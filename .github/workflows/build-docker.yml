@@ -4,7 +4,7 @@ name: Deploy to QA
 on:
   push:
     branches:
-      - qa
+      - main
 
 env: 
   POSTGRES_DB: keyharbour_ce_test
