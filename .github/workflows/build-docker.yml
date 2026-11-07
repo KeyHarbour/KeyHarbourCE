@@ -6,24 +6,11 @@ on:
     branches:
       - qa
 
-env:
-  KAMAL_VERSION: ${{ vars.KAMAL_VERSION }}
-  KAMAL_REGISTRY_USERNAME: ${{ github.actor || 'keyharbour' }}
-  KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}    
-  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-  POSTGRES_DB: ${{ vars.POSTGRES_DB }}
-  POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
+env: 
+  POSTGRES_DB: keyharbour_ce_test
   GITHUB_ACTOR: ${{ github.actor }}
-  POSTGRES_USER: ${{ vars.POSTGRES_USER }}
-  ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: ${{ secrets.ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY }}
-  ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: ${{ secrets.ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY }}
-  ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: ${{ secrets.ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT }}
-  HOST: ${{ vars.HOST }}   
-  MEILISEARCH_HOST: ${{ vars.MEILISEARCH_HOST }}
-  MEILI_MASTER_KEY: ${{ secrets.MEILI_MASTER_KEY }}
-  DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
-  SERVER_IP: ${{ vars.SERVER_IP }}
+  POSTGRES_USER: keyharbour_ce
+  HOST: localhost 
 
 jobs:
   increment_version:
@@ -92,6 +79,17 @@ jobs:
         with:
           ref: v${{ needs.increment_version.outputs.version }}
 
+      - name: Generate random test secrets
+        run: |
+          echo "ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=$(openssl rand -hex 16)" >> $GITHUB_ENV
+          echo "ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=$(openssl rand -hex 16)" >> $GITHUB_ENV
+          echo "ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=$(openssl rand -hex 16)" >> $GITHUB_ENV
+          echo "MEILI_MASTER_KEY=$(openssl rand -hex 16)" >> $GITHUB_ENV
+          echo "SECRET_KEY_BASE=$(openssl rand -hex 64)" >> $GITHUB_ENV
+          echo "RAILS_MASTER_KEY=$(openssl rand -hex 64)" >> $GITHUB_ENV
+          echo "POSTGRES_PASSWORD=$(openssl rand -hex 64)" >> $GITHUB_ENV
+
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
 
@@ -112,5 +110,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            keyharbour/keyharbouree:latest
-            keyharbour/keyharbouree:${{ needs.increment_version.outputs.version }}          
+            keyharbour/keyharbource:latest
+            keyharbour/keyharbource:${{ needs.increment_version.outputs.version }}          
