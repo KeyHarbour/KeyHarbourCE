@@ -25,7 +25,7 @@ services:
       - meili_data:/meili_data
 
   web:
-    image: keyharbour/keyharbouree:latest
+    image: keyharbour/keyharbource:latest
     # build:
     #   context: .
     #   args:
@@ -57,3 +57,4 @@ volumes:
   bundle_cache:
   key_harbour_storage:
   key_harbour_log:
+# 
