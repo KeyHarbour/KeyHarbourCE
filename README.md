@@ -2,16 +2,16 @@
 
 [![Ruby](https://img.shields.io/badge/Ruby-%3E%3D%204.0-green?logo=ruby)](https://www.ruby-lang.org/)
 [![Rails](https://img.shields.io/badge/Rails-8.x-green?logo=rubyonrails)](https://rubyonrails.org/)
-[![Latest Release](https://img.shields.io/github/v/release/KeyHarbour/KeyHarbourEE?sort=semver)](https://github.com/KeyHarbour/KeyHarbourEE/releases)
+[![Latest Release](https://img.shields.io/github/v/release/KeyHarbour/KeyHarbourCE?sort=semver)](https://github.com/KeyHarbour/KeyHarbourCE/releases)
 ![Coverage](coverage.svg)
-[![CI](https://github.com/KeyHarbour/KeyHarbourEE/actions/workflows/ci.yml/badge.svg)](https://github.com/KeyHarbour/KeyHarbourEE/actions/workflows/ci.yml)
-[![Dependabot enabled](https://img.shields.io/badge/Dependabot-enabled-025e8c?logo=dependabot)](https://github.com/KeyHarbour/KeyHarbourEE/blob/main/.github/dependabot.yml)
-[![License](https://img.shields.io/github/license/KeyHarbour/KeyHarbourEE)](https://github.com/KeyHarbour/KeyHarbourEE/blob/main/LICENSE.md)
+[![CI](https://github.com/KeyHarbour/KeyHarbourCE/actions/workflows/ci.yml/badge.svg)](https://github.com/KeyHarbour/KeyHarbourCE/actions/workflows/ci.yml)
+[![Dependabot enabled](https://img.shields.io/badge/Dependabot-enabled-025e8c?logo=dependabot)](https://github.com/KeyHarbour/KeyHarbourCE/blob/main/.github/dependabot.yml)
+[![License](https://img.shields.io/github/license/KeyHarbour/KeyHarbourCE)](https://github.com/KeyHarbour/KeyHarbourCE/blob/main/LICENSE.md)
 
 
-# KeyHarbour Enterprise Edition (KeyHarbourEE)
+# KeyHarbour Enterprise Edition (KeyHarbourCE)
 
-KeyHarbourEE is a robust enterprise management platform built with **Ruby on Rails 8**, designed for maximum security and optimal performance through a containerized architecture. It natively integrates PostgreSQL for data persistence and Meilisearch for an ultra-fast search experience.
+KeyHarbourCE is a robust enterprise management platform built with **Ruby on Rails 8**, designed for maximum security and optimal performance through a containerized architecture. It natively integrates PostgreSQL for data persistence and Meilisearch for an ultra-fast search experience.
 
 ---
 
@@ -80,7 +80,7 @@ docker compose exec web bundle exec rspec
 
 ## ⛵ Production Deployment (Kamal)
 
-KeyHarbourEE is pre-configured to deploy to bare-metal or cloud VPS servers within minutes using **Kamal**. The `config/deploy.yml` template leverages local environment variables dynamically.
+KeyHarbourCE is pre-configured to deploy to bare-metal or cloud VPS servers within minutes using **Kamal**. The `config/deploy.yml` template leverages local environment variables dynamically.
 
 To deploy:
 1. Configure your local `.env` file with your target server's public IP (`PROD_SERVER_IP`) and domain name (`PROD_DOMAIN_NAME`). Use env.sample as example
@@ -98,7 +98,7 @@ kamal shell -d prod
 
 ## 📄 License
 
-KeyHarbourEE is an open-source project distributed under the terms of the **Business Source License 1.1 (BSL 1.1)**.
+KeyHarbourCE is an open-source project distributed under the terms of the **Business Source License 1.1 (BSL 1.1)**.
 
 * You are fully permitted to use the source code for development, testing, and non-commercial purposes.
 * Commercial production use is restricted subject to the clear provisions detailed in the `LICENSE.md` file.
