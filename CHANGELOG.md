@@ -1,3 +1,13 @@
+## v1.15.0 (2026-11-07)
+
+### Features
+* Moving docker to Alpine (f59c235)
+
+### Bug Fixes
+* Adding contributing & security file (7df0f23)
+
+---
+
 ## v1.14.0 (2026-11-07)
 
 ### Features
