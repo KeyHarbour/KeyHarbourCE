@@ -1,3 +1,13 @@
+## v1.14.0 (2026-11-07)
+
+### Features
+* Fix Readme (2bb4f4f)
+
+### Maintenance
+* Security fix (f73fd9f)
+
+---
+
 ## v1.13.1 (2026-11-07)
 
 ### Bug Fixes
