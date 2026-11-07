@@ -1,0 +1,46 @@
+:css
+  .hero-bg {
+    background-image: url('#{asset_path("media/images/2600x1200/bg-1.png")}');
+  }
+  .dark .hero-bg {
+    background-image: url('#{asset_path("media/images/2600x1200/bg-1-dark.png")}');
+  }
+.bg-center.bg-cover.bg-no-repeat.hero-bg
+  .kt-container-fluid
+    .flex.flex-col.items-center.gap-2.py-4.lg:pt-5.lg:pb-10{:class => "lg:gap-3.5"}
+      .flex.items-center{:class => "gap-1.5"}
+        .text-lg.leading-5.font-semibold.text-mono
+          %i.ki-duotone.ki-document.text-primary{style: "font-size: 24px;"}
+          = t('activerecord.models.workspace')
+          = workspace.name
+          
+          .flex.flex-wrap.justify-center.gap-1.text-sm{:class => "lg:gap-4.5"}
+            .flex.items-center{:class => "gap-1.25"}
+              %i.ki-filled.ki-technology-4.text-muted-foreground.text-sm
+              %span.text-secondary-foreground.font-medium
+                = @environment.name
+
+.kt-container-fluid
+  .flex.items-center.flex-wrap.md:flex-nowrap.lg:items-end.justify-between.border-b.border-b-border.gap-3.lg:gap-6.mb-5.lg:mb-10
+    .grid
+      .kt-scrollable-x-auto
+        .kt-menu.gap-3{"data-kt-menu" => "true"}
+          .kt-menu-item.border-b-2.border-b-transparent.kt-menu-item-active:border-b-primary.kt-menu-item-here:border-b-primary{class: "#{controller_name=='statefiles' ? 'here' : ''}"}
+            = link_to member_workspace_statefiles_path(workspace, environment: @environment.name), class: "kt-menu-link pb-2 lg:pb-4 px-2 gap-1.5" do
+              %i.text-1xl.ki-filled.ki-ocean
+              %span.kt-menu-title.text-nowrap.font-medium.text-sm.text-secondary-foreground.kt-menu-item-active:text-primary.kt-menu-item-active:font-semibold.kt-menu-item-here:text-primary.kt-menu-item-here:font-semibold.kt-menu-item-show:text-primary.kt-menu-link-hover:text-primary
+                = t('activerecord.models.statefile').pluralize
+          .kt-menu-item.border-b-2.border-b-transparent.kt-menu-item-active:border-b-primary.kt-menu-item-here:border-b-primary{class: "#{controller_name=='key_value_stores' ? 'here' : ''}"}                
+            = link_to member_workspace_key_value_stores_path(workspace, environment: @environment.name), class: "kt-menu-link pb-2 lg:pb-4 px-2 gap-1.5" do
+              %i.text-1xl.ki-filled.ki-ocean
+              %span.kt-menu-title.text-nowrap.font-medium.text-sm.text-secondary-foreground.kt-menu-item-active:text-primary.kt-menu-item-active:font-semibold.kt-menu-item-here:text-primary.kt-menu-item-here:font-semibold.kt-menu-item-show:text-primary.kt-menu-link-hover:text-primary
+                = t('activerecord.models.key_value_store').pluralize
+          .kt-menu-item.border-b-2.border-b-transparent.kt-menu-item-active:border-b-primary.kt-menu-item-here:border-b-primary{class: "#{controller_name=='trust_assets' ? 'here' : ''}"}                
+            = link_to member_workspace_trust_assets_path(workspace, environment: @environment.name), class: "kt-menu-link pb-2 lg:pb-4 px-2 gap-1.5" do
+              %i.text-1xl.ki-filled.ki-calendar-tick
+              %span.kt-menu-title.text-nowrap.font-medium.text-sm.text-secondary-foreground.kt-menu-item-active:text-primary.kt-menu-item-active:font-semibold.kt-menu-item-here:text-primary.kt-menu-item-here:font-semibold.kt-menu-item-show:text-primary.kt-menu-link-hover:text-primary
+                = t('activerecord.models.trust_asset').pluralize
+    .flex.items-center.justify-end.grow.lg:grow-0.lg:pb-4.mb-3.lg:mb-0{:class => "gap-2.5"}
+      = link_to member_workspace_path(workspace), class: "kt-btn kt-btn-primary" do
+        %i.ki-filled.ki-arrow-left
+        = t('globals.back')

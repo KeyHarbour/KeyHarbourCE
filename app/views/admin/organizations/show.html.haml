@@ -1,0 +1,95 @@
+= render partial: "org_menu", locals: { actif: 'profile', organization: @item }
+
+.kt-container-fluid
+  / begin: grid
+  .grid.grid-cols-1.xl:grid-cols-3.gap-5{:class => "lg:gap-7.5"}
+    .col-span-1
+      .grid.gap-5{:class => "lg:gap-7.5"}
+        .kt-card
+          .kt-card-header
+            %h3.kt-card-title
+              = t('admin.organizations.about')
+          .kt-card-content.pt-4.pb-3
+            %table.kt-table-auto
+              %tbody
+                %tr
+                  %td.text-sm.text-secondary-foreground.pe-3{:class => "pb-3.5"}
+                    = t('admin.organizations.projects')
+                    :
+                  %td.text-sm.text-mono{:class => "pb-3.5"}
+                    = @item.projects.count
+                %tr
+                  %td.text-sm.text-secondary-foreground.pe-3{:class => "pb-3.5"}
+                    = t('admin.organizations.workspaces')
+                    :
+                  %td.text-sm.text-mono{:class => "pb-3.5"}
+                    = @item.workspaces.count
+                %tr
+                  %td.text-sm.text-secondary-foreground.pe-3{:class => "pb-3.5"}
+                    = t('admin.organizations.key_value_store')
+                    :
+                  %td.text-sm.text-mono{:class => "pb-3.5"}
+                    0
+                %tr
+                  %td.text-sm.text-secondary-foreground.pe-3{:class => "pb-3.5"}
+                    = t('admin.organizations.admins')
+                    :
+                  %td.text-sm.text-mono{:class => "pb-3.5"}
+                    0
+                %tr
+                  %td.text-sm.text-secondary-foreground.pe-3{:class => "pb-3.5"}
+                    = t('admin.organizations.users')
+                    :
+                  %td.text-sm.text-mono{:class => "pb-3.5"}
+                    0
+                %tr
+                  %td.text-sm.text-secondary-foreground.pe-3{:class => "pb-3.5"}
+                    = t('admin.organizations.viewers')
+                    :
+                  %td.text-sm.text-mono{:class => "pb-3.5"}
+                    0
+                %tr
+                  %td{colspan: "2"}
+                    = link_to edit_admin_organization_path(@item), class: "kt-btn kt-btn-outline kt-btn-sm.mt-2" do
+                      %i.ki-filled.ki-pencil.text-sm.me-1
+                      = t('admin.organizations.edit')
+    .col-span-2
+      .flex.flex-col.gap-5{:class => "lg:gap-7.5"}
+        .kt-card
+          .kt-card-header
+            %h3.kt-card-title
+              = t('admin.organizations.projects')
+            .kt-menu{"data-kt-menu" => "true"}
+              .kt-menu-item{"data-kt-menu-item-offset" => "0, 10px", "data-kt-menu-item-placement" => "bottom-end", "data-kt-menu-item-placement-rtl" => "bottom-start", "data-kt-menu-item-toggle" => "dropdown", "data-kt-menu-item-trigger" => "click"}
+                .flex.items-center.flex-wrap{:class => "gap-1.5 lg:gap-3.5"}
+                  = link_to new_admin_organization_project_path(@item), class: "kt-btn kt-btn-dark" do
+                    %i.ki-filled.ki-plus
+                    = t('admin.organizations.create_project')
+          .kt-card-table.kt-scrollable-x-auto
+            %table.kt-table.table-fixed
+              %thead
+                %tr
+                  %th.text-start.w-52
+                    = t('admin.organizations.project_name')
+                    %br/
+                    = t('admin.organizations.uuid')
+                  %th.text-end.w-4
+              %tbody
+                - @item.projects.limit(10).each do |item|
+                  %tr
+                    %td
+                      .text-base.font-medium.text-mono.hover:text-primary
+                        = link_to item.name, organization_project_path(@item, item)
+                      .text-base.font-normal
+                        .flex.items-center.gap-2.text-base.font-normal
+                          %i.text-sm.text-secondary-foreground.text-gray-700{id: "text_#{item.uuid}"}= item.uuid
+                          %button.flex.items-center.text-sm.gap-2.hover:bg-gray-50.font-semibold{id: "btn_#{item.uuid}", :onclick => "copierTexte('text_#{item.uuid}', 'btn_#{item.uuid}')"}
+                            %i.ki-filled.ki-menu
+                    %td
+                      = render partial: "item_menu", locals: { delete_link: admin_rganization_project_path(@item, item), edit_link: edit_admin_organization_project_path(@item, item) }    
+          .kt-card-footer.justify-center
+            = link_to admin_organization_projects_path(@item), class: "kt-link kt-link-underlined kt-link-dashed" do
+              = t('admin.organizations.all_projects')
+
+- content_for :page_name do
+  = @item.name

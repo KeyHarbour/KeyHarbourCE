@@ -1,0 +1,37 @@
+.col-md-12
+  .card
+    .card-header
+      = render partial: "workspace_top_menu", locals: { workspace: @workspace, actif: "statefiles" }
+    .card-body.mt-3
+      %h2
+        = turbo_frame_tag dom_id(@item, :id) do
+          #{@item.uuid}
+          = link_to edit_member_statefile_path(@item, field: :uuid), class: "btn btn-sm btn-light" do
+            %i.ti.ti-edit
+            Modifier
+      %hr/
+      .row.g-5
+        .col-sm-3
+          .sticky-top{style: "top:6rem"}
+            %nav#pills.nav.nav-vertical.nav-pills
+              - @item.tf_resources.each_with_index do |resource, resource_index|
+                %a.nav-link{:href => "##{resource["type"]}"}= resource["type"]
+        .col-sm{"data-bs-offset" => "0", "data-bs-spy" => "scroll", "data-bs-target" => "#pills"}
+          .card.card-lg
+            .card-body
+              - @item.tf_resources.each_with_index do |resource, resource_index|
+                %div.mb-4{id: "#{resource['type']}"}
+                  .card-body.p-0
+                    - resource["instances"].each_with_index do |instance, instance_index|
+                      .card
+                        .card-header
+                          %h3.card-title #{resource["type"]} / #{resource["name"]}
+                        .card-body
+                          %pre
+                            %code
+                              = @item.pretty_instance(instance)
+                        .card-footer
+                          .text-end
+                            = link_to instance_member_statefile_path(@item, resource: resource_index, instance: instance_index), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure to remove this block?" }, class: "btn btn-danger" do
+                              %i.ki-filled.ki-trash
+                              Delete

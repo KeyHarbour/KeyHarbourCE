@@ -1,0 +1,29 @@
+
+.kt-card-header
+  %h3.kt-card-title
+    = t('activerecord.models.trust_asset')
+.kt-card-content
+  %p.text-sm.text-foreground-secondary
+    Cette section permet d'enregistrer, de suivre et de renouveler les actifs de confiance de l'entreprise. En consignant ces informations, vous garantissez un historique fiable pour l'équipe et évitez les interruptions de service dues à des expirations d'actifs.
+    %h4 Guide des Champs de Saisie
+    %ul
+      %li 
+        Name (Nom) : Le nom unique et identifiable de l'actif.
+        %br/
+        Exemple : Certificat SSL - Production API ou Clé API Stripe - Client Mobile.
+      %li 
+        Expires At (Date d'expiration) : La date limite de validité de l'actif (sélectionnable via le calendrier). Crucial pour le suivi de l'historique.
+      %li 
+        Issuer (Émetteur) : L'autorité ou l'entité qui a généré ou vendu l'actif.
+        %br/
+        Exemple : Let's Encrypt, Sectigo, DigiCert.
+      %li 
+        Format (Format / Type) : Le type technique de l'actif (sélectionnable dans la liste déroulante).
+        %br/
+        Exemple : X509 (pour le SSL), P12, Jwks, etc.
+      %li 
+        Consumer (Consommateur / Utilisateur) : L'application, le service ou l'équipe qui utilise cet actif au quotidien.
+        %br/
+        Exemple : Application Mobile iOS, Serveur Nginx Proxy, Script de facturation.
+      %li Description : Un espace pour documenter les détails importants (emplacement des fichiers, commandes de renouvellement, ou contexte technique).
+      %li Reminder Days (Alerte avant expiration) : Le nombre de jours avant la date d'expiration où le système (ou l'équipe) doit être notifié pour démarrer le processus de renouvellement.

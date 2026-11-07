@@ -1,0 +1,13 @@
+
+.col-12.col-md-3.border-end
+  .card-body
+    %nav.list-group.list-group-transparent{"aria-label" => "settings"}
+      = link_to member_license_application_path(@application), class: "list-group-item list-group-item-action d-flex align-items-center #{active == :applications ? 'active' : ''}" do
+        = icon ApplicationHelper::CONTROLLERS[:"member/license/applications"][:icon]
+        = t('.application')
+      = link_to member_license_application_instances_path(application), class: "list-group-item list-group-item-action d-flex align-items-center #{active == :instances ? 'active' : ''}" do
+        = icon ApplicationHelper::CONTROLLERS[:"member/license/instances"][:icon]
+        = t('.instances')
+      = link_to member_license_application_quotes_path(application), class: "list-group-item list-group-item-action d-flex align-items-center #{active == :quotes ? 'active' : ''}" do
+        = icon ApplicationHelper::CONTROLLERS[:"member/license/quotes"][:icon]
+        = t('.quotes') 

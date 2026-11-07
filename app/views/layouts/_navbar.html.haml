@@ -1,0 +1,146 @@
+%aside.navbar.navbar-vertical.navbar-expand-lg
+  .container-fluid
+    %button.navbar-toggler{"aria-controls" => "sidebar-menu", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#sidebar-menu", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    .navbar-brand.navbar-brand-autodark
+      = link_to root_path, class: "d-flex align-items-center gap-2 text-decoration-none" do
+        = image_tag "logo.svg", width: "25", alt: "Logo"
+        %span CndFinTrack
+    #sidebar-menu.collapse.navbar-collapse
+      / BEGIN NAVBAR MENU
+      = nav_menu_simple_complete
+      %ul.navbar-nav.pt-lg-3
+        - nav_menu_with_active.each do |item|
+          - next if item.dig(:display) == false
+          - if item.dig(:items)
+            %li.nav-item.dropdown{class: "#{item[:active] ? "active" : ""}"}
+              %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#navbar-base", :role => "button", class: "#{item[:active] ? "show" : ""}"}
+                %span.nav-link-icon.d-md-none.d-lg-inline-block
+                  = icon item[:icon]
+                %span.nav-link-title= item[:title]
+              .dropdown-menu{ class: "#{item[:active] ? "show" : ""}"}
+                .dropdown-menu-columns
+                  .dropdown-menu-column
+                    - item[:items].each do |sub_item|
+                      - next if sub_item.dig(:display) == false
+                      - if sub_item.dig(:items)
+                        .dropend
+                          %a.dropdown-item.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#sidebar", :role => "button", class: "#{sub_item[:active] ? "show" : ""}"}
+                            = sub_item[:title]
+                          .dropdown-menu{ class: "#{sub_item[:active] ? "show" : ""}"}
+                            - sub_item[:items].each do |sub_sub_item|
+                              - next if sub_sub_item.dig(:display) == false
+                              = link_to sub_sub_item[:path], class: "dropdown-item #{sub_sub_item[:active] ? 'active' : ''}" do
+                                = sub_sub_item[:title]
+                      - else
+                        = link_to sub_item[:path], class: "dropdown-item #{sub_item[:active] ? 'active' : ''}" do
+                          = sub_item[:title]
+                          -# %span.badge.badge-sm.bg-green-lt.text-uppercase.ms-auto New
+
+          - else
+            %li.nav-item{class: "#{item[:active] ? "active" : ""}"}
+              = link_to item[:path], class: "nav-link" do
+                %span.nav-link-icon.d-md-none.d-lg-inline-block
+                  = icon item[:icon]
+                %span.nav-link-title= item[:title]
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#navbar-base", :role => "button"}
+            %span.nav-link-icon.d-md-none.d-lg-inline-block
+              / Download SVG icon from http://tabler.io/icons/icon/package
+              %svg.icon.icon-1{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"}
+                %path{:d => "M12 12l8 -4.5"}
+                %path{:d => "M12 12l0 9"}
+                %path{:d => "M12 12l-8 -4.5"}
+                %path{:d => "M16 5.25l-8 4.5"}
+            %span.nav-link-title Interface
+          .dropdown-menu
+            .dropdown-menu-columns
+              .dropdown-menu-column
+                %a.dropdown-item{:href => "./accordion.html"}
+                  Accordion
+                  %span.badge.badge-sm.bg-green-lt.text-uppercase.ms-auto New
+                %a.dropdown-item{:href => "./alerts.html"} Alerts
+                .dropend
+                %a.dropdown-item.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#sidebar-authentication", :role => "button"}
+                  Authentication
+                .dropdown-menu
+                  %a.dropdown-item{:href => "./sign-in.html"} Sign in
+                  %a.dropdown-item{:href => "./sign-in-link.html"} Sign in link
+                  %a.dropdown-item{:href => "./sign-in-illustration.html"} Sign in with illustration
+                  %a.dropdown-item{:href => "./sign-in-cover.html"} Sign in with cover
+                  %a.dropdown-item{:href => "./sign-up.html"} Sign up
+                  %a.dropdown-item{:href => "./forgot-password.html"} Forgot password
+                  %a.dropdown-item{:href => "./terms-of-service.html"} Terms of service
+                  %a.dropdown-item{:href => "./auth-lock.html"} Lock screen
+                  %a.dropdown-item{:href => "./2-step-verification.html"} 2 step verification
+                  %a.dropdown-item{:href => "./2-step-verification-code.html"} 2 step verification code
+                %a.dropdown-item{:href => "./avatars.html"}
+                  Avatars
+                  %span.badge.badge-sm.bg-green-lt.text-uppercase.ms-auto New
+                %a.dropdown-item{:href => "./badges.html"} Badges
+                %a.dropdown-item{:href => "./blank.html"} Blank page
+                %a.dropdown-item{:href => "./buttons.html"} Buttons
+                .dropend
+                  %a.dropdown-item.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#sidebar-cards", :role => "button"}
+                    Cards
+                  .dropdown-menu
+                    %a.dropdown-item{:href => "./cards.html"} Sample cards
+                    %a.dropdown-item{:href => "./card-actions.html"}
+                      Card actions
+                      %span.badge.badge-sm.bg-green-lt.text-uppercase.ms-auto New
+                    %a.dropdown-item{:href => "./cards-masonry.html"} Cards Masonry
+                %a.dropdown-item{:href => "./carousel.html"} Carousel
+                %a.dropdown-item{:href => "./colors.html"} Colors
+                %a.dropdown-item{:href => "./datagrid.html"} Data grid
+                %a.dropdown-item{:href => "./dropdowns.html"} Dropdowns
+                .dropend
+                  %a.dropdown-item.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#sidebar-error", :role => "button"}
+                    Error pages
+                  .dropdown-menu
+                    %a.dropdown-item{:href => "./error-404.html"} 404 page
+                    %a.dropdown-item{:href => "./error-500.html"} 500 page
+                    %a.dropdown-item{:href => "./error-maintenance.html"} Maintenance page
+                %a.dropdown-item{:href => "./lists.html"} Lists
+                %a.dropdown-item{:href => "./modals.html"} Modals
+              .dropdown-menu-column
+                %a.dropdown-item{:href => "./markdown.html"} Markdown
+                %a.dropdown-item{:href => "./navigation.html"} Navigation
+                %a.dropdown-item{:href => "./offcanvas.html"} Offcanvas
+                %a.dropdown-item{:href => "./pagination.html"} Pagination
+                %a.dropdown-item{:href => "./placeholder.html"} Placeholder
+                %a.dropdown-item{:href => "./segmented-control.html"}
+                  Segmented control
+                  %span.badge.badge-sm.bg-green-lt.text-uppercase.ms-auto New
+                %a.dropdown-item{:href => "./scroll-spy.html"}
+                  Scroll spy
+                  %span.badge.badge-sm.bg-green-lt.text-uppercase.ms-auto New
+                %a.dropdown-item{:href => "./social-icons.html"} Social icons
+                %a.dropdown-item{:href => "./stars-rating.html"} Stars rating
+                %a.dropdown-item{:href => "./steps.html"} Steps
+                %a.dropdown-item{:href => "./tables.html"} Tables
+                %a.dropdown-item{:href => "./tabs.html"} Tabs
+                %a.dropdown-item{:href => "./tags.html"} Tags
+                %a.dropdown-item{:href => "./toasts.html"} Toasts
+                %a.dropdown-item{:href => "./typography.html"} Typography
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#navbar-help", :role => "button"}
+            %span.nav-link-icon.d-md-none.d-lg-inline-block
+              / Download SVG icon from http://tabler.io/icons/icon/lifebuoy
+              %svg.icon.icon-1{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"}
+                %path{:d => "M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"}
+                %path{:d => "M15 15l3.35 3.35"}
+                %path{:d => "M9 15l-3.35 3.35"}
+                %path{:d => "M5.65 5.65l3.35 3.35"}
+                %path{:d => "M18.35 5.65l-3.35 3.35"}
+            %span.nav-link-title Help
+          .dropdown-menu
+            %a.dropdown-item{:href => "https://tabler.io/docs", :rel => "noopener", :target => "_blank"} Documentation
+            %a.dropdown-item{:href => "./changelog.html"} Changelog
+            %a.dropdown-item{:href => "https://github.com/tabler/tabler", :rel => "noopener", :target => "_blank"} Source code
+            %a.dropdown-item.text-pink{:href => "https://github.com/sponsors/codecalm", :rel => "noopener", :target => "_blank"}
+              / Download SVG icon from http://tabler.io/icons/icon/heart
+              %svg.icon.icon-inline.me-1.icon-2{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"}
+              Sponsor project!

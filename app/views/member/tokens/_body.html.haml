@@ -1,0 +1,24 @@
+.col-auto
+  %span.badge{class: status_color(item)}
+.col.text-truncate
+  = item.name
+  .d-block.text-secondary.text-truncate.mt-1
+    #{token_scope(item)} / #{token_scopable(item)}
+  .d-block.text-secondary.text-truncate.mt-1
+    %span.tag
+      = icon ApplicationHelper::CONTROLLERS[:"member/environments"][:icon], class: "icon-xs"
+      = item.environment&.name
+  .d-block.text-secondary.text-truncate.mt-1
+  - if item.expiration.past?
+    %span.kt-badge.kt-badge-sm.kt-badge-outline.kt-badge-destructive
+      Expired since at #{item.expiration.strftime("%Y-%m-%d %H:%M")}
+  - else
+    Expires at #{item.expiration.strftime("%Y-%m-%d %H:%M")}
+    ( #{distance_of_time_in_words(Time.current, item.expiration)} )
+.col-auto
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      = link_to member_token_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash"
+        = t('.remove')

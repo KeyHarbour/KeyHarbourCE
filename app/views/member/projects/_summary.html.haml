@@ -1,0 +1,38 @@
+.card
+  .card-header
+    %h3.card-title= t('.about')
+    .card-actions
+      = link_to edit_member_project_path(project) do
+        = t('.update')
+        %svg.icon.ms-1.icon-2{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+          %path{:d => "M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"}
+          %path{:d => "M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"}
+          %path{:d => "M16 5l3 3"}
+  .card-body
+    %dl.row
+      %dt.col-4= t('name')
+      %dd.col-8.text-end= project.name
+      %dt.col-4= t('activerecord.attributes.project.uuid')
+      %dd.col-8.text-end
+        %span{id: "text_#{project.uuid}"}
+          = project.uuid
+        = link_to "#", id: "btn_#{project.uuid}", :onclick => "copierTexte('text_#{project.uuid}', 'btn_#{project.uuid}')" do
+          = icon "copy", class: "icon-xs"
+      %dt.col-4= t('.org_uuid')
+      %dd.col-8.text-end
+        %span{id: "text_#{project.organization.uuid}"}
+          = project.organization.uuid
+        = link_to "#", id: "btn_#{project.organization.uuid}", :onclick => "copierTexte('text_#{project.organization.uuid}', 'btn_#{project.organization.uuid}')" do
+          = icon "copy", class: "icon-xs"
+      %dt.col-4= t('activerecord.attributes.project.status')
+      %dd.col-8.text-end= render partial: "layouts/status", locals: { item: project }
+      %dt.col-4= t('activerecord.models.workspace').pluralize
+      %dd.col-8.text-end= project.workspaces.count
+      -# %dt.col-4= t('activerecord.models.key_value_store').pluralize
+      -# %dd.col-8.text-end= project.key_value_stores.count
+      -# %dt.col-4= t('activerecord.models.trust_asset').pluralize
+      -# %dd.col-8.text-end= project.trust_assets.count
+      %dt.col-4= t('activerecord.models.environment').pluralize
+      %dd.col-8.text-end
+        - project.environments.pluck(:name).each do |name|
+          %span.tag= name

@@ -1,0 +1,11 @@
+.page-pretitle
+  - if breadcrumbs.present?
+    - breadcrumbs[0..-2].each do |breadcrumb|
+      = link_to breadcrumb[:path] do
+        - if breadcrumb[:only_icon]
+          = icon breadcrumb[:icon], class: "icon-sm"
+        - else
+          = breadcrumb[:title]
+      %span.text-muted-foreground.text-sm
+        \/
+    = breadcrumbs[-1][:title]

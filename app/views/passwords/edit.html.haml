@@ -1,0 +1,15 @@
+.card.card-md
+  .card-body
+    %h2.h2.text-center.mb-4= t(".title")
+
+    = form_with url: password_path(params[:token]), method: :put do |form|
+      = tag.div(flash[:alert], style: "color:red") if flash[:alert]
+      = tag.div(flash[:notice], style: "color:green") if flash[:notice]
+      .mb-3
+        %label.form-label= t(".new_password")
+        = form.password_field :password, required: true, autofocus: true, autocomplete: "password", placeholder: t('activerecord.placeholders.user.password'), class: "form-control"
+      .mb-3
+        %label.form-label= t(".repeat_new_password")
+        = form.password_field :password_confirmation, required: true, autofocus: true, autocomplete: "new-password", placeholder: t('activerecord.placeholders.user.password_confirmation'), class: "form-control"
+      .form-footer
+        %button.btn.btn-primary.w-100{:type => "submit"}= t(".reset_password")

@@ -1,0 +1,43 @@
+.grid.lg:grid-cols-3.gap-5.items-stretch{:class => "lg:gap-7.5"}
+  .lg:col-span-1
+    .kt-card
+      .kt-card-header
+        %h3.kt-card-title
+          = t(".user_license_average")
+      .kt-card-content
+        .grid.gap-y-5
+          .flex.align-start.gap-2
+            .flex.flex-col.gap-2
+              %span.text-2xl.font-semibold.text-mono.leading-none.tracking-tight
+                = Current.account.usage_daily_accounts.where(day: @days_range, service_name: 'License').average(:credits).to_i / Cost.find('License').credits
+              %span.text-sm.font-medium.text-secondary-foreground
+                = Current.account.usage_daily_accounts.where(day: @days_range, service_name: 'License').average(:credits)
+                = t(".credits")           
+  .lg:col-span-1
+    .kt-card
+      .kt-card-header
+        %h3.kt-card-title
+          = t(".trust_assets_average")
+      .kt-card-content
+        .grid.gap-y-5
+          .flex.align-start.gap-2
+            .flex.flex-col.gap-2
+              %span.text-2xl.font-semibold.text-mono.leading-none.tracking-tight
+                = Current.account.usage_daily_accounts.where(day: @days_range, service_name: 'TrustAsset').average(:credits).to_i / Cost.find('TrustAsset').credits
+              %span.text-sm.font-medium.text-secondary-foreground
+                = Current.account.usage_daily_accounts.where(day: @days_range, service_name: 'TrustAsset').average(:credits)
+                = t(".credits")           
+  .lg:col-span-1
+    .kt-card
+      .kt-card-header
+        %h3.kt-card-title
+          = t(".api_request")
+      .kt-card-content
+        .grid.gap-y-5
+          .flex.align-start.gap-2
+            .flex.flex-col.gap-2
+              %span.text-2xl.font-semibold.text-mono.leading-none.tracking-tight
+                = Current.account.usage_daily_accounts.where(day: @days_range).where(service_name: Cost.query_service_names).sum(:units)
+              %span.text-sm.font-medium.text-secondary-foreground
+                = Current.account.usage_daily_accounts.where(day: @days_range).where(service_name: Cost.query_service_names).sum(:credits)
+                = t(".credits")           

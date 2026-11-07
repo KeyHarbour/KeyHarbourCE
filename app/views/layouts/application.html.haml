@@ -1,0 +1,96 @@
+!!!
+/
+  * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+  * @version 1.4.0
+  * @link https://tabler.io
+  * Copyright 2018-2026 The Tabler Authors
+  * Copyright 2018-2026 codecalm.net Paweł Kuna
+  * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+%html
+  %head
+    = render partial: "layouts/google_tag"
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= content_for(:title) || "KeyHarbour"
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "KeyHarbour", :name => "application-name"}/
+    %meta{:content => "yes", :name => "mobile-web-app-capable"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    %link{:href => "/apple-touch-icon.png", :rel => "apple-touch-icon", :sizes => "180x180"}/
+    %link{:href => "/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    %link{:href => "/site.webmanifest", :rel => "manifest"}/
+    = stylesheet_link_tag :application, "data-turbo-track": "reload"
+    = javascript_importmap_tags
+    :javascript
+      (function () {
+        const savedTheme = localStorage.getItem('tabler-theme') || 'light';
+        if (savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-bs-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-bs-theme', 'light');
+        }
+      })();
+
+  %body.layout-fluid{"data-bs-theme-primary" => "kh"}
+    .page
+      = render partial: 'layouts/sticky_top'
+      = render partial: 'layouts/navbar_simple'
+      .page-wrapper
+        .page-header.d-print-none{"aria-label" => "Page header"}
+          .container-xl
+            .row.g-2.align-items-center
+              .col
+                %h1.page-title= page_title
+              .col-auto.ms-auto.d-print-none
+                .btn-list
+                  - if step_back != false
+                    = link_to "Back", step_back, class: "btn btn-primary"
+                  - if search == true && ["index"].include?(action_name)
+                    = link_to "Search", "", class: "btn", "aria-controls" => "offcanvasEnd", "data-bs-toggle" => "offcanvas", :href => "#offcanvasEnd", :role => "button"
+                  - if add_button(:top)
+                    = link_to add_button(:top)[:path], class: "btn btn-primary" do
+                      = icon add_button(:top)[:icon], class: "icon-sm"
+                      = add_button(:top)[:title]
+        .page-body
+          .container-xl
+            .row.row-deck.row-cards
+              = render partial: "flash"
+              = yield
+          %footer.footer.footer-transparent.d-print-none
+            .container-xl
+              .row.text-center.align-items-center.flex-row-reverse
+                .col-lg-auto.ms-lg-auto
+                  %ul.list-inline.list-inline-dots.mb-0
+                    %li.list-inline-item
+                      = link_to "Docs", "https://docs.keyharbour.ca", class: "link-secondary", target: "_blank"
+                    %li.list-inline-item
+                      = link_to "Support", "https://keyharbour.atlassian.net/servicedesk/customer/portal/1", class: "link-secondary", target: "_blank"
+                .col-12.col-lg-auto.mt-3.mt-lg-0
+                  %ul.list-inline.list-inline-dots.mb-0
+                    %li.list-inline-item
+                      © 2025-#{DateTime.now.year} KeyHarbour All rights reserved
+                    %li.list-inline-item
+                      v#{Rails.configuration.version}
+    = turbo_frame_tag "modal"
+    -if search == true && ["index"].include?(action_name)
+      = render partial: 'search', locals: { item: @item }
+    :javascript
+      function copierTexte(element_name, btn_name) {
+        const texte = document.getElementById(element_name).textContent;
+        const bouton = document.getElementById(btn_name);
+        const contenuInitial = bouton.innerHTML;
+
+        navigator.clipboard.writeText(texte).then(() => {
+          bouton.innerHTML = "#{icon('copy-check', class: "icon-xs").gsub("\"","'").gsub("\n","")} Copié";
+          bouton.classList.add("bg-green-600");
+
+          // Revenir à l’état initial après 1,5 seconde
+          setTimeout(() => {
+            bouton.innerHTML = contenuInitial;
+            bouton.classList.remove("bg-green-600");
+          }, 1500);
+        });
+      }

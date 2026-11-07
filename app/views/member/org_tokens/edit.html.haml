@@ -1,0 +1,17 @@
+- if @project
+  = render partial: "project_menu", locals: { actif: controller_name, organization: @organization }
+- else
+  = render partial: "org_menu", locals: { actif: controller_name, organization: @organization }
+
+.kt-container-fluid
+  .flex.flex-wrap.items-center.gap-5.justify-between.mb-4
+    %h3.text-lg.text-foreground.font-semibold
+      Create new #{index_page_name}
+    .flex.items-center.flex-wrap{:class => "gap-1.5 lg:gap-3.5"}
+      = link_to back_path, class: "kt-btn kt-btn-primary" do
+        %i.ki-filled.ki-arrow-left
+        Back
+  = render 'form'
+
+- content_for :page_name do
+  = edit_page_name

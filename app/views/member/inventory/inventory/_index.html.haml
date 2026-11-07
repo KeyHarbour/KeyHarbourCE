@@ -1,0 +1,22 @@
+.grid.grid-cols-1.lg:grid-cols-3{class: "gap-5 lg:gap-7.5"}
+  .col-span-1.lg:col-span-3
+    .kt-card
+      = render partial: 'searchbar'
+      .kt-card-table.kt-scrollable-x-auto
+        %table.kt-table.table-fixed
+          %thead
+            %tr
+              = render partial: 'headers'
+          %tbody
+            - items.each do |item|
+              %tr
+                = render partial: 'body', locals: { item: item }
+      .kt-card-footer.justify-center
+        .flex.justify-between.items-center.mt-4.mb-4.w-full
+          .text-sm.text-gray-600
+            != pagy.info_tag
+          .flex.items-center
+            .pagination-container
+              != pagy.series_nav()    
+- content_for :page_name do
+  = index_page_name

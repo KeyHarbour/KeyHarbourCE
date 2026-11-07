@@ -1,0 +1,17 @@
+%td.col-md-1.text-center
+  %span.badge{class: "#{item.active? ? 'bg-green' : 'bg-red'}"}
+%td
+  = item.name
+  %br/
+  - item.attrs do |name, value|
+    - next if name != 'Name'
+    .badge.badge-primary
+      = "#{name}: #{value}"
+%td.col-md-3.text-secondary.text-center
+  = item.workspace.name
+  %br/
+  .badge.badge-success
+    = item.environment.name
+%td.col-md-3= item.model_category.name
+-# %td
+-#   = render partial: "item_menu", locals: {delete_link: member_inventory_instance_path(item), edit_link: edit_member_inventory_instance_path(item) }

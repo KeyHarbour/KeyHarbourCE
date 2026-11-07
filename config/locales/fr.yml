@@ -1,0 +1,1052 @@
+---
+fr:
+  activerecord:
+    attributes:
+      account:
+        address1: Adresse
+        address2: Complément d'adresse
+        billing_contact: E-mail de facturation
+        city: Ville
+        country_code: Pays
+        name: Nom de la compagnie
+        province_code: Province/État
+        zip: Code postal
+      coupon:
+        amount_off: Montant de réduction
+        name: Nom
+        percent_off: Pourcentage de réduction
+        plans: Forfaits
+        status: Statut
+      environment:
+        active: Actif
+        description: Description
+        name: Nom
+      invite:
+        email: Adresse e-mail
+        expiration: Date d'expiration
+      key_value_store:
+        expires_at: Date d'expiration
+        key: Clé
+        private: Privé
+        value: Valeur
+      organization:
+        billing_contact: E-mail de facturation
+        description: Description
+        name: Nom
+      organization_user:
+        role: Rôle
+      project:
+        admins: Administrateurs
+        contributors: Contributeurs
+        description: Description
+        environments: Environnements
+        name: Nom
+        readers: Lecteurs
+        status: Statut
+        uuid: UUID
+      statefile:
+        name: Nom
+        pretty_content: Contenu formaté
+        project: Projet
+      team:
+        description: Description
+        name: Nom
+        organization_users: Membres
+        projects: Projets
+        source: Source
+        team_users: Utilisateurs de l'équipe
+      team_user:
+        role: Rôle
+      token:
+        environment_id: Environnement
+        expires_at: Expire le
+        name: Nom
+      user:
+        email_address: Adresse e-mail
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        prefered_language: Langue préférée
+      workspace:
+        description: Description
+        name: Nom
+    hints:
+      account:
+        name: Nom
+      invite:
+        email_address: L'adresse e-mail de la personne que vous souhaitez inviter.
+        role: Le rôle que cette personne aura dans l'organisation.
+      key_value_store:
+        expires_at: Date d'expiration de cette valeur
+        one_time_only: Une seule fois
+        private: Privé
+      organization:
+        description: Une brève description de votre organisation.
+        name: Le nom de votre organisation.
+      project:
+        description: Une brève description du projet.
+        name: Le nom du projet.
+      statefile:
+        name: Le nom du fichier d'état.
+        project: Le projet auquel ce fichier d'état est associé.
+      team:
+        description: Une brève description de l'équipe.
+        name: Le nom de l'équipe.
+      token:
+        environment_id: Environnement
+        expires_at: La date à laquelle ce jeton expirera.
+        name: Un nom descriptif pour ce jeton.
+        workspace_id: ID de l'espace
+      user:
+        email_address: Ne peut pas être modifié, créez un nouveau compte et transférez
+          vos données si vous avez besoin de le changer.
+        password: Laissez vide si vous ne souhaitez pas changer le mot de passe.
+        password_confirmation: Confirmez le nouveau mot de passe.
+        prefered_language: La langue dans laquelle vous souhaitez utiliser l'application
+          lors de votre connexion.
+      workspace:
+        description: Une brève description de l'espace.
+        name: Le nom de l'espace.
+    models:
+      account: Compte
+      addon: Module complémentaire
+      coupon: Coupon
+      environment: Environnement
+      instance: Instance
+      instance_attr: Attribut d'instance
+      inventory: Inventaire
+      inventory_model_category: Catégorie de modèle
+      inventory_model_category_attr: Attribut de catégorie de modèle
+      inventory_model_family: Famille de modèle
+      inventory_instance: Instance
+      invite: Invitation
+      key_value_store: Stockage clé-valeur
+      license_application: Demande de licence
+      license_instance: Instance de licence
+      license_licensee: Titulaire de licence
+      license_provider: Fournisseur
+      license_quote: Devis de licence
+      license_team_member: Membre d'équipe de licence
+      organization: Organisation
+      organization_user: Membres
+      project: Projet
+      project_token: Jeton
+      statefile: Fichier d'état
+      subscription: Abonnement
+      team: Équipe
+      token: Jeton
+      token_organization: Jeton d'organization
+      token_project: Jeton de project
+      trust_asset: Actif de confiance
+      user: Utilisateur
+      workspace: Espace de travail
+    placeholders:
+      invite:
+        email_address: Entrez l'adresse e-mail de la personne à inviter
+        role: Sélectionnez le rôle dans l'organisation
+      key_value_store:
+        value: Valeur
+      organization:
+        description: Entrez une brève description de votre organisation
+        name: Entrez le nom de votre organisation
+      project:
+        description: Entrez une brève description du projet
+        name: Entrez le nom du projet
+      statefile:
+        name: Entrez le nom du fichier d'état
+        project: Sélectionnez le projet associé
+      team:
+        description: Entrez une brève description de l'équipe
+        name: Entrez le nom de l'équipe
+      token:
+        expires_at: Sélectionnez la date d'expiration du jeton
+        name: Entrez un nom pour ce jeton
+      user:
+        email_address: Adresse e-mail
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        prefered_language: Sélectionnez votre langue préférée
+      workspace:
+        description: Entrez une brève description de l'espace
+        name: Entrez le nom de l'espace
+  admin:
+    accounts:
+      fields:
+        select: Sélectionner
+      index:
+        activate: Activer
+        api_queries: Requêtes API
+        api_queries_available: Requêtes API disponibles
+        app_team_members: Membres de l'équipe de l'application
+        applications: Applications
+        archive: Archiver
+        desactivate: Désactiver
+        max_employee: Employés
+        organizations: Organisations
+        projects: Projets
+        unarchived: Non archivés
+        users: Utilisateurs
+        workspaces: Espaces de travail
+      table_item:
+        update: Modifier
+    coupons:
+      table_item:
+        activate: Activer
+        delete: Supprimer
+        desactivate: Désactiver
+    dashboard:
+      index:
+        account: Compte
+        all_time_storage: Stockage total
+        creation_date: Date de création
+        highlights: Points clés
+        instance_informations: Informations sur l'instance
+        key_value: Clé-valeur
+        license: Licence
+        organization: Organisation
+        organizations_last_10: 10 dernières organisations
+        projects: Projets
+        remove: Remove
+        statefiles: Fichiers d'état
+        tokens_about_to_expire: Jetons sur le point d'expirer
+        user_count: Nombre d'utilisateurs
+        workspaces: Espaces de travail
+    organizations:
+      about: À propos
+      actions: Actions
+      admins: Administrateurs
+      all_projects: Tous les projets
+      archive: Archiver
+      create_project: Créer un projet
+      edit: Modifier
+      key_value_store: Stockage clé-valeur
+      name: Nom
+      project_name: Nom du projet
+      projects: Projets
+      tokens: Jetons
+      users: Utilisateurs
+      uuid: UUID
+      viewers: Lecteurs
+      workspaces: Espaces de travail
+    users:
+      account: Compte
+      actions: Actions
+      email: E-mail
+      global_role: Rôle global
+      roles: Rôles
+      table_item:
+        update: Modifier
+  application:
+    org_menu:
+      profile: Profil
+    project_menu:
+      all_spaces: Tous les espaces
+      profile: Profil
+  attr_name: Nom de l'attribut
+  attributs: Attributs
+  category: Catégorie
+  controllers:
+    admin:
+      unauthorized: Non autorisé
+    application:
+      password_change_required: Changement de mot de passe requis
+    license_licensees:
+      licensees_successful_imported: Titulaires de licence importés avec succès
+    license_team_members:
+      successful_imported: Importation réussie
+    member:
+      license_denied: Licence refusée
+      workspaces:
+        updated: Modifié
+    registrations:
+      sign_up_failed: Échec de l'inscription
+      signed_up: Inscription réussie
+    sessions:
+      login_failure: Échec de la connexion
+      oauth_failure: Échec de l'authentification
+      oauth_success: Authentification réussie
+      rate_limit: Limite de requêtes atteinte
+    users:
+      profile_updated: Profil mis à jour
+  email_verifications:
+    create:
+      notice: Un e-mail de vérification a été envoyé à %{email_address}. Veuillez
+        vérifier votre boîte de réception et cliquer sur le lien de vérification pour
+        activer votre compte.
+      please_wait: Veuillez patienter un peu plus longtemps avant de demander une
+        autre vérification par e-mail. Si le problème persiste, veuillez contacter
+        le support à support@example.com.
+    edit:
+      already_confirmed: L'e-mail a déjà été confirmé.
+      failed: La vérification de l'e-mail a échoué. Veuillez réessayer.
+      page_name: Vérification de l'e-mail
+      success: Votre adresse e-mail a été vérifiée avec succès.
+      unauthorize: Vous n'êtes pas autorisé à confirmer cet e-mail.
+    invalid_or_expired: Le lien de vérification de l'e-mail est invalide ou a expiré.
+  globals:
+    accept: Accepter
+    active: Actif
+    add: Ajouter
+    api_credits: Crédits API
+    api_queries: Requêtes API
+    api_request: Requête API
+    assets: Actifs
+    back: Retour
+    back_to_home: Retour à l'accueil
+    bool_no: Non
+    bool_yes: Oui
+    cancel: Annuler
+    confirm: Confirmer
+    confirm_copy: Confirmer la copie
+    confirm_push: Confirmer l'envoi
+    confirm_remove_tag: Confirmer la suppression du tag
+    cost: Coût
+    create: Créer
+    created: Créé
+    dashboard: Tableau de bord
+    delete: Supprimer
+    destroyed: Supprimé
+    edit: Modifier
+    edit_with: Modifier avec
+    email: E-mail
+    filter: Filtrer
+    inactive: Inactif
+    key_value_api_queries: Requêtes API pour le stockage clé-valeur
+    key_value_api_queries_montly: Requêtes clé-valeur ce mois-ci
+    name: Nom
+    new: Nouveau
+    new_with: Nouveau avec
+    no_logo_uploaded: Aucun logo téléversé
+    other_credits: Autres crédits
+    pricing: Choix du forfait
+    queries: Requêtes
+    queries_current_period: Requêtes API pour la période courante
+    queries_montly: Requêtes mensuelles
+    resources: Ressources
+    role: Rôle
+    save: Enregistrer
+    search_placeholder: Rechercher
+    size: Ko
+    statefile_api_queries_montly: Requêtes du fichier d'état ce mois-ci
+    status: Statut
+    subscription: Abonnement
+    token: Jeton
+    token_org: Jeton d'organisation
+    tokens:
+      scope: Portée
+    update: Modifier
+    updated: Modifié
+    user_license: Licence utilisateur
+    validate: Valider
+  helpers:
+    select:
+      prompt: Veuillez sélectionner
+    submit:
+      create: Créer un(e) %{model}
+      submit: Enregistrer ce(tte) %{model}
+      update: Modifier ce(tte) %{model}
+  layouts:
+    public:
+      switch_account_to_english: Passer le compte en anglais
+      switch_account_to_french: Passer le compte en français
+  member:
+    accounts:
+      create:
+        my_organization: "Mon organisation"
+        my_organization_description: "Organisation par defaut"
+        my_project: "Mon projet"
+        my_infra: "Espace Infra"
+        my_app: "Espace Application"
+        my_public_key: "ClePublique"
+        my_public_value: "ValeurPublique"
+        my_private_key: "ClePrivee"
+        my_private_value: "ValeurPrivee"
+        my_private_one_time_only_key: "CleUneFoisSeulement"
+        my_private_one_time_only_value: "ValeurUneFoisSeulement"
+      fields:
+        select: Sélectionner
+      new:
+        title: Titre
+    dashboard:
+      account:
+        api_request: Requete Api
+        credits: Credits
+        trust_assets_average: Moyenne des Trust assets
+        user_license_average: Moyenne des licenses utilisateurs
+      helper:
+        main-title: De quoi avez vous besoin ?
+        intro: Laissez-nous vous guider pour la prise en main de votre espace KeyHarbour.
+        key_value: Key-Value
+        key_value_explain: Vous avez besoin d'un stockage Key-Value à utiliser depuis vos pipelines ? Cessez de faire circuler vos secrets et fichiers de configuration à l'aveugle. Avec le Key-Value Store de KeyHarbour, centralisez vos données opérationnelles dans un espace sécurisé.
+        licenses: Licences
+        licenses_explain: Vous avez besoin d'une vue unifiée sur vos licences logicielles ? Reprenez le contrôle de vos dépenses de logiciels et centralisez les dates critiques de renouvellement.
+        start_now: Commencer maintenant
+        statefile: Statefile
+        statefile_explain: Vous avez besoin d'un remote state fiable pour vos déploiements d'infrastructure ? Bénéficiez d'un verrouillage d'état automatisé pour vos exécutions Terraform/OpenTofu, ainsi que d'un historique des versions pour revenir en arrière en cas de pépin.
+        title: "Besoin d'aide ?"
+        trust_assets: Actifs de confiance
+        trust_assets_explain: Vous avez besoin de sécuriser et de suivre vos certificats et tokens au même endroit ? Reprenez le contrôle de vos actifs de confiance. Dites adieu aux expirations surprises, suivez l'utilisation et configurez des rappels automatiques.
+
+      index:
+        active_invitation_count: Vous avez %{count} invitations actives pour rejoindre
+          une organisation
+        active_invitations: Invitations actives
+        balance: Balance
+        billing_details: Détails de facturation
+        create_organization_button: Créer votre première organisation
+        credit_usage_for_this_month: Credit usage mois en cours
+        credits: Credits
+        daily_credit_usage_for_this_month: Consommation quotidienne de crédit pour
+          le mois en cours
+        enter_code: Entrez votre code
+        expiring_tokens: Jetons sur le point d'expirer
+        key_value: Key value
+        key_value_explain: Key value explain
+        last_access: Dernier accès
+        licenses: Licenses
+        licenses_explain: Licenses explain
+        monthly_credit: Crédit mensuel
+        monthly_usage: Usage mensuel
+        no_organization_yet: Vous n'avez pas encore créé d'organisation.
+        statefile: Statefile
+        statefile_explain: Statefile explain
+        total_admins: Administrateurs
+        total_owners: Propriétaires
+        total_users: Utilisateurs
+        trust_assets: Trust assets
+        trust_assets_explain: Trust assets explain
+        users_with_access: Utilisateurs ayant accès à la même organisation que vous
+          (10 derniers)
+        welcome_back: Welcome back
+        welcome_context: Voici votre tableau de bord où vous pouvez surveiller vos
+          équipes et les statistiques d'utilisation.
+        welcome_message: Bienvenue sur votre tableau de bord
+        your_organizations: Vos organisations
+      organizations:
+        your_organizations: Vos organisations
+    environments:
+      body:
+        remove: Supprimer
+        update: Modifier
+      create: Créer un environnement
+      edit:
+        page_title: Modifier l'environnement
+      index:
+        page_title: Environnements
+      new:
+        page_title: Nouvel environnement
+    inventory:
+      instances:
+        table_header:
+          name: Nom
+      inventory:
+        body:
+          remove: Supprimer
+          update: Modifier
+        index:
+          inventory: Inventaire
+        menu:
+          dashboard: Tableau de bord
+          model_categories: Catégories de modèles
+          model_families: Familles de modèles
+        top_menu:
+          dashboard: Tableau de bord
+          model_categories: Catégories de modèles
+          model_families: Familles de modèles
+      model_categories:
+        table_header:
+          name: Nom
+        table_item:
+          attributs: Attributs
+          remove: Supprimer
+          update: Modifier
+      model_category_attrs:
+        table_header:
+          name: Nom
+        table_item:
+          remove: Supprimer
+          update: Modifier
+      model_families:
+        table_item:
+          remove: Supprimer
+          update: Modifier
+    invites:
+      edit:
+        page_title: Modifier l'invitation
+      index:
+        page_title: Invitations
+      new:
+        page_title: Nouvelle invitation
+    key_value_stores:
+      headers:
+        expiration: Expiration
+        key: Clé
+        one_time_only: Une seule fois
+        private: Privé
+        value: Valeur
+      index:
+        description: Un dépôt clé-valeur simple
+        title: Dépôts clé-valeur
+      searchbar:
+        filter: Filtrer
+        placeholder: Rechercher...
+      table_header:
+        expires_at: Expire le
+        key: Clé
+        one_time_only: Une seule fois
+        private: Privé
+        value: Valeur
+      table_item:
+        remove: Supprimer
+        update: Modifier
+      workspace_menu:
+        title: 'Dépôt clé-valeur pour '
+    license:
+      applications:
+        index:
+          color_code_by_renewal_priorities: Code couleur par priorité de renouvellement
+          color_legends: Légende des couleurs
+          first_reminder: Premier rappel
+          last_reminder: Dernier rappel
+          no_reminder: Aucun rappel
+          overdue: En retard
+          remove: Supprimer
+          short_name: Nom court
+          update: Modifier
+          vendor: Fournisseur
+        menu:
+          application: Application
+          instances: Instances
+          quotes: Devis
+        show:
+          alerts: Alertes
+          details: Détails
+          first_renewal_alert: Première alerte de renouvellement
+          renewal: Renouvellement
+          renewal_date: Date de renouvellement
+          second_renewal_alert: Seconde alerte de renouvellement
+          tier: Niveau
+          unit_cost: Coût unitaire
+          usage: Utilisation
+          vendor: Fournisseur
+        table_header:
+          name: Nom
+          renewal_date: Date de renouvellement
+          tier: Niveau
+          vendor: Fournisseur
+        table_item:
+          remove: Supprimer
+          update: Modifier
+      dashboard:
+        index:
+          calendar: Calendrier
+          calendar_overview: Vue d'ensemble du calendrier
+          first_reminder: Premier rappel
+          last_reminder: Dernier rappel
+          license_threshold: Seuil de licence
+          no_reminder: Aucun rappel
+          optimal_consumption: Consommation optimale
+          over_consuming: Surconsommation
+          over_licensed: Sur-licencié
+          overdue: En retard
+          rate_overview: Vue d'ensemble des tarifs
+          usage_rate: Taux d'utilisation
+      instances:
+        index:
+          active: Actif
+          active_add_on: Module actif
+          add_on: Module
+          all_add_on: Tous les modules
+          inactive: Inactif
+          instance_only: Instance uniquement
+          licensees: Titulaires de licence
+          remove: Supprimer
+          unlimited: Illimité
+          update: Modifier
+      licensees:
+        index:
+          details: Détails
+          direct_cost: Coût direct
+          download: Télécharger
+          manager: Gestionnaire
+          team_cost: Coût d'équipe
+          user: Utilisateur
+      providers:
+        hint:
+          provider: Fournisseur
+        index:
+          approved_quote: Devis approuvé
+          quote: Devis
+          remove: Supprimer
+          update: Modifier
+      quote_add_ons:
+        edit:
+          cancel: Annuler
+          ok: Valider
+      quote_applications:
+        edit:
+          cancel: Annuler
+          ok: Valider
+      quote_instances:
+        edit:
+          cancel: Annuler
+          ok: Valider
+      quotes:
+        compare:
+          base_cost: Coût de base
+          compare: Comparer
+          cost: Coût
+          cost_per_site_with_add_on: Coût par site avec module complémentaire
+          cost_per_site_with_add_on_and_application: Coût par site avec module complémentaire
+            et application
+          per_seat: Par siège
+          seats: Sièges
+        index:
+          approved: Approuvé
+          compare: Comparer
+          initial: Initial
+          items: Éléments
+          quotes: Devis
+          rejected: Rejeté
+          remove: Supprimer
+          update: Modifier
+        show:
+          activate: Activer
+          deactivate: Désactiver
+      team_members:
+        index:
+          users_organization: Organisation de l'utilisateur
+    member_controller:
+      access_denied: Accès refusé
+      account_required: Compte requis
+      accounts_management: Gestion des comptes
+      admin: Administrateur
+      all_users: Tous les utilisateurs
+      desactivated: Désactivé
+      global_dashboard: Tableau de bord global
+      member: Membre
+    model_categories:
+      edit:
+        page_title: Modifier la catégorie de modèle
+      index:
+        page_title: Catégories de modèles
+        title: Catégories de modèles
+      new:
+        page_title: Nouvelle catégorie de modèle
+      show:
+        page_title: "%{name}"
+    model_families:
+      edit:
+        page_title: Modifier la famille de modèle
+      index:
+        page_title: Familles de modèles
+        title: Familles de modèles
+      new:
+        page_title: Nouvelle famille de modèle
+      show:
+        page_title: "%{name}"
+    org_tokens:
+      body:
+        remove: Supprimer
+    organizations:
+      body:
+        remove: Supprimer
+        tokens: Jetons
+        update: Modifier
+      edit:
+        page_title: Modifier l'organisation
+      index:
+        organizations: Organizations
+      item_menu:
+        copy: Copier
+        push_as_current: Définir comme actuel
+        remove: Supprimer
+        tokens: Jetons
+        update: Modifier
+      new:
+        create_invite: Nouvelle invitation
+        new_organization: Nouvelle organisation
+        page_title: Créer une organisation
+      projects:
+        all_projects: Tous les projets
+        remove: Supprimer
+        tokens: Jetons
+        update: Modifier
+      show:
+        all_projects: Tous les projets
+        key_value_store: Stockage clé-valeur
+        queries_included: "%{count} requêtes incluses"
+        resources: Ressources
+        trust_assets: Actifs de confiance
+        update: Mettre à jour l'organisation
+      summary:
+        key_value_store: Stockage clé-valeur
+        resources: Ressources
+        trust_assets: Actifs de confiance
+        update: Modifier
+      top_menu:
+        profile: Profil
+    pricings:
+      index:
+        additional_managed_employees: Employés additionnels gérés
+        additional_package: Forfait supplémentaire
+        addtionnal_managed_employees: Employés additionnels gérés
+        annual_billing: Facturation annuelle
+        api_queries: Requêtes API
+        contact-us: Nous contacter
+        coupon:
+          input: Saisie
+          submit: Valider
+          text: Texte
+          title: Titre
+        current_plan: Forfait actuel
+        employees: employés
+        key_value_store: Stockage clé-valeur
+        licence_mgnt: Gestion des licences
+        managed_employees: Nombre d'employés gérés
+        month: Mois
+        monthly_billing: Facturation mensuelle
+        plans:
+          enterprise:
+            description: Forfait personnalisé pour les grandes entreprises.<br/><br/><br/>
+            name: Entreprise
+          free:
+            description: Forfait gratuit pour les utilisateurs individuels ou les
+              petits projets.<br/><br/>
+            name: Gratuit
+          pro:
+            description: Forfait avancé pour les entreprises en croissance.<br/><br/>
+            name: Pro
+          startup:
+            description: Forfait abordable pour les startups et les petites équipes
+              avec des besoins de base.<br/>
+            name: Startup
+        queries: Requêtes
+        select: Sélectionner
+        soon: Bientôt
+        terraform_ressources: Ressources Terraform
+        terraform_statefile: Fichier d'état Terraform
+        title: Forfaits
+        unlimited: Illimité
+        unlimited_terraform_ressources: Ressources Terraform illimitées
+        upgrade: Mise à niveau
+        user_accounts: Comptes utilisateurs
+    projects:
+      body:
+        remove: Supprimer
+        update: Modifier
+      edit:
+        page_title: Modifier le projet
+      new:
+        page_title: Nouveau projet
+      show:
+        about: À propos
+        admins: Administrateurs
+        billing_details_monthly: Détails de facturation mensuelle
+        billing_details_monthy: Détails de facturation mensuelle
+        edit_project: Modifier le projet
+        org_uuid: UUID de l'organisation
+        users: Utilisateurs
+        viewers: Lecteurs
+      summary:
+        about: À propos
+        org_uuid: UUID de l'organisation
+        update: Modifier
+      top_menu:
+        profile: Profil
+    statefile_tags:
+      index:
+        title: Titre
+    statefiles:
+      index:
+        actions: Actions
+        billing_details: Détails de facturation
+        download: Télécharger
+        duplicate: Dupliquer
+        make_primary: Définir comme principal
+        no_statefiles: Aucun fichier d'état trouvé pour cet environnement.
+        published_at: Publié le
+        remove: Supprimer
+        remove_tag: Supprimer le tag
+        resources: Ressources
+        see: Voir
+        statefile_history: Historique du fichier d'état
+        tag: Tag
+        tagged_version: Version taggée
+        terraform_link: Lien Terraform
+        title: Titre
+      item_menu:
+        copy: Copier
+        push_as_current: Définir comme actuel
+        remove: Supprimer
+        tokens: Jetons
+        update: Modifier
+      show:
+        back: Retour
+        token_for: Jeton pour
+      statefile:
+        resources: Ressources
+        tag: Tag
+      statefiles:
+        resources: Ressources
+        statefile_history: Historique des fichiers d'état
+        tag: Tagger
+      workspace_menu:
+        title: Fichiers d'état Terraform pour
+    subscriptions:
+      fail:
+        body: Contenu
+        title: Titre
+      index:
+        amount: Montant
+        date: Date
+        description: Description
+        next_bill_amount: Montant de la prochaine facture
+        next_bill_date: Date de la prochaine facture
+        state: État
+      show:
+        amount: Montant
+        date: Date
+        description: Description
+        invoices: Factures
+        next_bill_amount: Prochain montant
+        next_bill_date: Prochaine facture
+        page_title: Votre abonnement
+        state: État
+        usage_status: Utilisation %{rate}%% (%{current} sur %{limit})
+      success:
+        body: Contenu
+        title: Titre
+    teams:
+      body:
+        permissions: Permissions
+        remove: Supprimer
+        update: Modifier
+      edit:
+        page_title: Modifier l'équipe
+      new:
+        page_title: Nouvelle équipe
+    tokens:
+      body:
+        remove: Supprimer
+      edit:
+        page_title: Modifier le jeton
+      fields:
+        leave_blank_project_token: Laisser le jeton du projet vide
+      index:
+        app_token: Jeton d'application
+        org_token: Jeton d'organisation
+      new:
+        page_title: Nouveau jeton
+      search_form:
+        if_check_workspace_ignore: Si l'espace est coché, ignorer
+        leave_blank_project_token: Laisser le jeton du projet vide
+      show:
+        back: Retour
+        token: Jeton
+        token_for: Jeton pour
+        token_visibility_warning: Vous ne pourrez voir ce jeton qu'une seule fois.
+          Assurez-vous de le copier et de le stocker en lieu sûr.
+        user_access: Accès utilisateur
+    trust_assets:
+      edit:
+        description: Mettre à jour les détails de votre actif de confiance pour maintenir
+          sa sécurité et sa pertinence au sein de votre espace de travail.
+        title: Modifier l'actif de confiance
+      headers:
+        consumer: Consommateur
+        expires_at: Expire le
+        format: Format
+        issuer: Émetteur
+        name: Nom
+      index:
+        description: Gérer vos actifs de confiance, tels que les certificats et les
+          secrets, pour garantir des opérations sécurisées dans votre espace de travail.
+        title: Actifs de confiance
+      new:
+        description: Créer un nouvel actif de confiance pour gérer en toute sécurité
+          les informations sensibles dans votre espace de travail.
+        title: Nouvel actif de confiance
+      searchbar:
+        filter: Filtrer
+        placeholder: Rechercher...
+      table_header:
+        consumer: Consommateur
+        expires_at: Expire le
+        format: Format
+        issuer: Émetteur
+        name: Nom
+      table_item:
+        remove: Supprimer
+        update: Modifier
+      workspace_menu:
+        title: Actifs de confiance pour
+    users:
+      body:
+        remove: Supprimer
+      fields:
+        password_hint: L'utilisateur devra changer le mot de passe lors de sa première
+          connexion.
+    wizard:
+      new_organization:
+        add_env: "+ Ajouter un environnement"
+        envs: Environnements à initialiser
+        next: "Suivant →"
+        step1: "Étape 1 / 3 : Créer votre Organisation"
+      new_project:
+        next: "Suivant →"
+        org: Organisation
+        step2: "Étape 2 / 3 : Créer un Projet"
+        prj_placeholder: "Ex: Site Web"
+      new_workspace:
+        project: Projet
+        step3: "Étape 3 / 3 : Configurer votre Workspace"
+        next: "Terminer et lancer 🚀"
+        wks_placeholder: "Ex: Équipe Dev / Production"
+
+    workspaces:
+      edit:
+        page_title: Modifier l'espace de travail
+      index:
+        remove: Supprimer
+        update: Modifier
+      new:
+        page_title: Nouvel espace de travail
+      show:
+        activate: Activer
+        archive: Archiver
+        deactivate: Désactiver
+        desactivate: Désactiver
+        environments: Environnements
+        key_value_stores: Dépôt clé-valeur
+        key_values: Clé/Valeur
+        last_update: Dernière mise à jour
+        resources: Ressources
+        terraform_state_files: Fichiers d'état Terraform
+        trust_assets: Actifs de confiance
+  menu:
+    account_applications: Applications
+    add_ons: Modules
+    all_organizations: Toutes les organisations
+    all_spaces: Tous les espaces
+    api_queries: Requêtes API
+    applications: Applications
+    dashboard: Tableau de bord
+    environments: Environnements
+    global_admin: Administration globale
+    instances: Instances
+    inventory_instances: Instances d'inventaire
+    inventory_model_categories: Catégories de modèles d'inventaire
+    inventory_model_category_attrs: Attributs de catégories de modèles d'inventaire
+    inventory_model_families: Familles de modèles d'inventaire
+    key_value_stores: Dépôts clé-valeur
+    licensees: Titulaires de licence
+    licenses: Licences
+    licenses_dashboard: Tableau de bord
+    organization_applications: Applications de l'organisation
+    organization_inventory: Inventaire de l'organisation
+    organization_overview: Vue d'ensemble de l'organisation
+    organization_team_members: Membres de l'équipe de l'organisation
+    pricings: Tarifs
+    projects: Projets
+    providers: Fournisseurs
+    quotes: Devis
+    statefile_tags: Tags des fichiers d'état
+    statefiles: Fichiers d'état
+    team_members: Membres de l'équipe
+    teams: Équipes
+    tokens: Jetons
+    trust_assets: Actifs de confiance
+    users: Utilisateurs
+    workspaces: Espaces de travail
+  model_family: Famille de modèles
+  models:
+    concerns:
+      archivable:
+        archived_item_error: 'Élément archivé — modifications interdites : %{changes}'
+      edition_limits:
+        max_projects: L'édition On-Premise est limitée à %{max} projets par organisation
+        max_workspaces: L'édition On-Premise est limitée à %{max} espaces de travail
+          par projet
+  name: Nom
+  passwords:
+    create:
+      instructions_sent: Instructions envoyées
+    edit:
+      new_password: Nouveau mot de passe
+      repeat_new_password: Répéter le nouveau mot de passe
+      reset_password: Réinitialiser le mot de passe
+      save_changes: Enregistrer les modifications
+      title: Mettre a jour
+    invalid_or_expired: Invalide ou expiré
+    new:
+      need_account: Besoin d'un compte
+      reset_instructions: Instructions de réinitialisation
+      sign_up: S'inscrire
+      title: Inscription
+    update:
+      did_not_match: Ne correspond pas
+      password_updated: Mot de passe mis à jour
+  permission_denied: Permission refusée
+  ready: Prêt
+  registrations:
+    new:
+      accept: Accepter
+      already_have_account: Vous avez déjà un compte
+      conditions: Conditions
+      forgot_password: Mot de passe oublié
+      log_in: Se connecter
+      prefered_language: Langue préférée
+      switch_account_to_english: Passer en anglais
+      switch_account_to_french: Passer en français
+      title: Inscription
+  resource_type: Type de ressource
+  sessions:
+    new:
+      forgot_password: Mot de passe oublié
+      need_account: Besoin d'un compte
+      remember_me: Se souvenir de moi
+      sign_up: S'inscrire
+      switch_account_to_english: Passer en anglais
+      switch_account_to_french: Passer en français
+      title: Ouvrir
+  sidebar:
+    footer:
+      account_settings: Paramètres du compte
+      docs: Documentation
+      language: Langue
+      logout: Déconnexion
+  simple_form:
+    error_notification:
+      default_message: 'Veuillez corriger les problèmes ci-dessous :'
+    'no': Non
+    required:
+      mark: "*"
+      text: obligatoire
+    'yes': Oui
+  status:
+    active: Actif
+    archived: Archivé
+    deleted: Supprimé
+    disabled: Désactivé
+  support:
+    array:
+      last_word_connector: " et "
+      two_words_connector: " et "
+      words_connector: ", "
+  users:
+    edit:
+      page_name: Mettre à jour mon profil
+  views:
+    member:
+      statefiles:
+        title_for: Titre pour
+        token_for: Jeton pour
+      tokens:
+        token: Jeton
+        token_for: Jeton pour
+        token_visibility_warning: Vous ne pourrez voir ce jeton qu'une seule fois.
+          Assurez-vous de le copier et de le stocker en lieu sûr.
+        user_access: Accès utilisateur
+  wizard:
+    organizations: Organisations
+  workspace: Espace de travail

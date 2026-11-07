@@ -1,0 +1,16 @@
+= simple_form_for item, url: member_organization_inventory_model_categories_path(@organization), method: :get, html: {class: "simple_form"}  do |f|
+  = render partial: "form_error", locals: { form_table: item }
+  .mt-3
+    = f.input :name
+  .mb-3
+    = f.input :resource_type,
+      collection: @organization.model_categories.all.pluck(:resource_type, :resource_type),
+      as: :select,
+      input_html: { multiple: false, data: { controller: "tom-select" } }
+  .mb-3
+    = f.association :model_family,
+      collection: @organization.model_families.all.pluck(:name, :id),
+      as: :select,
+      input_html: { multiple: false, data: { controller: "tom-select" } }
+  .mt-3
+    = f.submit 'Search', class: 'btn btn-primary'

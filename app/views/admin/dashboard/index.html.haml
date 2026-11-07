@@ -1,0 +1,100 @@
+.col-md-12
+  .card
+    .card-header
+      %h3.card-title
+        = t('.instance_informations')
+    .card-body
+      .row
+        .col-md-8
+          %b= t('.license')
+          .mt-2= Rails.application.config.register.license_id
+        .col-md-4
+          %b= t('.serial_id')
+          .mt-2= Rails.application.config.register.identity["production"]["uuid"]
+      .datagrid
+        - Rails.configuration.register.features.each do |feature, value|
+          .datagrid-item
+            .datagrid-content
+              .tag
+                %span.badge.bg-lime.text-lime-fg.tag-status.badge-dot
+                = feature
+.col-md-2                
+  .card
+    .card-body
+      .d-flex.align-items-center
+        .subheader Last processes date
+      .d-flex.align-items-baseline
+        .h1.mb-3.me-2
+          - processed_date = ProcessedDate.last
+          = processed_date.day
+        .me-auto
+          %span.text-green.d-inline-flex.align-items-center.lh-1
+            %span.visually-hidden
+            = UsageDailyAccount.where(day: processed_date.day).sum(:units)
+      = link_to admin_processed_date_path(processed_date), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash", class: "icon-xs"
+        = t('.remove')
+- Cost.service_with_icon.each do |item|
+  .col-md-2         
+    .card.card-sm
+      .card-body
+        .row.align-items-center
+          .col-auto
+            %span.bg-primary.text-white.avatar.avatar-square
+              = icon item[:icon]
+          .col
+            .fw-medium  #{item[:id].camelize}
+            .text-secondary 
+              %strong #{UsageDailyAccount.monthly_units(item, processed_date.day)} 
+              last processed day
+            .text-secondary 
+              %strong #{UsageDailyAccount.where(day: processed_date.day.advance(days: -30)..processed_date.day, service_name: item[:id]).sum(:units)} 
+              last 30 days
+            
+.col-md-12
+  .card
+    .card-body
+      .row
+        .col-md-4
+          .card
+            .card-header
+              %h3.card-title= t('.highlights')
+            .card-body
+              .datagrid.mb-4
+                .datagrid-item
+                  .datagrid-title= t('.all_time_storage')
+                  .datagrid-content= number_to_human_size @total[:statefile_size] + @total[:keyvalue_size]
+                .datagrid-item
+                  .datagrid-title= t('.statefiles')
+                  .datagrid-content= Statefile.count
+                .datagrid-item
+                  .datagrid-title= t('.key_value')
+                  .datagrid-content= KeyValueStore.count
+          .card.mt-4
+            .card-header
+              %h3.card-title= t('.account')
+            .card-body
+              .datagrid.mb-4
+                - Account.unscope(:where).all.each do |account|
+                  .datagrid-item
+                    .datagrid-title= account.name
+                    .datagrid-content TF: #{account.statefiles.count} - KV: #{account.key_value_stores.count} - TrustAsset: #{account.trust_assets.count}
+        .col-md-8
+          .card
+            .card-header
+              %h3.card-title= t('.organizations_last_10')
+            .card-body
+              %table.table.table-vcenter.card-table
+                %thead
+                  %tr
+                    %th= t('.organization')
+                    %th= t('.projects')
+                    %th= t('.workspaces')
+                    %th= t('.creation_date')
+                %tbody
+                  - Organization.order(created_at: :desc).limit(10).each do |organization|
+                    %tr
+                      %td= organization.name
+                      %td= organization.projects.count
+                      %td= organization.workspaces.count
+                      %td= organization.created_at.to_date

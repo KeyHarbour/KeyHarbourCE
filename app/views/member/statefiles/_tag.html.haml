@@ -1,0 +1,11 @@
+#offcanvasEnd.offcanvas.offcanvas-end{"aria-labelledby" => "offcanvasEndLabel", :tabindex => "-1"}
+  .offcanvas-header
+    Tagger
+    %button.btn-close.text-reset{"aria-label" => "Close", "data-bs-dismiss" => "offcanvas", :type => "button"}
+  .offcanvas-body
+    %div
+      = simple_form_for item, url: member_statefile_statefile_tags_path(@statefile), method: :get, html: {class: "simple_form"}  do |f|
+        = render partial: "form_error", locals: { form_table: item }
+        = f.input :tag
+        .mt-3
+          = f.submit 'Apply', class: 'btn btn-primary'

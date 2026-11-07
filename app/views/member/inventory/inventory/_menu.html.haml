@@ -1,0 +1,33 @@
+:css
+  .hero-bg {
+    background-image: url('#{asset_path("media/images/2600x1200/bg-1.png")}');
+  }
+  .dark .hero-bg {
+    background-image: url('#{asset_path("media/images/2600x1200/bg-1-dark.png")}');
+  }
+.bg-center.bg-cover.bg-no-repeat.hero-bg
+  / Container
+  .kt-container-fluid
+    .flex.flex-col.items-center.gap-2.py-4.lg:pt-5.lg:pb-10{:class => "lg:gap-3.5"}
+      .flex.items-center{:class => "gap-1.5"}
+        .text-lg.leading-5.font-semibold.text-mono
+          %i.ki-duotone.ki-folder.text-primary{style: "font-size: 24px;"}
+          = t('activerecord.models.project').capitalize
+          = @organization.name
+.kt-container-fluid
+  .flex.items-center.flex-wrap.md:flex-nowrap.lg:items-end.justify-between.border-b.border-b-border.gap-3.lg:gap-6.mb-5.lg:mb-10
+    .grid
+      .kt-scrollable-x-auto
+        .kt-menu.gap-3{"data-kt-menu" => "true"}
+          .kt-menu-item.border-b-2.border-b-transparent.kt-menu-item-active:border-b-primary.kt-menu-item-here:border-b-primary{class: "#{actif=='instances' ? 'here' : ''}"}
+            = link_to member_organization_inventory_instances_path(organization), class: "kt-menu-link pb-2 lg:pb-4 px-2 gap-1.5" do
+              %span.kt-menu-title.text-nowrap.font-medium.text-sm.text-secondary-foreground.kt-menu-item-active:text-primary.kt-menu-item-active:font-semibold.kt-menu-item-here:text-primary.kt-menu-item-here:font-semibold.kt-menu-item-show:text-primary.kt-menu-link-hover:text-primary
+                = t('.dashboard').capitalize
+          .kt-menu-item.border-b-2.border-b-transparent.kt-menu-item-active:border-b-primary.kt-menu-item-here:border-b-primary{class: "#{actif=='model_categories' ? 'here' : ''}"}
+            = link_to member_organization_inventory_model_categories_path(organization), class: "kt-menu-link pb-2 lg:pb-4 px-2 gap-1.5" do
+              %span.kt-menu-title.text-nowrap.font-medium.text-sm.text-secondary-foreground.kt-menu-item-active:text-primary.kt-menu-item-active:font-semibold.kt-menu-item-here:text-primary.kt-menu-item-here:font-semibold.kt-menu-item-show:text-primary.kt-menu-link-hover:text-primary
+                = t('.model_categories')
+          .kt-menu-item.border-b-2.border-b-transparent.kt-menu-item-active:border-b-primary.kt-menu-item-here:border-b-primary{class: "#{actif=='model_families' ? 'here' : ''}"}
+            = link_to member_organization_inventory_model_families_path(organization), class: "kt-menu-link pb-2 lg:pb-4 px-2 gap-1.5" do
+              %span.kt-menu-title.text-nowrap.font-medium.text-sm.text-secondary-foreground.kt-menu-item-active:text-primary.kt-menu-item-active:font-semibold.kt-menu-item-here:text-primary.kt-menu-item-here:font-semibold.kt-menu-item-show:text-primary.kt-menu-link-hover:text-primary
+                = t('.model_families')

@@ -1,0 +1,7 @@
+%td
+  = link_to item.name, member_organization_path(item), class: "hover:text-primary"
+  = render partial: "layouts/status", locals: { item: item }
+%td    
+  = item.uuid    
+%td
+  = render partial: "item_menu", locals: {token_link: admin_organization_tokens_path(item), delete_link: admin_organization_path(item), edit_link: edit_admin_organization_path(item) }

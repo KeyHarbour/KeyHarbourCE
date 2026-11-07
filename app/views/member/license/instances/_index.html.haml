@@ -1,0 +1,83 @@
+.card
+  .row.g-0
+    = render partial: "menu", locals: {application: @application, active: :instances}
+    .col-12.col-md-9.d-flex.flex-column
+      .row.row-cards.m-2
+        .space-y
+          - items.each do |item|
+            .card
+              .row.g-0
+                .col.p-2
+                  .card-body.ps-0
+                    .row
+                      .col.text-truncate
+                        %h3.mb-0
+                          = item.name
+                          = render partial: "layouts/status", locals: { item: item }
+                        = item.uuid
+                        .badge.badge-outline.text-secondary.fw-normal.badge-pill{:href => "#"}= item.short_name
+                      .col-auto
+                        .dropdown.no-arrow
+                          %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+                          .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+                            = link_to edit_member_license_instance_path(item), class: "dropdown-item" do
+                              = icon "edit"
+                              = t('.update')
+                            = link_to member_license_instance_licensees_path(item), class: "dropdown-item" do
+                              = icon "users"
+                              = t('.licensees')
+                            = link_to member_license_instance_path(item), method: :delete, data:  { turbo_method: :delete, turbo_confirm: t('globals.confirm') }, class: "dropdown-item" do
+                              = icon "trash"
+                              = t('.remove')
+                    .row
+                      .col-md
+                        .progressbg.mt-4
+                          .progress.progressbg-progress
+                            .progress-bar{class: bg_progress_color(item.usage_rate), "aria-label" => "#{item.usage_rate}% Complete", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{(item.usage_rate * 100).round(2)}", :role => "progressbar", :style => "width: #{(item.usage_rate * 100).to_i}%"}                        
+
+                          .progressbg-text
+                            = icon "chair-director"
+                            = "#{item.seat_used} / #{item.seats || t('.unlimited')}"
+                          .progressbg-value #{(item.usage_rate * 100).round(2)}%  
+                        .mt-3.list-inline.list-inline-dots.mb-0.text-secondary.d-sm-block.d-none
+                          .list-inline-item
+                            = icon "currency-dollar"
+                            = number_to_currency item.unit_cost || item.application&.unit_cost || 0
+                            = t('.instance_only')
+                            \-
+                            = number_to_currency item.cost_with_active_add_ons
+                            (#{t('.active_add_on')})
+                            \-
+                            = number_to_currency item.cost_with_add_ons
+                            (#{t('.all_add_on')})
+                        
+                    .row.p-2
+                      .card
+                        .card-header
+                          %div
+                            %h2.card-title-= t('.add_on')
+                          .card-actions
+                            = link_to new_member_license_instance_add_on_path(item), class: "btn btn-primary btn-sm" do
+                              = icon "plus"
+                              = t('activerecord.models.addon')
+                        .list-group.list-group-hoverable.card-list-group
+                          - item.add_ons.each do |add_on|
+                            .list-group-item
+                              .row.align-items-center.g-3
+                                .col-12.col-sm
+                                  .fw-medium= add_on.name
+                                  .text-secondary= add_on.uuid
+                                .col-auto.fw-medium= number_to_currency add_on.unit_cost || 0
+                                .col-auto
+                                  - if add_on.active?
+                                    %span.badge.bg-success-lt= t('.active')
+                                  - else
+                                    %span.badge.bg-warning-lt= t('.inactive')
+                                .col-auto.ms-auto.ms-sm-0
+                                  .btn-list
+                                    = link_to edit_member_license_add_on_path(add_on), class: "btn btn-sm btn-icon", :aria => { label: "Edit add-on #{add_on.name}" } do
+                                      = icon "edit"
+                                    = link_to member_license_add_on_path(add_on), method: :delete, data:  { turbo_method: :delete, turbo_confirm: t('globals.confirm') }, class: "btn btn-sm btn-icon", :aria => { label: "Delete add-on #{add_on.name}" } do
+                                      = icon "trash"
+
+

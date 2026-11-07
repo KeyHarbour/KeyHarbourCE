@@ -1,0 +1,42 @@
+.card
+  .card-header
+    %h3.card-title= t('activerecord.models.project').pluralize
+    .card-actions
+      = link_to new_member_organization_project_path(organization), class: "btn btn-primary btn-sm" do
+        = icon "plus"
+        = t('activerecord.models.project')
+  .card-body
+    .list-group.list-group-flush.list-group-hoverable
+      - organization.projects.not_archived.limit(10).each do |item|
+        .list-group-item
+          .row.align-items-center
+            .col.text-truncate
+              .d-block.mb-2
+                = link_to item.name, member_project_path(item)
+                = render partial: "layouts/status", locals: { item: item }
+              .d-block.text-secondary.text-truncate.mt-n1
+                %span{id: "text_#{@item.uuid}"}
+                  = item.uuid
+                = link_to "#", id: "btn_#{item.uuid}", :onclick => "copierTexte('text_#{item.uuid}', 'btn_#{item.uuid}')" do
+                  = icon "copy", class: "icon-xs"
+                -# %button.flex.items-center.text-sm.gap-2.hover:bg-gray-50.font-semibold{id: "btn_#{item.uuid}", :onclick => "copierTexte('text_#{item.uuid}', 'btn_#{item.uuid}')"}
+                -#   = icon "copy", class: "icon-xs"
+            .col-auto
+              .dropdown.no-arrow
+                %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+                .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+                  = link_to member_project_tokens_path(item), class: "dropdown-item" do
+                    = icon "lock-code"
+                    = t('.tokens')
+                  = link_to edit_member_project_path(item), class: "dropdown-item" do
+                    = icon "edit"
+                    = t('.update')
+                  .dropdown-divider
+                  = link_to member_project_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+                    = icon "trash"
+                    = t('.remove')
+    .hr
+    .text-center
+      = link_to member_organization_projects_path(@item) do
+        = t('.all_projects')
+

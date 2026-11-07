@@ -1,0 +1,5 @@
+= simple_form_for item, url: member_license_application_quotes_path(@application), method: :get, html: {class: "simple_form"}  do |f|
+  = render partial: "form_error", locals: { form_table: item }
+  = f.input :uuid
+  .mt-3
+    = f.submit 'Search', class: 'btn btn-primary'

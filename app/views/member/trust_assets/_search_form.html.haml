@@ -1,0 +1,14 @@
+= simple_form_for item, url: member_workspace_trust_assets_path(@workspace), method: :get, html: {class: "simple_form"}  do |f|
+  = render partial: "form_error", locals: { form_table: item }
+  .mt-3
+    = f.input :name
+  .mt-3
+    = f.input :format, collection: TrustAsset.formats.keys.map { |r| [r.titleize, r] }
+  .mt-3
+    = f.input :issuer, collection: @workspace.trust_assets.pluck(:issuer).uniq
+  .mt-3
+    = f.input :consumer, collection: @workspace.trust_assets.pluck(:consumer).uniq
+  .mt-3
+    = f.input :environment_id, as: :hidden
+  .mt-3
+    = f.submit 'Search', class: 'btn btn-primary'

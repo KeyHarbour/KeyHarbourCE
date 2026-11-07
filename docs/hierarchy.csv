@@ -1,0 +1,104 @@
+name,manager_name,role
+Jean Dupont,,CEO
+Alice Martin,Jean Dupont,CTO
+Thomas Richard,Alice Martin,VP Engineering
+Lucas Laurent,Thomas Richard,Engineering Manager
+Enzo Lefevre,Lucas Laurent,Lead iOS
+Axel Guerin,Enzo Lefevre,iOS Junior A
+Inaya Caron,Enzo Lefevre,iOS Junior B
+Louna Garnier,Enzo Lefevre,iOS Junior C
+Mila Adam,Enzo Lefevre,iOS Junior D
+Rose Gautier,Enzo Lefevre,iOS Junior E
+Nino Lemaire,Enzo Lefevre,iOS Junior F
+Jade Mercier,Lucas Laurent,Lead Android
+Liam Duval,Jade Mercier,Android Dev A
+Sébastien Nicolas,Jade Mercier,Android Dev B
+Clara Roussel,Jade Mercier,Android Dev C
+Arthur Francois,Jade Mercier,Android Dev D
+Victor Morin,Jade Mercier,Android Dev E
+Julie Lambert,Jade Mercier,Android Dev F
+Marc Simon,Thomas Richard,Engineering Manager Web
+Hugo Fournier,Marc Simon,Lead Fullstack
+Manon Morel,Hugo Fournier,Fullstack A
+Leo Girard,Hugo Fournier,Fullstack B
+Sophie Vasseur,Hugo Fournier,Fullstack C
+Kevin Meunier,Hugo Fournier,Fullstack D
+Emma Dunand,Hugo Fournier,Fullstack E
+Yanis Privat,Hugo Fournier,Fullstack F
+Louna Tessier,Hugo Fournier,Fullstack G
+Nathan Bery,Hugo Fournier,Fullstack H
+Julie Durand,Jean Dupont,VP Product
+Emma Michel,Julie Durand,Product Director
+Mathieu Garcia,Emma Michel,Product Lead
+Gabriel Roger,Mathieu Garcia,Junior PM 1
+Sacha Mallet,Mathieu Garcia,Junior PM 2
+Lola Bonnet,Mathieu Garcia,Junior PM 3
+Paul Dupont,Mathieu Garcia,Junior PM 4
+Jade Royer,Mathieu Garcia,Junior PM 5
+Ines Andre,Mathieu Garcia,Junior PM 6
+Camille Boyer,Mathieu Garcia,Junior PM 7
+Antoine Roux,Mathieu Garcia,Junior PM 8
+Robert Bernard,Jean Dupont,CFO
+Kevin Leroy,Robert Bernard,Finance Director
+Nicolas David,Kevin Leroy,Accounting Lead
+Chloe Bertrand,Nicolas David,Accountant 1
+Antoine Morel,Nicolas David,Accountant 2
+Lea Vincent,Nicolas David,Accountant 3
+Hugo Petit,Nicolas David,Accountant 4
+Manon Grand,Nicolas David,Accountant 5
+Leo Blanc,Nicolas David,Accountant 6
+Ines Petit,Nicolas David,Accountant 7
+Enzo Brun,Nicolas David,Accountant 8
+Claire Petit,Jean Dupont,COO
+Sarah Moreau,Claire Petit,Operations Director
+Antoine Roux,Sarah Moreau,Logistics Lead
+Lea Vincent,Antoine Roux,Ops Analyst 1
+Hugo Fournier,Antoine Roux,Ops Analyst 2
+Manon Morel,Antoine Roux,Ops Analyst 3
+Leo Girard,Antoine Roux,Ops Analyst 4
+Ines Andre,Antoine Roux,Ops Analyst 5
+Enzo Lefevre,Antoine Roux,Ops Analyst 6
+Jade Mercier,Antoine Roux,Ops Analyst 7
+Paul Dupont,Antoine Roux,Ops Analyst 8
+Lola Bonnet,Antoine Roux,Ops Analyst 9
+Arthur Francois,Antoine Roux,Ops Analyst 10
+Benoit Hamon,Alice Martin,VP Infrastructure
+Sophie Lefebvre,Benoit Hamon,DevOps Manager
+Lola Durand,Sophie Lefebvre,SRE Lead
+Arthur Joly,Lola Durand,SRE Junior 1
+Camille Favre,Lola Durand,SRE Junior 2
+Louis Perrin,Lola Durand,SRE Junior 3
+Gabriel Noe,Lola Durand,SRE Junior 4
+Zoe Marchand,Lola Durand,SRE Junior 5
+Nathan Colin,Lola Durand,SRE Junior 6
+Clara Vallet,Lola Durand,SRE Junior 7
+Sebastien Adam,Lola Durand,SRE Junior 8
+David Miller,Julie Durand,Design Director
+Sarah Connor,David Miller,UX Lead
+Kyle Reese,Sarah Connor,Designer 1
+John Connor,Sarah Connor,Designer 2
+Ellen Ripley,Sarah Connor,Designer 3
+Arthur Bishop,Sarah Connor,Designer 4
+Marion Ravenwood,Sarah Connor,Designer 5
+Indiana Jones,Sarah Connor,Designer 6
+Lara Croft,Sarah Connor,Designer 7
+Nathan Drake,Sarah Connor,Designer 8
+Rick Deckard,David Miller,UI Lead
+Roy Batty,Rick Deckard,UI Junior 1
+Pris Stratos,Rick Deckard,UI Junior 2
+Rachael Tyrell,Rick Deckard,UI Junior 3
+Gaff Bryant,Rick Deckard,UI Junior 4
+Leon Kowalski,Rick Deckard,UI Junior 5
+Zhora Salome,Rick Deckard,UI Junior 6
+Holden Dave,Rick Deckard,UI Junior 7
+Sebastian JF,Rick Deckard,UI Junior 8
+Luc Besson,Claire Petit,Fleet Manager
+Jean Reno,Luc Besson,Driver Lead
+Natalie Portman,Jean Reno,Driver 1
+Gary Oldman,Jean Reno,Driver 2
+Danny Aiello,Jean Reno,Driver 3
+Peter Appel,Jean Reno,Driver 4
+Michael Badalucco,Jean Reno,Driver 5
+Ellen Bright,Jean Reno,Driver 6
+Will Sasso,Jean Reno,Driver 7
+Frank Sivero,Jean Reno,Driver 8

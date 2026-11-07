@@ -1,0 +1,6 @@
+.col-md-12
+  .card
+    .card-header
+      = render partial: "workspace_top_menu", locals: { workspace: @workspace, actif: "key_value_stores" }
+    .card-body.mt-3
+      = render partial: "table", locals: {items: @items}

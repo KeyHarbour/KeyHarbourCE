@@ -1,0 +1,20 @@
+- if params[:field] == "amount"
+  = turbo_frame_tag [dom_id(@quote_instance), :amount] do
+    = simple_form_for @quote_instance, url: member_license_quote_instance_path(@quote_instance, locale: I18n.locale), method: :patch, html: { data: { turbo_frame: "_top" } } do |f|
+      .mb-2
+        = f.text_field :amount, class: "form-control form-control-sm", style: "max-width: 150px;"
+
+      .d-flex.justify-content-end.gap-2.align-items-center
+        = link_to t('.cancel'), member_license_quote_instance_path(@quote_instance, locale: I18n.locale), class: "btn-cancel btn-sm text-nowrap", style: "font-size: 12px;"
+        %button.btn.btn-primary.btn-sm.text-nowrap{ type: "submit" } #{t('.ok')}
+- if params[:field] == "seats"
+  = turbo_frame_tag [dom_id(@quote_instance), :seats] do
+    = simple_form_for @quote_instance, url: member_license_quote_instance_path(@quote_instance, locale: I18n.locale), method: :patch do |f|
+      / Ligne 1 : Le champ de saisie
+      .mb-2
+        = f.text_field :seats, class: "form-control form-control-sm", style: "max-width: 150px;"
+
+      / Ligne 2 : Les boutons alignés horizontalement à droite (ou à gauche selon votre choix)
+      .d-flex.justify-content-end.gap-2.align-items-center
+        = link_to t('.cancel'), member_license_quote_instance_path(@quote_instance, locale: I18n.locale), class: "btn-cancel btn-sm text-nowrap", style: "font-size: 12px;"
+        %button.btn.btn-primary.btn-sm.text-nowrap{ type: "submit" } #{t('.ok')}

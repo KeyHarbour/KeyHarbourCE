@@ -1,0 +1,14 @@
+.kt-card-header
+  %h3.kt-card-title
+    Utilisateur
+.kt-card-content
+  %p.text-sm.text-foreground-secondary
+    L'Utilisateur est l'entité individuelle accédant à la plateforme. Contrairement aux équipes qui servent à gérer des accès groupés sur des ressources spécifiques, chaque utilisateur possède un Rôle Global qui définit son niveau d'autorité sur l'ensemble de l'Account.
+
+  %h4.mb-2.mt-4 Pourquoi cette distinction ?
+  %p.text-sm.text-foreground-secondary
+    Cette structure permet une double sécurité : le Rôle Global définit ce que l'utilisateur peut faire avec la plateforme (paramètres, utilisateurs), tandis que l'Assignation (ou l'Équipe) définit sur quelles données techniques (Terraform, Clés/Valeurs) il peut travailler.
+
+  %h4.mb-2.mt-4 La Règle de Non-Dépassement (Global Override)
+  %p.text-sm.text-foreground-secondary
+    Le rôle global définit le niveau de privilège maximum. Un utilisateur avec un rôle de Viewer ne pourra jamais obtenir de droits d'édition, quel que soit le niveau (Project ou Workspace) ou l'équipe à laquelle il appartient.

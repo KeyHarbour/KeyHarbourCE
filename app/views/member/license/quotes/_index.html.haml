@@ -1,0 +1,44 @@
+.card{"data-controller" => "compare-quotes"}
+  .row.g-0
+    = render partial: "menu", locals: {application: @application, active: :quotes}
+    .col-12.col-md-9.d-flex.flex-column    
+      .card-header 
+        %h2.card-title= t('.quotes')
+        .card-actions
+          = link_to compare_member_license_application_quotes_path(@application), class: "btn btn-secondary disabled", "data-action" => "click->compare-quotes#navigate", "data-compare-quotes-target" => "link" do
+            #{t('.compare')}
+      .list-group.list-group-hoverable.card-list-group
+        - @items.each do |item|
+          .list-group-item
+            .row.align-items-center.g-3
+              .col-auto.fw-medium
+                %input.form-check-input.m-0.align-middle.table-selectable-check{"aria-label" => "Select invoice", :type => "checkbox",  :value => item.id, "data-compare-quotes-target" => "checkbox", "data-action" => "change->compare-quotes#toggle"  }
+              .col-12.col-sm
+                .fw-medium
+                  = link_to "#{item.uuid} / #{item.provider.name}", member_license_quote_path(item)
+                - if item.available_on || item.available_until
+                  .text-secondary
+                    #{item.available_on} <-> #{item.available_until}
+              .col-auto.fw-medium= number_to_currency item.total
+              .col-auto
+                - if item.approved?
+                  %span.badge.bg-success-lt= t('.approved')
+                - elsif item.rejected?
+                  %span.badge.bg-danger-lt= t('.rejected')
+                - elsif item.ready?
+                  %span.badge.bg-warning-lt= t('ready')
+                - else item.intial?
+                  %span.badge.bg-blue-lt= t('.initial')
+              .col-auto
+                .dropdown.no-arrow
+                  %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+                  .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+                    = link_to edit_member_license_quote_path(item), class: "dropdown-item" do
+                      = icon "edit"
+                      = t('.update')
+                    = link_to member_license_quote_path(item), class: "dropdown-item" do
+                      = icon "moneybag-edit"
+                      = t('.items')                  
+                    = link_to member_license_quote_path(item), method: :delete, data:  { turbo_method: :delete, turbo_confirm: t('globals.confirm') }, class: "dropdown-item" do
+                      = icon "trash"
+                      = t('.remove')

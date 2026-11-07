@@ -1,0 +1,9 @@
+- id: free
+  available: true
+  price: 0
+  price_annual: 0
+  price_package: 0
+  credits: 100
+  active: true
+  next_plan: startup
+  order: 1

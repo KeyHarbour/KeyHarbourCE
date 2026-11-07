@@ -1,0 +1,12 @@
+<% flash.each do |type, message| %>
+  <% css_class = case type.to_sym
+    when :notice then "bg-green-50 text-green-600 border-green-500"
+    when :alert  then "bg-red-50 text-red-800 border-red-300"
+    else "bg-gray-100 text-gray-800 border-gray-300"
+  end %>
+
+  <div class="relative border-l-4 p-4 my-4 rounded shadow-sm <%= css_class %>">
+    <p class="text-sm font-medium"><%= message %></p>
+    <button class="absolute top-2 right-2 text-sm" onclick="this.parentElement.remove()">&times;</button>
+  </div>
+<% end %>

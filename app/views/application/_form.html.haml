@@ -1,0 +1,18 @@
+.row.row-cards
+  .col-md-8
+    = simple_form_for @item, url: form_url, html: {class: "card"}, wrapper: "horizontal_form"  do |f|
+      -# = tag.div(flash[:alert], style: "color:red") if flash[:alert]
+      -# = tag.div(flash[:notice], style: "color:green") if flash[:notice]
+      .card-body
+        .mt-2
+          = render partial: "form_error", locals: { form_table: @item }
+          -# = render partial: "flash"
+          = render partial: "fields", locals: { f: f }
+
+      .card-footer.text-end
+        .d-flex
+          %a.btn.btn-link{:href => back_path} Cancel
+          %button.btn.btn-primary.ms-auto{:type => "submit"}=  t('globals.save')
+
+  .col-md-4
+    = render 'hint'

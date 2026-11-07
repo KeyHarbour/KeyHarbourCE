@@ -1,0 +1,30 @@
+
+.card.mt-4
+  .card-header
+    %h3.card-title
+      = link_to edit_admin_account_path(item) do
+        = item.name
+        = render partial: "layouts/status", locals: { item: item }
+  .card-body
+    .datagrid
+      .datagrid-item
+        .datagrid-title= t(".users")
+        .datagrid-content= link_to "#{item.account_users.count}", admin_account_users_path(item)
+      .datagrid-item
+        .datagrid-title= t(".organizations")
+        .datagrid-content #{item.organizations.count}
+      .datagrid-item
+        .datagrid-title= t(".projects")
+        .datagrid-content #{item.projects.count}
+      .datagrid-item
+        .datagrid-title= t(".workspaces")
+        .datagrid-content #{item.workspaces.count}
+      .datagrid-item
+        .datagrid-title= t(".applications")
+        .datagrid-content #{item.applications.count}
+      .datagrid-item
+        .datagrid-title= t(".app_team_members")
+        .datagrid-content #{item.app_team_members.count}
+      .datagrid-item
+        .datagrid-title Longer description
+        .datagrid-content= item.description

@@ -1,0 +1,33 @@
+%td.col-md-1.text-center
+  %span.badge{class: "#{item.active? ? 'bg-green' : 'bg-red'}"}
+%td= item.name
+%td.text-center= item.resource_type
+%td.text-center= item.model_family.name
+%td.text-center= item.model_category_attrs.count
+%td
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      = link_to edit_member_inventory_model_category_path(item), class: "dropdown-item" do
+        = icon "edit"
+        = t('.update')
+      = link_to member_inventory_model_category_attrs_path(item), class: "dropdown-item" do
+        = icon "chart-column"
+        = t('.attributs')
+      .dropdown-divider
+      = link_to member_inventory_model_category_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash"
+        = t('.remove')
+-#   %br/
+-#   - item.attrs do |name, value|
+-#     - next if name != 'Name'
+-#     .badge.badge-primary
+-#       = "#{name}: #{value}"
+-# %td.col-md-3.text-secondary.text-center
+-#   = item.workspace.name
+-#   %br/
+-#   .badge.badge-success
+-#     = item.environment.name
+-# %td.col-md-3= item.model_category.name
+-# -# %td
+-# -#   = render partial: "item_menu", locals: {delete_link: member_inventory_instance_path(item), edit_link: edit_member_inventory_instance_path(item) }

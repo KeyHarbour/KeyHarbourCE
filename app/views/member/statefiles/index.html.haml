@@ -1,0 +1,65 @@
+.col-md-12
+  .card
+    .card-header
+      = render partial: "workspace_top_menu", locals: { workspace: @workspace, actif: "statefiles" }
+    .card-body.mt-3
+      %h3
+        .card-title
+          = t('.terraform_link', workspace: @workspace.name, environment: @environment.name.downcase)
+      %div
+        .text-end
+          .input-group.input-group-flat
+            %input#clipboard-key-green.form-control{style: "border-color: #000000; background-color: #000000; color: #FFFFFF", :readonly => "readonly", :type => "text", :value => statefiles_v1_url(@workspace.uuid, @environment.name.downcase).split('?').first}/
+            %span.input-group-text
+              %button.link-secondary.input-group-link.border-0.bg-transparent.p-0.ps-2{"aria-label" => "Copy the API key", "data-bs-target" => "#clipboard-key-green", "data-bs-toggle" => "clipboard", :type => "button"}
+                = icon 'clipboard', class: "clipboard-label icon-sm"
+                = icon 'check', class: "clipboard-feedback text-green icon-sm"
+                %span.clipboard-feedback.visually-hidden{:hidden => "", :role => "status"} Copied
+
+      %h3.pt-4
+        .card-title
+          = t('.or-backend_sample')
+
+        .d-flex.align-items-center.gap-2
+          %pre
+            %code
+              #clipboard-command
+                :plain
+                  terraform {
+                    backend "http" {
+                      address = "#{statefiles_v1_url(@workspace.uuid, @environment.name.downcase).split('?').first}"
+                      lock_address = "#{statefiles_v1_url(@workspace.uuid, @environment.name.downcase).split('?').first}"
+                      unlock_address = "#{statefiles_v1_url(@workspace.uuid, @environment.name.downcase).split('?').first}"
+                      username = "token"
+                      password = "REPLACE WITH THE TOKEN"
+                      lock_method = "PUT"
+                      unlock_method = "DELETE"
+                      # skip_cert_verification = true # For dev and test only you can skip
+                    }
+                  }
+          %button.link-secondary.input-group-link.border-0.bg-transparent.p-0.ps-2{"aria-label" => "Copy backend sample", "data-bs-target" => "#clipboard-command", "data-bs-toggle" => "clipboard", :type => "button"}
+            = icon 'clipboard', class: "clipboard-label icon-sm"
+            = icon 'check', class: "clipboard-feedback text-green icon-sm"
+            %span.clipboard-feedback.visually-hidden{:hidden => "", :role => "status"} Copied
+
+      .row.mt-4
+        .col-sm-8
+          .card
+            .card-header
+              %h3.card-title= t('.statefile_history')
+            .card-body{id: "statefiles"}
+              = render partial: "index", locals: {items: @items}
+        .col-sm-4
+          .card
+            .card-header
+              %h3.card-title= t('.tagged_version')
+            .card-body{id: "statefiles_tag"}
+              - @items.joins(:statefile_tag).order(created_at: :desc).each do |statefile|
+                - if statefile.statefile_tag
+                  = link_to member_statefile_path(statefile) do
+                    .badge.badge-pill.badge-primary
+                      = icon "tag", class: "icon-xs"
+                      #{statefile.statefile_tag.tag}
+
+- content_for :page_name do
+  = "#{t('views.member.statefiles.title_for')} #{@workspace.name}"

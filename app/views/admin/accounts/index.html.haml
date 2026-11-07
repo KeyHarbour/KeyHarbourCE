@@ -1,0 +1,5 @@
+.col-md-12
+  .card
+    .card-body.mt-3
+      - @items.each do |item|
+        = render partial: "index", locals: { item: item }

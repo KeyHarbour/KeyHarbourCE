@@ -1,0 +1,126 @@
+!!! Strict
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:o" => "urn:schemas-microsoft-com:office:office"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "telephone=no", :name => "format-detection"}/
+    %meta{:name => "x-apple-disable-message-reformatting"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Inter", :rel => "stylesheet", :type => "text/css"}/
+    %meta{:content => "light dark", :name => "color-scheme"}/
+    %meta{:content => "light dark only", :name => "supported-color-schemes"}/
+    :css
+      :root {
+          color-scheme: light dark;
+          supported-color-schemes: light dark;
+      }
+    %style{"data-premailer" => "ignore"}
+      :cdata
+        \:root {
+        color-scheme: light dark;
+        supported-color-schemes: light dark;
+        }
+        
+        @media screen and (max-width: 600px) {
+        u+.body {
+        width: 100vw !important;
+        }
+        }
+        
+        a[x-apple-data-detectors] {
+        color: inherit !important;
+        text-decoration: none !important;
+        font-size: inherit !important;
+        font-family: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+        }
+    /[if mso]
+      <style type="text/css">
+      body, table, td {
+      font-family: Arial, Helvetica, sans-serif !important;
+      }
+      
+      img {
+      \-ms-interpolation-mode: bicubic;
+      }
+      
+      \.box {
+      border-color: #eee !important;
+      }
+      </style>
+    / [if !mso]><!
+    %link{"data-premailer" => "ignore", :href => "https://rsms.me/inter/inter.css", :rel => "stylesheet", :type => "text/css"}/
+    %style{"data-premailer" => "ignore", :type => "text/css"}
+      :cdata
+        @import url(https://rsms.me/inter/inter.css);
+    / <![endif]
+    = stylesheet_link_tag 'theme', media: 'all'
+  %body.bg-body
+    %center
+      %table.main.bg-body{:cellpadding => "0", :cellspacing => "0", :role => "presentation", :width => "100%"}
+        %tr
+          %td{:align => "center", :valign => "top"}
+            /[if (gte mso 9)|(IE)]
+              <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+              <td align="center" valign="top" width="640">
+            %span.preheader This is preheader text. Some clients will show this text as a preview.
+            %table.wrap{:cellpadding => "0", :cellspacing => "0", :role => "presentation"}
+              %tr
+                %td.p-sm
+                  / /HEADER
+                  .main-content
+                    .box
+                      %table.box-table{:cellpadding => "0", :cellspacing => "0"}
+                        %tr
+                          %td
+                            %table{:cellpadding => "0", :cellspacing => "0"}
+                              %tr
+                                %td.content.pb-0{:align => "center"}
+                                  = image_tag attachments.inline['harbor-42.png'].url, style: 'display: block; margin: 0 auto;'
+
+                                  %h1.text-center.m-0.font-strong.mt-md
+                                    Trust asset event calendar
+                              %tr
+                                %td.content
+                                  %p Here the list of your trust assets that are about to expire. Please make sure to take the necessary actions before the expiration date.
+                                  %table.row.row-flex{:cellpadding => "0", :cellspacing => "0"}
+                                    - @account.trust_assets.order(expires_at: :asc).each do |ta|
+                                      %tr
+                                        %td.col-mobile.w-1p.pb-md
+                                          %table{:cellpadding => "0", :cellspacing => "0"}
+                                            %tr
+                                              %td
+                                                %table.day{:cellpadding => "0", :cellspacing => "0"}
+                                                  %tr
+                                                    %td.day-month= ta.expires_at.strftime("%b")
+                                                  %tr
+                                                    %td.day-number= ta.expires_at.strftime("%d")
+                                              %td.w-100p
+                                        %td.col-mobile-spacer
+                                        %td.col-mobile.pb-md.va-middle
+                                          %h4 #{ta.format} : #{ta.name}
+                                          .text-muted= ta.issuer
+                  / FOOTER
+                  %table{:cellpadding => "0", :cellspacing => "0"}
+                    %tr
+                      %td.py-xl
+                        %table.text-center.text-muted{:cellpadding => "0", :cellspacing => "0"}
+                          %tr
+                            %td.pt-md
+                              If you have any questions, feel free to message us at
+                              = succeed "." do
+                                %a{:href => "https://keyharbour.ca/member"} info@keyharbour.ca
+                          %tr
+                            %td.pt-md
+                              You are receiving this email because you activate your account on Key Harbour. If you no longer wish to receive these emails, you can
+                              %a{:href => "https://keyharbour.ca/unsubscribe"} Unsubscribe
+                          %tr
+                            %td.pt-md
+                              Copyright © 2026 Key Harbour. All rights reserved.
+                  / /FOOTER
+            /[if (gte mso 9)|(IE)]
+              </td>
+              </tr>
+              </table>

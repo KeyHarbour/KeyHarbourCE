@@ -1,0 +1,43 @@
+.card.card-md
+  .card-body
+    %h2.h2.text-center.mb-4= t(".title")
+    .text-center.text-xs.text-center.mb-4
+      = t(".need_account")
+      = link_to t('.sign_up'), new_registration_path, class: "text-sm link"
+    = form_with url: session_url, scope: :session do |form|
+      = tag.div(flash[:alert], style: "color:red") if flash[:alert]
+      = tag.div(flash[:notice], style: "color:green") if flash[:notice]
+      .mb-3
+        %label.form-label= t("activerecord.attributes.user.email_address")
+        = form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t('activerecord.placeholders.user.email_address'), value: params[:email_address], class: "form-control"
+      .mb-2
+        %label.form-label
+          = t("activerecord.attributes.user.password")
+          %span.form-label-description
+            = link_to new_password_path do
+              = t(".forgot_password")
+        .input-group.input-group-flat
+          = form.password_field :password, required: true, autocomplete: "current-password", placeholder: t('activerecord.placeholders.user.password'), maxlength: 72, class: "form-control"
+      .form-footer
+        %button.btn.btn-primary.w-100{:type => "submit"}= t(".title")
+  - if KeyHarbour.oauth_google? || KeyHarbour.oauth_microsoft? || KeyHarbour.oauth_github? 
+    .hr-text or
+    .card-body
+      - if KeyHarbour.oauth_google?
+        .row.mb-3
+          .col
+            = button_to '/auth/google_oauth2', method: :post, data: { turbo: false }, class: "btn btn-4 w-100" do
+              = icon "brand-google"
+              Login with Google
+      - if KeyHarbour.oauth_microsoft?
+        .row.mb-3
+          .col
+            = button_to '/auth/microsoft_graph', method: :post, data: { turbo: false }, class: "btn btn-4 w-100" do
+              = icon "brand-entra"
+              Login with Microsoft
+      - if KeyHarbour.oauth_github?
+        .row.mb-3
+          .col
+            = button_to '/auth/github', method: :post, data: { turbo: false }, class: "btn btn-4 w-100" do
+              = icon "brand-github"
+              Login with Github

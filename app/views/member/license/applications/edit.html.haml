@@ -1,0 +1,5 @@
+.card
+  .row.g-0
+    = render partial: "menu", locals: {application: @application, active: :applications}
+    .col-12.col-md-9.d-flex.flex-column
+      = render 'form'

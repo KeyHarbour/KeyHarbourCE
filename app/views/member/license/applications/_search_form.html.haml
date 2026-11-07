@@ -1,0 +1,7 @@
+= simple_form_for item, url: member_license_applications_path, method: :get, html: {class: "simple_form"}  do |f|
+  = render partial: "form_error", locals: { form_table: item }
+  = f.input :name
+  = f.input :renewal, as: :select, collection: {'Expired': "0", "First alert expiring": "1", "Second alert expiring ": "2", "No alert now": "3"}.map { |label, value| [label, value] }, input_html: { multiple: true, data: { controller: "tom-select" } }
+
+  .mt-3
+    = f.submit 'Search', class: 'btn btn-primary'

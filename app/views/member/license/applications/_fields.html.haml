@@ -1,0 +1,32 @@
+.w-full
+  = f.input :name
+.w-full
+  = f.input :short_name
+.flex
+  .flex-1.pr-2
+    = f.input :owner
+  .flex-1.pr-2
+    = f.input :renewal_date, as: :string, input_html: { data: { controller: "datepicker" } }
+
+.flex
+  .flex-1.pr-2
+    = f.input :vendor
+  .flex-1.pr-2
+    = f.input :tier  
+.flex
+  .flex-1.pr-2
+    = f.input :seats  
+  .flex-1.pr-2
+    = f.input :unit_cost
+.flex
+  .flex-1.pr-2
+    = f.input :alert_renewal_1
+  .flex-1.pr-2
+    = f.input :alert_renewal_2     
+.flex
+  .flex-1.pr-2
+    = f.input :alert_seats_1
+  .flex-1.pr-2
+    = f.input :alert_seats_2  
+.w-full
+  = f.input :logo, as: :file, hint: f.object.logo.attached? ? image_tag(f.object.logo.variant(resize_to_limit: [100, 100])) : content_tag(:span, t('globals.no_logo_uploaded'))

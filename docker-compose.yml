@@ -1,0 +1,59 @@
+services:
+  db:
+    image: postgres:18-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: your_secure_password_here
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.54
+    ports:
+      - "7800:7700"
+    environment:
+      - MEILI_MASTER_KEY=your_meilisearch_master_key_here
+      - MEILI_ENV=development
+    volumes:
+      - meili_data:/meili_data
+
+  web:
+    image: keyharbour/keyharbouree:latest
+    # build:
+    #   context: .
+    #   args:
+    #     - PORT=3000
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    volumes:
+      - bundle_cache:/usr/local/bundle
+      - key_harbour_storage:/rails/storage
+      - key_harbour_log:/rails/log
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - DB_HOST=db
+      - RAILS_ENV=production
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=your_secure_password_here
+      - MEILISEARCH_HOST=http://meilisearch:7700
+      - MEILI_MASTER_KEY=your_meilisearch_master_key_here
+    depends_on:
+      db:
+        condition: service_healthy
+      meilisearch:
+        condition: service_started
+
+volumes:
+  postgres_data:
+  meili_data:
+  bundle_cache:
+  key_harbour_storage:
+  key_harbour_log:

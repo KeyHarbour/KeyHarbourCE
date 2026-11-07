@@ -1,0 +1,14 @@
+.flex.items-center.justify-center.grow.h-full
+  .flex.flex-col.items-center
+    .mb-16
+      = image_tag "media/illustrations/5.svg", alt: "image", class: "dark:hidden max-h-[160px]"
+      = image_tag "media/illustrations/5-dark.svg", alt: "image", class: "light:hidden max-h-[160px]"
+    %span.kt-badge.kt-badge-primary.kt-badge-outline.mb-3
+      403 Error
+    %h3.text-2xl.font-semibold.text-mono.text-center.mb-2
+      Forbidden
+    .text-base.text-center.text-secondary-foreground.mb-10
+      You do not have permission to access this page.
+    .text-base.text-center.text-secondary-foreground.mb-10
+      = render partial: "layouts/flash"
+    = link_to t('globals.back_to_home'), "https://keyharbour.ca", class: "kt-btn kt-btn-primary flex justify-center"

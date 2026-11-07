@@ -1,0 +1,28 @@
+.flex.gap-4.w-full
+  %div{class: "w-1/2"}
+    = f.input :name
+  %div{class: "w-1/2"}
+    = f.input :billing_contact
+.flex.gap-4.w-full    
+  %div{class: "w-1/2"}
+    = f.input :address1  
+  %div{class: "w-1/2"}
+    = f.input :address2  
+.flex.gap-4.w-full    
+  %div{class: "w-1/2"}
+    = f.input :zip
+  %div{class: "w-1/2"}
+    = f.input :city  
+.country{ "data-controller" => "location"}
+  .flex.gap-4.w-full.mb-4
+    %div{class: "w-1/2"}
+      = f.input :country_code,
+        as: :country,
+        prompt: t('.select'),
+        priority: ["CA", "FR"],
+        input_html: { data: { action: "change->location#updateProvinces", location_target: "country" } }
+    %div{class: "w-1/2"}
+      = f.input :province_code,
+        collection: province_options(f.object.country_code),
+        prompt: t('.select'),
+        input_html: { data: { location_target: "province" } }

@@ -1,0 +1,15 @@
+.col.text-truncate
+  = link_to item.email_address, member_user_path(item)
+  .d-block.text-secondary.text-truncate.mt-1= item.role&.name
+  .d-block.text-secondary.text-truncate.mt-1= item.last_access_at ? l(item.last_access_at, format: :short) : "never accessed"
+.col-auto
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      -#   = link_to edit_member_user_path(item), class: "dropdown-item" do
+      -#     = icon "edit"
+      -#     = t('.update')
+      .dropdown-divider
+      = link_to member_user_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash"
+        = t('.remove')

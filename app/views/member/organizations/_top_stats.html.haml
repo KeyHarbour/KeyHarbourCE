@@ -1,0 +1,31 @@
+.row.justify-content-lg-center.mt-3.mb-3
+  .col-sm-6.col-lg-4
+    .card.card-sm
+      .card-body
+        .row.align-items-center
+          .col-auto
+            %span.bg-primary.text-white.avatar
+              = icon ApplicationHelper::CONTROLLERS[:"member/licenses"][:icon]
+          .col
+            .font-weight-medium= organization.usage_daily_organizations.where(day: @days_range, service_name: 'License').average(:credits) || 0 / Cost.find('License').credits
+            .text-secondary Users license average
+  .col-sm-6.col-lg-4
+    .card.card-sm
+      .card-body
+        .row.align-items-center
+          .col-auto
+            %span.bg-primary.text-white.avatar
+              = icon ApplicationHelper::CONTROLLERS[:"member/trust_assets"][:icon]
+          .col
+            .font-weight-medium= organization.usage_daily_organizations.where(day: @days_range, service_name: 'TrustAsset').average(:credits) || 0 / Cost.find('TrustAsset').credits
+            .text-secondary TrustAssets
+  .col-sm-6.col-lg-4
+    .card.card-sm
+      .card-body
+        .row.align-items-center
+          .col-auto
+            %span.bg-primary.text-white.avatar
+              = icon ApplicationHelper::CONTROLLERS[:"member/api_queries"][:icon]
+          .col
+            .font-weight-medium= organization.usage_daily_organizations.where(day: @days_range).where(service_name: Cost.query_service_names).sum(:credits)
+            .text-secondary Api requests

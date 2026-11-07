@@ -1,0 +1,32 @@
+.col-md-12
+  .card
+    .card-header
+      = render partial: "top_menu", locals: { organization: @item, actif: "project" }
+    .card-body
+      = render partial: "flash"
+      .tab-content
+        #tabs-profile-4.tab-pane.active.show{:role => "tabpanel"}
+          = render partial: "top_stats", locals: { project: @item }
+          .row
+            .col-md-8
+              .mt-2
+                = render partial: "summary", locals: { project: @item }
+      .col-sm-12.mt-4
+        %h2 Workspaces
+      .row.row-cards
+        - @item.workspaces.each do |workspace|
+          .col-sm-6.col-lg-4
+            .card.card-sm
+              .card-body
+                .d-flex.align-items-center
+                  %div
+                    = link_to member_workspace_path(workspace), class: "text-lg font-medium text-mono hover:text-primary" do
+                      = workspace.name
+                  .ms-auto
+                    %a.text-secondary{:href => "#"}
+                      = trust_icon('icon icon-1', workspace.trust_assets.count)
+                    %a.ms-2.text-secondary{:href => "#"}
+                      = tf_icon('icon icon-1', workspace.statefiles.resource_count)
+                    %a.ms-2.text-secondary{:href => "#"}
+                      = key_icon('icon icon-1', workspace.key_value_stores.count)
+

@@ -1,0 +1,21 @@
+!!!
+%html.h-full.light
+  %head
+    %title= content_for(:title) || "KeyHarbour"
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "KeyHarbour", :name => "application-name"}/
+    %meta{:content => "yes", :name => "mobile-web-app-capable"}/
+    %meta{charset: "UTF-8"}
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    %link{:href => "/apple-touch-icon.png", :rel => "apple-touch-icon", :sizes => "180x180"}/
+    %link{:href => "/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    %link{:href => "/site.webmanifest", :rel => "manifest"}/
+    %style
+      = File.read(Rails.root.join('app', 'assets', 'builds', 'application.css')).html_safe
+    = javascript_importmap_tags
+  %body.antialiased.flex.h-full.text-base
+    = yield

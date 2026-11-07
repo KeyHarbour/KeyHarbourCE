@@ -1,0 +1,15 @@
+%td.col-md-1.text-center
+  %span.badge{class: "#{item.active? ? 'bg-green' : 'bg-red'}"}
+%td= item.name
+%td= item.attr_name
+%td
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      = link_to edit_member_inventory_attr_path(item), class: "dropdown-item" do
+        = icon "edit"
+        = t('.update')
+      .dropdown-divider
+      = link_to member_inventory_attr_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash"
+        = t('.remove')

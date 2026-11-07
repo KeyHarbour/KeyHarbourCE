@@ -1,0 +1,17 @@
+%div{ data: { controller: "trust-assets-form" } }
+  .mt-3
+    = f.input :name
+  .mt-3
+    = f.input :format, collection: TrustAsset.formats.keys.map { |r| [r.titleize, r] }, wrapper: :horizontal_form, input_html: { data: { action: "change->trust-assets-form#toggleFields" } }
+  .mt-3.d-none{ data: { trust_assets_form_target: "field" } }
+    = f.input :expires_at, as: :string, input_html: { data: { controller: "datepicker" } }
+  .mt-3.d-none{ data: { trust_assets_form_target: "field" } }
+    = f.input :issuer
+  .mt-3
+    = f.input :consumer
+  .mt-3
+    = f.input :description, input_html: { style: 'height: 100px;' }
+  .mt-3
+    = f.input :reminder_days, as: :string, input_html: { type: 'number' }
+  .mt-3
+    = f.input :environment_id, as: :hidden  

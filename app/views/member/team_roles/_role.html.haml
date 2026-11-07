@@ -1,0 +1,12 @@
+= turbo_frame_tag "team_role_field_#{team_role.id}" do
+  %div{ data: { controller: "inline-edit" } }
+    -# Mode AFFICHAGE
+    %div{ data: { inline_edit_target: "view", action: "click->inline-edit#toggle" }, class: "user-select-all p-1 rounded hover-bg cursor-pointer d-inline-flex align-items-center" }
+      = team_role.role.titleize
+      %span.small.text-muted.ms-1 ✎
+
+    -# Mode ÉDITION : masqué par défaut
+    %div{ data: { inline_edit_target: "form" }, class: "d-none" }
+      = turbo_frame_tag "role_field_#{team_role.id}" do
+        = form_with model: team_role, url: member_team_role_path(team_role), method: :patch do |f|
+          = f.select :role, TeamRole.roles.keys.map { |r| [r.titleize, r] }, {}, { onchange: "this.form.requestSubmit()", onblur: "this.closest('[data-inline-edit-target]').classList.add('d-none')", class: "form-select form-select-sm" }

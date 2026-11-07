@@ -1,0 +1,38 @@
+.container.mt-5
+  .row.justify-content-center
+    .col-md-9
+      = turbo_frame_tag "wizard" do
+        .card.shadow-sm
+          .card-header
+            %h3.card-title.mb-0= t('.step1') 
+          .card-body
+            = simple_form_for @organization, url: path_create_organization, method: :post, wrapper: "horizontal_form", data: { controller: "nested-form" } do |f|
+              - if @organization.errors.any?
+                .alert.alert-danger
+                  = @organization.errors.full_messages.to_sentence
+
+              .mb-4
+                = f.input :name, class: "form-control", placeholder: "Ex: Acme Corp", autofocus: true
+
+              %hr/
+              .mb-4
+                %h5.mb-3= t('.envs')  
+                #environments-container{ data: { nested_form_target: "container" } }
+                  = f.fields_for :environments do |env_form|
+                    .nested-form-wrapper.mb-2{ data: { new_record: env_form.object.new_record?.to_s } }
+                      .input-group
+                        = env_form.text_field :name, class: "form-control", placeholder: "Ex: Production, Staging"
+                        = env_form.hidden_field :_destroy
+                        %button.btn.btn-outline-danger{ type: "button", data: { action: "nested-form#remove" } } ✕
+                .mt-2
+                  %button.btn.btn-sm.btn-outline-secondary{ type: "button", data: { action: "nested-form#add" } }
+                    = t('.add_env')  
+              %template{ data: { nested_form_target: "template" } }
+                = f.fields_for :environments, Environment.new, child_index: "NEW_RECORD" do |env_form|
+                  .nested-form-wrapper.mb-2{ data: { new_record: "true" } }
+                    .input-group
+                      = env_form.text_field :name, class: "form-control", placeholder: "Ex: Staging, Dev"
+                      %button.btn.btn-outline-danger{ type: "button", data: { action: "nested-form#remove" } } ✕
+
+              .d-flex.justify-content-end.mt-4
+                = f.submit t('.next'), class: "btn btn-primary"

@@ -1,0 +1,19 @@
+= turbo_frame_tag "wizard" do
+  .card.shadow-sm
+    .card-header
+      %h3.card-title.mb-0= t('.step3', default: )
+    .card-body
+      %p.text-muted #{t('.project')} : #{@project.name}
+
+      = simple_form_for @workspace, url: path_create_workspace, method: :post, wrapper: "horizontal_form", data: { turbo: false } do |f|
+        - if @workspace.errors.any?
+          .alert.alert-danger
+            = @workspace.errors.full_messages.to_sentence
+
+        = hidden_field_tag :project_id, @project.id
+
+        .mb-3
+          = f.input :name, class: "form-control", placeholder: t('.wks_placeholder'), autofocus: true
+
+        .d-flex.justify-content-end
+          = f.submit t('.next', default: ), class: "btn btn-success"

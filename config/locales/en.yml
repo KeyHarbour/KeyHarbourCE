@@ -1,0 +1,1045 @@
+---
+en:
+  activerecord:
+    attributes:
+      account:
+        address1: Address
+        address2: Address (line 2)
+        billing_contact: Billing email
+        city: City
+        country_code: Country
+        name: Company name
+        province_code: Province/State
+        zip: Zip
+      coupon:
+        amount_off: Amount off
+        name: Name
+        percent_off: Percent off
+        plans: Plans
+        status: Status
+      environment:
+        active: Active
+        description: Description
+        name: Name
+      invite:
+        email: Email Address
+        expiration: Expiration
+      key_value_store:
+        expires_at: Expiry Date
+        key: Key
+        private: Private
+        value: Value
+      organization:
+        billing_contact: E-mail de facturation
+        description: Description
+        name: Name
+      organization_user:
+        role: Role
+      project:
+        admins: Administrators
+        contributors: Contributors
+        description: Description
+        environments: Environments
+        name: Name
+        readers: Viewers
+        status: Status
+        uuid: Uuid
+      statefile:
+        name: Name
+        pretty_content: Pretty Content
+        project: Project
+      team:
+        description: Description
+        name: Name
+        organization_users: Members
+        projects: Projects
+        source: Source
+        team_users: Team users
+      team_user:
+        role: Role
+      token:
+        environment_id: Environments
+        expires_at: Expires at
+        name: Name
+      user:
+        email_address: Email address
+        password: Password
+        password_confirmation: Password confirmation
+        prefered_language: Preferred Language
+      workspace:
+        description: Description
+        name: Name
+    hints:
+      account:
+        name: Name
+      invite:
+        email_address: The email address of the person you want to invite.
+        role: The role that this person will have in the organization.
+      key_value_store:
+        expires_at: When this value will expires
+        one_time_only: One time only
+        private: Private
+      organization:
+        description: A brief description of your organization.
+        name: The name of your organization.
+      project:
+        description: A brief description of the project.
+        name: The name of the project.
+      statefile:
+        name: The name of the state file.
+        project: The project to which this state file is associated.
+      team:
+        description: A brief description of the team.
+        name: The name of the team.
+      token:
+        environment_id: Environment
+        expires_at: The date at which this token will expire.
+        name: A descriptive name for this token.
+        workspace_id: Workspace ID
+      user:
+        email_address: Cannot be edited, create a new account and transfer your data
+          if you need to change it.
+        password: Leave blank if you don't want to change the password.
+        password_confirmation: Confirm the new password.
+        prefered_language: The language in which you want to use the application when
+          logging in.
+      workspace:
+        description: A brief description of the workspace.
+        name: The name of the workspace.
+    models:
+      account: Account
+      addon: Addon
+      coupon: Coupon
+      environment: Environment
+      instance: Instance
+      instance_attr: Instance Attribute
+      inventory: Inventory
+      inventory_model_category: Model Category
+      inventory_model_category_attr: Attribute of Model Category
+      inventory_model_family: Model Family
+      inventory_instance: Instance
+      invite: Invite
+      key_value_store: Key value store
+      license_application: License application
+      license_instance: License instance
+      license_licensee: License licensee
+      license_provider: Provider
+      license_quote: Quote
+      license_team_member: License team member
+      organization: Organization
+      organization_user: Members
+      project: Project
+      project_token: Token
+      statefile: Statefile
+      subscription: Subscription
+      team: Team
+      token: Token
+      token_organization: Organization Token
+      token_project: Project Token
+      trust_asset: Trust asset
+      user: User
+      workspace: Workspace
+    placeholders:
+      invite:
+        email_address: Enter the email address of the person you want to invite
+        role: Select the role in the organization
+      key_value_store:
+        value: Value
+      organization:
+        description: Enter a brief description of your organization
+        name: Enter the name of your organization
+      project:
+        description: Enter a brief description of the project
+        name: Enter the name of the project
+      statefile:
+        name: Enter the name of the state file
+        project: Select the project associated
+      team:
+        description: Enter a brief description of the team
+        name: Enter the name of the team
+      token:
+        expires_at: Select the expiry date of the token
+        name: Enter a name for this token
+      user:
+        email_address: Email address
+        password: Password
+        password_confirmation: Password confirmation
+        prefered_language: Select your preferred language
+      workspace:
+        description: Enter a brief description of the workspace
+        name: Enter the name of the workspace
+  admin:
+    accounts:
+      fields:
+        select: Select
+      index:
+        activate: Activate
+        api_queries: Api queries
+        api_queries_available: API Queries available
+        app_team_members: App team members
+        applications: Applications
+        archive: Archive
+        desactivate: Desactivate
+        max_employee: Employees
+        organizations: Organizations
+        projects: Projects
+        unarchived: Unarchived
+        users: Users
+        workspaces: Workspaces
+      table_item:
+        update: Update
+    coupons:
+      table_item:
+        activate: Activate
+        delete: Delete
+        desactivate: Desactivate
+    dashboard:
+      index:
+        account: Account
+        all_time_storage: All time storage
+        creation_date: Creation date
+        highlights: Highlights
+        instance_informations: Instance informations
+        key_value: Key value
+        license: License
+        organization: Organization
+        organizations_last_10: Organizations last 10
+        projects: Projects
+        remove: Remove
+        statefiles: Statefiles
+        tokens_about_to_expire: Tokens about to expire
+        user_count: User count
+        workspaces: Workspaces
+    organizations:
+      about: About
+      actions: Actions
+      admins: Admins
+      all_projects: All projects
+      archive: Archive
+      create_project: Create project
+      edit: Edit
+      key_value_store: Key value store
+      name: Name
+      project_name: Project name
+      projects: Projects
+      tokens: Tokens
+      users: Users
+      uuid: Uuid
+      viewers: Viewers
+      workspaces: Workspaces
+    users:
+      account: Account
+      actions: Actions
+      email: Email
+      global_role: Global role
+      roles: Roles
+      table_item:
+        update: Update
+  application:
+    org_menu:
+      profile: Profile
+    project_menu:
+      all_spaces: All spaces
+      profile: Profile
+  attr_name: Attr name
+  attributs: Attributs
+  category: Category
+  controllers:
+    admin:
+      unauthorized: Unauthorized
+    application:
+      password_change_required: Password change required
+    license_licensees:
+      licensees_successful_imported: Licensees successful imported
+    license_team_members:
+      successful_imported: Successful imported
+    member:
+      license_denied: License denied
+      workspaces:
+        updated: Updated
+    registrations:
+      sign_up_failed: Sign up failed
+      signed_up: Signed up
+    sessions:
+      login_failure: Login failure
+      oauth_failure: Google failure
+      oauth_success: Google success
+      rate_limit: Rate limit
+    users:
+      profile_updated: Profile updated
+  email_verifications:
+    create:
+      notice: A verification email has been sent to %{email_address}. Please check
+        your inbox and click on the verification link to activate your account.
+      please_wait: Please wait a bit longer before requesting another email verification.
+        If the problem persists, please contact support at support@example.com.
+    edit:
+      already_confirmed: The email has already been confirmed.
+      failed: The email verification failed. Please try again.
+      page_name: Email Verification
+      success: Your email address has been verified successfully.
+      unauthorize: You are not authorized to confirm this email.
+    invalid_or_expired: The email verification link is invalid or has expired.
+  globals:
+    accept: Accept
+    active: Active
+    add: Add
+    api_credits: API Queries
+    api_queries: API Queries
+    api_request: Api request
+    assets: Assets
+    back: Back
+    back_to_home: Back to home
+    bool_no: false
+    bool_yes: true
+    cancel: Cancel
+    confirm: Confirm
+    confirm_copy: Confirm copy
+    confirm_push: Confirm push
+    confirm_remove_tag: Confirm remove tag
+    cost: Cost
+    create: Create
+    created: Created
+    dashboard: Dashboard
+    delete: Delete
+    destroyed: Destroyed
+    edit: Edit
+    edit_with: Edit with
+    email: Email
+    filter: Filter
+    inactive: Inactive
+    key_value_api_queries: API Queries for Key value store
+    key_value_api_queries_montly: Key Value Queries this month
+    name: Name
+    new: New
+    new_with: New with
+    no_logo_uploaded: No logo uploaded
+    other_credits: Others
+    pricing: Choose a plan
+    queries: Queries
+    queries_current_period: API Queries for current period
+    queries_montly: Queries montly
+    resources: Resources
+    role: Role
+    save: Save
+    search_placeholder: Search placeholder
+    size: ko
+    statefile_api_queries_montly: Statefile Queries this month
+    status: Status
+    subscription: Subscription
+    token: Token
+    token_org: Org Token
+    tokens:
+      scope: Scope
+    update: Update
+    updated: Updated
+    user_license: User license
+    validate: Validate
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  layouts:
+    public:
+      switch_account_to_english: Switch account to english
+      switch_account_to_french: Switch account to french
+  member:
+    accounts:
+      create:
+        my_organization: "My organization"
+        my_organization_description: "Default Organization"
+        my_project: "My Project"
+        my_infra: "Infra Space"
+        my_app: "Application Space"
+        my_public_key: "PublicKey"
+        my_public_value: "PublicValue"
+        my_private_key: "PrivateKey"
+        my_private_value: "PrivateValue"
+        my_private_one_time_only_key: "OneTimeOnlySecretKey"
+        my_private_one_time_only_value: "One Time Only Secret Value"
+      fields:
+        select: Select
+      new:
+        title: Create
+    dashboard:
+      account:
+        api_request: Api request
+        credits: Credits
+        trust_assets_average: Trust assets average
+        user_license_average: User license average
+      helper:
+        main-title: What do you need to do ?
+        intro: Let us guide you through getting started with your KeyHarbour workspace.
+        key_value: Key-Value
+        key_value_explain: Need a key-value store to use within your pipelines? Stop circulating your secrets and configuration files blindly. With KeyHarbour's Key-Value Store, centralize your operational data in a secure space.
+        licenses: Licenses
+        licenses_explain: Need a unified view of your software licenses? Take back control of your software spend and centralize critical renewal dates.
+        start_now: Get started
+        statefile: Statefile
+        statefile_explain: Need a reliable remote state for your infrastructure deployments? Benefit from automated state locking for your Terraform/OpenTofu runs, as well as a version history to roll back in case of a hitch.
+        title: "Need help?"
+        trust_assets: Trusted Assets
+        trust_assets_explain: Need to secure and track your certificates and tokens in one place? Take back control of your trusted assets. Say goodbye to surprise expirations, track usage, and set up automatic reminders.
+
+      index:
+        active_invitation_count: You have %{count} active invitations to join an organization
+        active_invitations: Active Invitations
+        balance: Balance
+        billing_details: Billing Details
+        create_organization_button: Create your first organization
+        credit_usage_for_this_month: Credit usage for this month
+        credits: Credits
+        daily_credit_usage_for_this_month: Daily credit usage for this month
+        enter_code: Enter coupon code
+        expiring_tokens: Tokens about to expire
+        key_value: Key value
+        key_value_explain: Key value explain
+        last_access: Last access
+        licenses: Licenses
+        licenses_explain: Licenses explain
+        monthly_credit: Monthly credit
+        monthly_usage: Monthly usage
+        no_organization_yet: You have not created any organization yet.
+        statefile: Statefile
+        statefile_explain: Statefile explain
+        total_admins: Total admins
+        total_owners: Total owners
+        total_users: Total users
+        trust_assets: Trust assets
+        trust_assets_explain: Trust assets explain
+        users_with_access: Users with access to the same organization as you (last
+          10)
+        welcome_back: Welcome back
+        welcome_context: Here is your dashboard where you can monitor your teams and
+          usage statistics.
+        welcome_message: Welcome to your dashboard
+        your_organizations: Your Organizations
+      organizations:
+        your_organizations: Your organizations
+    environments:
+      body:
+        remove: Remove
+        update: Update
+      create: Create an environment
+      edit:
+        page_title: Edit environment
+      index:
+        page_title: Environments
+      new:
+        page_title: New environment
+    inventory:
+      instances:
+        table_header:
+          name: Name
+      inventory:
+        body:
+          remove: Remove
+          update: Update
+        index:
+          inventory: Inventory
+        menu:
+          dashboard: Dashboard
+          model_categories: Model categories
+          model_families: Model families
+        top_menu:
+          dashboard: Dashboard
+          model_categories: Model categories
+          model_families: Model families
+      model_categories:
+        table_header:
+          name: Name
+        table_item:
+          attributs: Attributs
+          remove: Remove
+          update: Update
+      model_category_attrs:
+        table_header:
+          name: Name
+        table_item:
+          remove: Remove
+          update: Update
+      model_families:
+        table_item:
+          remove: Remove
+          update: Update
+    invites:
+      edit:
+        page_title: Edit invite
+      index:
+        page_title: Page title
+      new:
+        page_title: New invite
+    key_value_stores:
+      headers:
+        expiration: Expiration
+        key: Key
+        one_time_only: One time only
+        private: Private
+        value: Value
+      index:
+        description: A simple key value store
+        title: Title
+      searchbar:
+        filter: Filter
+        placeholder: Placeholder
+      table_header:
+        expires_at: Expires at
+        key: Key
+        one_time_only: One time only
+        private: Private
+        value: Value
+      table_item:
+        remove: Remove
+        update: Update
+      workspace_menu:
+        title: 'Key Value Store for '
+    license:
+      applications:
+        index:
+          color_code_by_renewal_priorities: Color code by renewal priorities
+          color_legends: Color legends
+          first_reminder: First reminder
+          last_reminder: Last reminder
+          no_reminder: No reminder
+          overdue: Overdue
+          remove: Remove
+          short_name: Short name
+          update: Update
+          vendor: Vendor
+        menu:
+          application: Application
+          instances: Instances
+          quotes: Quotes
+        show:
+          alerts: Alerts
+          details: Details
+          first_renewal_alert: First renewal alert
+          renewal: Renewal
+          renewal_date: Renewal date
+          second_renewal_alert: Second renewal alert
+          tier: Tier
+          unit_cost: Unit cost
+          usage: Usage
+          vendor: Vendor
+        table_header:
+          name: Name
+          renewal_date: Renewal date
+          tier: Tier
+          vendor: Vendor
+        table_item:
+          remove: Remove
+          update: Update
+      dashboard:
+        index:
+          calendar: Calendar
+          calendar_overview: Calendar overview
+          first_reminder: First reminder
+          last_reminder: Last reminder
+          license_threshold: License threshold
+          no_reminder: No reminder
+          optimal_consumption: Optimal consumption
+          over_consuming: Over consuming
+          over_licensed: Over licensed
+          overdue: Overdue
+          rate_overview: Rate overview
+          usage_rate: Usage rate
+      instances:
+        index:
+          active: Active
+          active_add_on: Active add on
+          add_on: Add on
+          all_add_on: All add on
+          inactive: Inactive
+          instance_only: Instance only
+          licensees: Licensees
+          remove: Remove
+          unlimited: Unlimited
+          update: Update
+      licensees:
+        index:
+          details: Details
+          direct_cost: Direct cost
+          download: Download
+          manager: Manager
+          team_cost: Team cost
+          user: User
+      providers:
+        hint:
+          provider: Provider
+        index:
+          approved_quote: Approved quote
+          quote: Quote
+          remove: Remove
+          update: Update
+      quote_add_ons:
+        edit:
+          cancel: Cancel
+          ok: Ok
+      quote_applications:
+        edit:
+          cancel: Cancel
+          ok: Ok
+      quote_instances:
+        edit:
+          cancel: Cancel
+          ok: Ok
+      quotes:
+        compare:
+          base_cost: Base cost
+          compare: Compare
+          cost: Cost
+          cost_per_site_with_add_on: Cost per site with add on
+          cost_per_site_with_add_on_and_application: Cost per site with add on and
+            application
+          per_seat: Per seat
+          seats: Seats
+        index:
+          approved: Approved
+          compare: Compare
+          initial: Initial
+          items: Items
+          quotes: Quotes
+          rejected: Rejected
+          remove: Remove
+          update: Update
+        show:
+          activate: Activate
+          deactivate: Deactivate
+      team_members:
+        index:
+          users_organization: Users organization
+    member_controller:
+      access_denied: Access denied
+      account_required: Account required
+      accounts_management: Accounts management
+      admin: Admin
+      all_users: All users
+      desactivated: Desactivated
+      global_dashboard: Global dashboard
+      member: Member
+    model_categories:
+      edit:
+        page_title: Edit Model Category
+      index:
+        page_title: Model Categories
+        title: Model Categories
+      new:
+        page_title: New Model Category
+      show:
+        page_title: "%{name}"
+    model_families:
+      edit:
+        page_title: Edit Model Family
+      index:
+        page_title: Model Families
+        title: Model Families
+      new:
+        page_title: New Model Family
+      show:
+        page_title: "%{name}"
+    org_tokens:
+      body:
+        remove: Remove
+    organizations:
+      body:
+        remove: Remove
+        tokens: Tokens
+        update: Update
+      edit:
+        page_title: Edit organization
+      index:
+        organizations: Organizations
+      item_menu:
+        copy: Copy
+        push_as_current: Push as current
+        remove: Remove
+        tokens: Tokens
+        update: Update
+      new:
+        create_invite: New invite
+        new_organization: New organization
+        page_title: Create an organization
+      projects:
+        all_projects: All projects
+        remove: Remove
+        tokens: Tokens
+        update: Update
+      show:
+        all_projects: All projects
+        key_value_store: Key/Value store
+        queries_included: "%{count} queries included"
+        resources: Resources
+        trust_assets: Trust assets
+        update: Update organization
+      summary:
+        key_value_store: Key value store
+        resources: Resources
+        trust_assets: Trust assets
+        update: Update
+      top_menu:
+        profile: Profile
+    pricings:
+      index:
+        additional_managed_employees: Employés additionnels gérés
+        additional_package: Additional package
+        addtionnal_managed_employees: Aditionnal managed employees
+        annual_billing: Annual billing
+        api_queries: Api queries
+        contact-us: Contact-us
+        coupon:
+          input: Input
+          submit: Submit
+          text: Text
+          title: Apply
+        current_plan: Current plan
+        employees: employees
+        key_value_store: Key Value Store
+        licence_mgnt: Licence management
+        managed_employees: Employed managed
+        month: Month
+        monthly_billing: Monthly billing
+        plans:
+          enterprise:
+            description: Custom plan for large enterprises.<br/><br/>
+            name: Entreprise
+          free:
+            description: Free plan for individuals and small teams with basic needs.<br/>
+            name: Free
+          pro:
+            description: Advanced plan for growing businesses.<br/><br/>
+            name: Pro
+          startup:
+            description: Affordable plan for startups and small teams with basic needs.
+            name: Startup
+        queries: Queries
+        select: Select
+        soon: Soon
+        terraform_ressources: Terraform resources
+        terraform_statefile: Terraform statefiles
+        title: Pricing Plans
+        unlimited: Unlimited
+        unlimited_terraform_ressources: Unlimited terraform ressources
+        upgrade: upgrade
+        user_accounts: User accounts
+    projects:
+      body:
+        remove: Remove
+        update: Update
+      edit:
+        page_title: Edit project
+      new:
+        page_title: New project
+      show:
+        about: About
+        admins: Administrators
+        billing_details_monthly: Détails de facturation mensuelle
+        billing_details_monthy: Montly Billing details
+        edit_project: Edit project
+        org_uuid: Organization UUID
+        users: Users
+        viewers: Viewers
+      summary:
+        about: About
+        org_uuid: Org uuid
+        update: Update
+      top_menu:
+        profile: Profile
+    statefile_tags:
+      index:
+        title: All
+    statefiles:
+      index:
+        actions: Actions
+        billing_details: Billing details
+        download: Download
+        duplicate: Duplicate
+        make_primary: Make primary
+        no_statefiles: No state file found for this environment.
+        published_at: Published at
+        remove: Remove
+        remove_tag: Remove tag
+        resources: Resources
+        see: See
+        statefile_history: Statefile history
+        tag: Tag
+        tagged_version: Tagged version
+        terraform_link: Terraform link
+        title: All
+      item_menu:
+        copy: Copy
+        push_as_current: Push as current
+        remove: Remove
+        tokens: Tokens
+        update: Update
+      show:
+        back: Back
+        token_for: Token for
+      statefile:
+        resources: Resources
+        tag: Tag
+      statefiles:
+        resources: Resources
+        statefile_history: Statefile history
+        tag: Tag
+      workspace_menu:
+        title: Terraform State files for
+    subscriptions:
+      fail:
+        body: Body
+        title: Fait
+      index:
+        amount: Amount
+        date: Date
+        description: Description
+        next_bill_amount: Next bill amount
+        next_bill_date: Next bill date
+        state: State
+      show:
+        amount: Amount
+        date: Date
+        description: Description
+        invoices: Invoices
+        next_bill_amount: Next Bill Amount
+        next_bill_date: Next Billing Date
+        page_title: Your subscription
+        state: Status
+        usage_status: Usage %{rate}%% ( %{current} of %{limit} )
+      success:
+        body: Body
+        title: Success
+    teams:
+      body:
+        permissions: Permissions
+        remove: Remove
+        update: Update
+      edit:
+        page_title: Edit team
+      new:
+        page_title: New team
+    tokens:
+      body:
+        remove: Remove
+      edit:
+        page_title: Edit token
+      fields:
+        leave_blank_project_token: Leave blank project token
+      index:
+        app_token: Jeton d'application
+        org_token: Jeton d'organisation
+      new:
+        page_title: New token
+      search_form:
+        if_check_workspace_ignore: If check workspace ignore
+        leave_blank_project_token: Leave blank project token
+      show:
+        back: Back
+        token: Token
+        token_for: Token for
+        token_visibility_warning: You will only be able to see this token once. Make
+          sure to copy and store it securely.
+        user_access: User Access
+    trust_assets:
+      edit:
+        description: Update the details of your trust asset to maintain its security
+          and relevance within your workspace.
+        title: Edit Trust Asset
+      headers:
+        consumer: Consumer
+        expires_at: Expires at
+        format: Format
+        issuer: Issuer
+        name: Name
+      index:
+        description: Manage your trust assets, such as certificates and secrets, to
+          ensure secure operations within your workspace.
+        title: All
+      new:
+        description: Create a new trust asset to securely manage sensitive information
+          in your workspace.
+        title: New Trust Asset
+      searchbar:
+        filter: Filter
+        placeholder: Placeholder
+      table_header:
+        consumer: Consumer
+        expires_at: Expires at
+        format: Format
+        issuer: Issuer
+        name: Name
+      table_item:
+        remove: Remove
+        update: Update
+      workspace_menu:
+        title: All
+    users:
+      body:
+        remove: Remove
+      fields:
+        password_hint: The password must contain at least 8 characters, including
+          letters and numbers.
+    wizard:
+      new_organization:
+        add_env: "+ Add an environment"
+        envs: Environments to initialize
+        next: "Next →"
+        step1: "Step 1 / 3: Create your Organization"
+      new_project:
+        next: "Next →"
+        org: Organization
+        step2: "Step 2 / 3: Create a Project"
+        prj_placeholder: "e.g., Website"
+      new_workspace:
+        project: Project
+        step3: "Step 3 / 3: Configure your Workspace"
+        next: "Finish and launch 🚀"
+        wks_placeholder: "e.g., Dev Team / Production"
+
+    workspaces:
+      edit:
+        page_title: Edit workspace
+      index:
+        remove: Remove
+        update: Update
+      new:
+        page_title: New workspace
+      show:
+        activate: Activate
+        archive: Archive
+        deactivate: Deactivate
+        desactivate: Desactivate
+        environments: Environments
+        key_value_stores: Key Value Store
+        key_values: Key Value
+        last_update: Last update
+        resources: Resources
+        terraform_state_files: Terraform State files
+        trust_assets: Trust assets
+  menu:
+    account_applications: Applications
+    add_ons: Add ons
+    all_organizations: All organizations
+    all_spaces: All spaces
+    api_queries: Api queries
+    applications: Applications
+    dashboard: Dashboard
+    environments: Environments
+    global_admin: Global Admin
+    instances: Instances
+    inventory_instances: Inventory instances
+    inventory_model_categories: Inventory model categories
+    inventory_model_category_attrs: Inventory model category attrs
+    inventory_model_families: Inventory model families
+    key_value_stores: Key value stores
+    licensees: Licensees
+    licenses: Licenses
+    licenses_dashboard: Licenses dashboard
+    organization_applications: Organization applications
+    organization_inventory: Organization inventory
+    organization_overview: Organization overview
+    organization_team_members: Organization team members
+    pricings: Pricings
+    projects: Projects
+    providers: Providers
+    quotes: Quotes
+    statefile_tags: Statefile tags
+    statefiles: Statefiles
+    team_members: Team members
+    teams: Teams
+    tokens: Tokens
+    trust_assets: Trust assets
+    users: Users
+    workspaces: Workspaces
+  model_family: Model family
+  models:
+    concerns:
+      archivable:
+        archived_item_error: 'Archived item — modifications forbidden: %{changes}'
+      edition_limits:
+        max_projects: On-Premise edition limited to %{max} projects per organization
+        max_workspaces: On-Premise edition limited to %{max} workspaces per project
+  name: Name
+  passwords:
+    create:
+      instructions_sent: Instructions sent
+    edit:
+      new_password: New password
+      repeat_new_password: Repeat new password
+      reset_password: Reset password
+      save_changes: Save changes
+      title: Submit
+    invalid_or_expired: Invalid or expired
+    new:
+      need_account: Need account
+      reset_instructions: Reset instructions
+      sign_up: Sign up
+      title: Submit
+    update:
+      did_not_match: Did not match
+      password_updated: Password updated
+  permission_denied: Permission denied
+  ready: Ready
+  registrations:
+    new:
+      accept: Accept
+      already_have_account: Already have account
+      conditions: Conditions
+      forgot_password: Forgot password
+      log_in: Log in
+      prefered_language: Preferred language
+      switch_account_to_english: Switch to English
+      switch_account_to_french: Passer en français
+      title: Submit
+  resource_type: Resource type
+  sessions:
+    new:
+      forgot_password: Forgot password
+      need_account: Need account
+      remember_me: Remember me
+      sign_up: Sign up
+      switch_account_to_english: Switch to English
+      switch_account_to_french: Passer en français
+      title: Submit
+  sidebar:
+    footer:
+      account_settings: Account settings
+      docs: Documentation
+      language: Language
+      logout: Logout
+  simple_form:
+    error_notification:
+      default_message: 'Please review the problems below:'
+    'no': 'No'
+    required:
+      mark: "*"
+      text: required
+    'yes': 'Yes'
+  status:
+    active: Active
+    archived: Archived
+    deleted: Deleted
+    disabled: Disabled
+  support:
+    array:
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
+  users:
+    edit:
+      page_name: Update My Profile
+  views:
+    member:
+      statefiles:
+        title_for: Title for
+        token_for: Token for
+      tokens:
+        token: Token
+        token_for: Token for
+        token_visibility_warning: You will only be able to see this token once. Make
+          sure to copy and store it securely.
+        user_access: User access
+  wizard:
+    organizations: Organizations
+  workspace: Workspace

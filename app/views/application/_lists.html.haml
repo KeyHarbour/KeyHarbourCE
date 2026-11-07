@@ -1,0 +1,17 @@
+.card
+  .card-header
+    %h3.card-title= title
+    .card-actions
+      - add_list_button.each do |button|
+        = link_to button[:path], class: "btn btn-primary btn-sm" do
+          = icon button[:icon]
+          = button[:name]
+  .card-body.text-end
+    != @pagy.info_tag
+  .list-group.list-group-flush.list-group-hoverable
+    - items.each do |item|
+      .list-group-item
+        .row.align-items-center
+          = render partial: "body", locals: { item: item }
+  .card-footer.d-flex.justify-content-center
+    != @pagy.series_nav((:bootstrap))

@@ -1,0 +1,18 @@
+= turbo_frame_tag "wizard" do
+  .card.shadow-sm
+    .card-header
+      %h3.card-title.mb-0= t('.step2')
+    .card-body
+      %p.text-muted #{t('.org')} : #{@organization.name}
+      
+      = simple_form_for @project, url: path_create_project, wrapper: "horizontal_form", method: :post do |f|
+        - if @project.errors.any?
+          .alert.alert-danger
+            = @project.errors.full_messages.to_sentence
+        = hidden_field_tag :organization_id, @organization.id
+
+        .mb-3
+          = f.input :name, class: "form-control", placeholder: t('.prj_placeholder'), autofocus: true
+
+        .d-flex.justify-content-end
+          = f.submit t('.next'), class: "btn btn-primary"

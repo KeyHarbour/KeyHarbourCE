@@ -1,0 +1,27 @@
+.col-md-12
+  .card
+    .card-header.mt-3
+      %h3= t(".users_organization")
+    .card-body.mt-3
+      .card.shadow-sm
+        .card-body.p-0{:style => "background-color: #f8f9fa;"}
+          #tree-container.d-flex.justify-content-center{"data-controller" => "tree-chart", "data-tree-chart-data-value" => "#{@employees.to_json}"}
+            %svg#tree-svg
+      :css
+        /* Style des lignes de connexion */
+        .link {
+          fill: none;
+          stroke: #ccc;
+          stroke-width: 2px;
+        }
+
+        .node circle {
+          stroke: steelblue;
+          stroke-width: 2px;
+        }
+
+        .node text {
+          font: 12px sans-serif;
+        }
+      - content_for :page_name do
+        = index_page_name

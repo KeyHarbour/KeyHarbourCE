@@ -1,0 +1,31 @@
+.kt-card.p-5{:class => "lg:p-7.5"}
+  .flex.items-center.flex-wrap.justify-between.gap-5
+    .flex.items-center{:class => "gap-3.5"}
+      %div
+        = link_to member_statefile_path(statefile), class: "font-sm text-mono hover:text-primary" do
+          = statefile.uuid
+          %br
+          = statefile.published_at
+    .flex.items-center.flex-wrap.justify-between.gap-5.lg:gap-12
+      .flex.items-center.flex-wrap.gap-2.lg:gap-5
+        .flex.flex-col.border.border-dashed.border-input.rounded-md.py-2{:class => "gap-1.5 px-2.5"}
+          %span.text-mono.text-sm.leading-none.font-medium
+            #{statefile.resource_count}
+          %span.text-secondary-foreground.text-xs
+            = t('.resources')
+            resources
+      .flex.items-center.flex-wrap.gap-2.lg:gap-5
+        .flex.flex-col.border.border-dashed.border-input.rounded-md.py-2{:class => "gap-1.5 px-2.5"}
+          %span.text-mono.text-sm.leading-none.font-medium
+            #{statefile.content.size/1000.0}
+          %span.text-secondary-foreground.text-xs
+            ko
+      .flex.justify-center.w-20
+        - if statefile.statefile_tag.nil?
+          = link_to new_member_statefile_statefile_tag_path(statefile), class: "kt-btn kt-btn-mono" do
+            %i.ki-filled.ki-medal-star
+            = t('.tag')
+        - else
+          .kt-badge.kt-badge-success.kt-badge-outline Tag: #{statefile.statefile_tag.tag}
+      .flex.ml-auto
+        = render partial: "item_menu", locals: { delete_link: member_statefile_path(statefile), edit_link: edit_member_statefile_path(statefile), push_link: push_member_statefile_path(statefile), duplicate_link: duplicate_member_statefile_path(statefile) }

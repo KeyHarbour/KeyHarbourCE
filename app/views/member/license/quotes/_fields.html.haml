@@ -1,0 +1,11 @@
+.w-full
+  = f.input :uuid
+.w-full
+  = f.association :provider,
+    collection: Current.providers,
+    as: :select,
+    input_html: { multiple: false, data: { controller: "tom-select" } }, wrapper: :horizontal_form
+.w-full= f.input :available_on, as: :string, input_html: { value: f.object.approved_at&.strftime("%Y-%m-%d"), data: { controller: "datepicker", datepicker_max_date_value: DateTime.now.advance(years: 1, days: -1) } }
+.w-full= f.input :available_until, as: :string, input_html: { value: f.object.approved_at&.strftime("%Y-%m-%d"), data: { controller: "datepicker", datepicker_max_date_value: DateTime.now.advance(years: 1, days: -1) } }
+.w-full= f.input :approved_at, as: :string, input_html: { value: f.object.approved_at&.strftime("%Y-%m-%d"), data: { controller: "datepicker", datepicker_max_date_value: DateTime.now.advance(years: 1, days: -1) } }
+.w-full= f.input :status, as: :select, collection: License::Quote::STATUSES.keys.map { |k| [k.to_s.humanize, k] }, wrapper: :horizontal_form

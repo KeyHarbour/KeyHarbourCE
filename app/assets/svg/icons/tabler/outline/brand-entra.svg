@@ -1,0 +1,19 @@
+<svg 
+  xmlns="http://w3.org" 
+  width="24"
+  height="24"
+  fill="#000000"
+  viewBox="0 0 90 90"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <g>
+    <!-- Élément central / Bouclier d'identité -->
+    <path d="M50 18 C33 18 25 28 25 42 C25 62 43 78 50 82 C57 78 75 62 75 42 C75 28 67 18 50 18 Z M50 25 C62 25 68 32 68 42 C68 56 55 69 50 73 C45 69 32 56 32 42 C32 32 38 25 50 25 Z"/>
+    <!-- Nœud d'accès sécurisé -->
+    <circle cx="50" cy="45" r="8"/>
+    <path d="M50 56 C42 56 37 61 37 66 L63 66 C63 61 58 56 50 56 Z"/>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+.col-md-12
+  .card
+    .card-body
+      %h3.card-title= @item.name
+      %p.text-secondary= @item.description
+
+= render partial: "members", locals: { item: @item }
+= render partial: "organizations", locals: { item: @item, items: @item.team_roles.where(resource_type: "Organization") }
+= render partial: "projects", locals: { item: @item, items: @item.team_roles.where(resource_type: "Project") }
+= render partial: "workspaces", locals: { item: @item, items: @item.team_roles.where(resource_type: "Workspace") }
+
+-# .kt-container-fluid.mb-4
+-#   .grid.grid-cols-1.lg:grid-cols-3.gap-5{:class => "lg:gap-7.5"}
+-#     .col-span-1
+-#       .grid.gap-5{:class => "lg:gap-7.5"}
+-#         = render partial: "organizations", locals: { item: @item, items: @item.team_roles.where(resource_type: "Organization") }
+-#
+-#     .col-span-1
+-#       .grid.gap-5{:class => "lg:gap-7.5"}
+-#         = render partial: "projects", locals: { item: @item, items: @item.team_roles.where(resource_type: "Project") }
+-#     .col-span-1
+-#       .grid.gap-5{:class => "lg:gap-7.5"}
+-#         = render partial: "workspaces", locals: { item: @item, items: @item.team_roles.where(resource_type: "Workspace") }
+-# = render partial: "members", locals: { item: @item }

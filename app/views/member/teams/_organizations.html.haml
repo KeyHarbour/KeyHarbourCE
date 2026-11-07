@@ -1,0 +1,29 @@
+= turbo_frame_tag "team_organizations_#{item.id}", class: "col-md-6"  do
+  .card
+    .card-header
+      %h3.card-title
+        Organizations
+      .card-actions
+        - team_role = item.team_roles.new
+        = form_with(model: team_role, url: member_team_roles_path(team_role), data: { turbo_frame: "_top" }) do |f|
+          = f.collection_select :organization_id, Current.organizations.where.not(id: item.team_roles.where(resource_type: "Organization").pluck(:resource_id)), :id, :name, { prompt: "Choisir une organisation" }, { class: "votre-classe-css" }
+          = f.hidden_field :team_id, value: item.id
+          = f.submit t('globals.add')
+    .table-responsive
+      %table.table.table-vcenter.card-table
+        %thead
+          %tr
+            %th
+              Organization
+            %th.text-secondary-foreground.font-normal
+              Roles
+            %th
+              Action
+        - items.each do |team_role|
+          %tr{ id: dom_id(team_role) }
+            %td
+              %b= team_role.resource.name
+            %td= render partial: "member/team_roles/role", locals: { team_role: team_role }
+            %td.text-center{:class => "w-[60px]"}
+              = link_to member_team_role_path(team_role), method: :delete, data: { turbo_confirm: t('globals.confirm'), turbo_method: :delete }, class: "text-red-500 hover:text-red-700" do
+                = icon "trash", class: "icon-xs"

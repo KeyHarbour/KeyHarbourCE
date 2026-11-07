@@ -1,0 +1,63 @@
+
+.card
+  .table-responsive
+    .card-body.d-flex.justify-content-between.align-items-center
+      %h2.text-start
+        = t('.color_code_by_renewal_priorities')
+      .text-end
+        != @pagy.info_tag
+    .card-body
+      .row.mb-4
+        #{t('.color_legends')} :
+        %span.badge.bg-red.kh_white.col-md-2.ms-2
+          = t('.overdue')
+        %span.badge.bg-yellow.kh_white.col-md-2.ms-2
+          = t('.last_reminder')
+        %span.badge.bg-primary.kh_white.col-md-2.ms-2
+          = t('.first_reminder')
+        %span.badge.bg-green.kh_white.col-md-2.ms-2
+          = t('.no_reminder')
+      .row
+        - @items.each do |item|
+          .col-md-6.mb-4
+            .card
+              -# .progress.card-progress
+              -#   .progress-bar{class: renewal_color(item), :role => "progressbar", :style => "width: 100%"}
+              .card-body
+                .row
+                  .col.text-truncate
+                    %h3.card-title
+                      = link_to item.name, member_license_application_path(item)
+                  .col-auto.ms-auto.ms-sm-0
+                    .dropdown.no-arrow
+                      %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+                      .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+                        = link_to edit_member_license_application_path(item), class: "dropdown-item" do
+                          = icon "edit"
+                          = t('.update')
+                        .dropdown-divider
+                        = link_to member_license_application_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+                          = icon "trash"
+                          = t('.remove')
+                .progressbg
+                  .progress.progressbg-progress
+                    .progress-bar{class: bg_progress_color(item.usage_rate), "aria-label" => "#{item.usage_rate}% Complete", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{(item.usage_rate * 100).round(2)}", :role => "progressbar", :style => "width: #{(item.usage_rate * 100).to_i}%"}                        
+
+                  .progressbg-text= "#{item.seat_used} / #{item.seats || 'unlimited'} seats"
+                  .progressbg-value #{(item.usage_rate * 100).round(2)}%  
+                %p.card-subtitle.mt-3.mb-0{:style => "min-height: 2lh"}            
+                  %small 
+                    #{t('.vendor')} : #{item.vendor}
+                    %br/
+                    #{t('.short_name')} : #{item.short_name}
+                    %br/
+                    #{item.uuid}
+              .card-footer.d-flex.text-secondary
+                %div
+                  %span.fw-medium.text-body
+                    - if item.renewal_date
+                      %span.badge{class: renewal_color(item)}
+                        = item.renewal_date.to_date
+                .ms-auto= item.tier
+    .card-footer.d-flex.justify-content-center
+      != @pagy.series_nav((:bootstrap))

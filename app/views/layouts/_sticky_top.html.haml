@@ -1,0 +1,15 @@
+.sticky-top{style: "left: 16rem;width: calc(100% - 16rem);"}
+  %header.navbar.navbar-expand-md.sticky-top.d-print-none
+    .container-xl
+      .col
+        = render partial: 'breadcrumbs'
+      .navbar-nav.flex-row.order-md-last
+        .nav-item.dropdown
+          %a.nav-link.d-flex.lh-1.p-0.px-2{"aria-label" => "Open user menu", "data-bs-toggle" => "dropdown", :href => "#"}
+            %span.avatar.avatar-sm{:style => "background-image: url(#{Gravatar.src(Current.user.email_address, 32)})"}
+            .d-none.d-xl-block.ps-2
+              %div= Current.user.email_address.to_s.downcase
+              .mt-1.small.text-secondary Admin
+          .dropdown-menu.dropdown-menu-end.dropdown-menu-arrow
+            .dropdown-divider
+            = link_to "Logout", session_path, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Logout"}, class: 'dropdown-item'

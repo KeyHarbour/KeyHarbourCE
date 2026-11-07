@@ -1,0 +1,19 @@
+%main#content.page.page-center
+  .container-tight.py-4
+    .empty
+      .empty-img
+        / BEGIN ILLUSTRATION
+        %svg{:height => "100", :viewbox => "0 0 100 100", :width => "100", :xmlns => "http://w3.org"}
+          / Cercle extérieur rouge
+          %circle{:cx => "50", :cy => "50", :fill => "none", :r => "40", :stroke => "#DC2626", "stroke-width" => "8"}
+          / Barre diagonale rouge
+          %line{:stroke => "#DC2626", "stroke-width" => "8", :x1 => "21.7", :x2 => "78.3", :y1 => "21.7", :y2 => "78.3"}
+
+
+      %h1.empty-title Accès interdit / Forbidden (403)
+      %p.empty-subtitle.text-secondary 
+        Vous n'avez pas la permission d'acceder à cette section
+        %br/
+        You do not have permission to access this section
+      .empty-action
+        = link_to t('globals.back'), member_root_path, class: "btn btn-primary"

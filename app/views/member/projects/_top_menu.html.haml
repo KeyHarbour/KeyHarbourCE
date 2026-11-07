@@ -1,0 +1,18 @@
+%ul.nav.nav-tabs.card-header-tabs{"data-bs-toggle" => "tabs", :role => "tablist"}
+  - if Current.user.project_view(@project)
+    %li.nav-item{:role => "presentation"}
+      = link_to member_project_path(@project), class: "nav-link #{actif=='project' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+        = t('.profile')
+  %li.nav-item.dropdown
+    %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :role => "button", class: "#{actif=='workspaces' ? 'active' : ''}"}= t('activerecord.models.workspace').pluralize
+    .dropdown-menu{"data-popper-placement" => "bottom-start", :style => "position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 40px);"}
+      = link_to member_project_workspaces_path(@project), class: "dropdown-item #{(actif=='workspaces' && @workspace.nil?) ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+        = t('menu.all_spaces').pluralize
+      - @project.workspaces.current_user(Current).active.each do |workspace|
+        - next if workspace.id == nil
+        = link_to member_workspace_path(workspace), class: "dropdown-item #{@workspace==workspace ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+          = workspace.name
+
+    %li.nav-item{:role => "presentation"}
+      = link_to member_project_tokens_path(@project), class: "nav-link #{actif=='tokens' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+        = t('activerecord.models.token').pluralize

@@ -1,0 +1,19 @@
+.col-auto
+  %span.badge{class: status_color(item)}
+.col.text-truncate
+  = link_to item.name, member_organization_path(item), class: "hover:text-primary"
+  .d-block.text-secondary.text-truncate.mt-1= item.uuid
+.col-auto
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      = link_to edit_member_organization_path(item), class: "dropdown-item" do
+        = icon "edit"
+        = t('.update')
+      = link_to member_organization_org_tokens_path(item), class: "dropdown-item" do
+        = icon "key"
+        = t('.tokens')
+      .dropdown-divider
+      = link_to member_organization_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash"
+        = t('.remove')

@@ -1,0 +1,42 @@
+%aside.navbar.navbar-vertical.navbar-expand-lg
+  .container-fluid
+    %button.navbar-toggler{"aria-controls" => "sidebar-menu", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#sidebar-menu", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    .navbar-brand.navbar-brand-autodark
+      = link_to root_path do
+        = image_tag "harbor.png"
+    #sidebar-menu.collapse.navbar-collapse
+      %ul.navbar-nav.pt-lg-3
+        - nav_menu_simple.each do |item|
+          - if item.dig(:items)
+            %li.nav-item.dropdown{class: "#{item[:active] ? "active" : ""}"}
+              %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#navbar-base", :role => "button", class: "#{item[:active] ? "show" : ""}"}
+                %span.nav-link-icon.d-md-none.d-lg-inline-block
+                  = icon item[:icon], class: "icon-xs"
+                %span.nav-link-title= item[:title]
+              .dropdown-menu{ class: "#{item[:active] ? "show" : ""}"}
+                .dropdown-menu-columns
+                  .dropdown-menu-column
+                    - item[:items].each do |sub_item|
+                      - if sub_item.dig(:items)
+                        .dropend
+                          %a.dropdown-item.dropdown-toggle{"aria-expanded" => "false", "data-bs-auto-close" => "false", "data-bs-toggle" => "dropdown", :href => "#sidebar", :role => "button", class: "#{sub_item[:active] ? "show" : ""}"}
+                            = icon sub_item[:icon], class: "icon-xs"
+                            = sub_item[:title]
+                          .dropdown-menu{ class: "#{sub_item[:active] ? "show" : ""}"}
+                            - sub_item[:items].each do |sub_sub_item|
+                              = link_to sub_sub_item[:path], class: "dropdown-item #{sub_sub_item[:active] ? 'active' : ''}" do
+                                -# = icon sub_sub_item[:icon]
+                                = sub_sub_item[:title]
+                      - else
+                        = link_to sub_item[:path], class: "dropdown-item #{sub_item[:active] ? 'active' : ''}" do
+                          = icon sub_item[:icon], class: "icon-xs"
+                          = sub_item[:title]
+                          -# %span.badge.badge-sm.bg-green-lt.text-uppercase.ms-auto New
+
+          - else
+            %li.nav-item{class: "#{item[:active] ? "active" : ""}"}
+              = link_to item[:path], class: "nav-link" do
+                %span.nav-link-icon.d-md-none.d-lg-inline-block
+                  = icon item[:icon]
+                %span.nav-link-title= item[:title]

@@ -1,0 +1,61 @@
+.col-12
+  .card
+    .card-stamp
+      .card-stamp-icon.bg-yellow
+        = icon "home", class: "icon-64"
+    .card-body
+      %h2.card-title
+        = Current.subscription.plan.name
+      %p.text-secondary
+        = html_escape(Current.subscription.plan.description).gsub("&lt;br/&gt;", "")
+
+      .datagrid
+        .datagrid-item
+          .datagrid-title= t('.next_bill_amount')
+          .datagrid-content= number_to_currency( Current.subscription.next_billing_amount, unit: "$")
+        .datagrid-item
+          .datagrid-title= t('.next_bill_date')
+          .datagrid-content= Current.subscription.current_period_end.to_date.strftime("%-d %b, %Y")
+        .datagrid-item
+          .datagrid-title Frequence
+          .datagrid-content
+            %span.status.status-green= Current.subscription.yearly ? "Annual" : "Monthly"
+      %p.text-secondary.mt-4
+        = link_to "Upgrade Plan", member_subscriptions_path(plan: Current.subscription.plan.next_plan, period: Current.subscription.yearly ? "year" : "month"), class: "btn w-100", method: :post, data:  { turbo: false }
+      .progress
+        .progress-bar.bg-yellow{"aria-label" => "#{progress_color(Current.subscription.usage_rate)}% used", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => progress_color(Current.subscription.usage_rate), :role => "progressbar", :style => "width: #{progress_color(Current.subscription.usage_rate)}%"}
+          %span.visually-hidden #{progress_color(Current.subscription.usage_rate)}% Complete
+.col-12
+  .card
+    .card-body
+      .table-responsive
+        %table.table.table-vcenter.card-table
+          %thead
+            %tr
+              %th.min-w-52
+                = t(".description")
+              %th.min-w-24.text-end
+                = t(".state")
+              %th.min-w-32.text-end
+                = t(".date")
+              %th.min-w-20.text-end
+                = t(".amount")
+              %th.w-8
+          %tbody
+            - Current.subscription.invoices.order(created_at: :desc).each do |invoice|
+              %tr
+                %td.text-sm.text-foreground.font-normal
+                  %p.text-sm.font-medium.text-gray-800
+                    = invoice.ref
+                  %p.text-xs.text-gray-800 Période: #{invoice.period_start.strftime('%d/%m/%Y')} - #{invoice.period_end.strftime('%d/%m/%Y')}
+                %td.lg:text-end
+                  - if invoice.status == 'paid'
+                    .kt-badge.kt-badge-sm.kt-badge-success.kt-badge-outline
+                      = invoice.status.capitalize
+                %td.text-sm.text-foreground.font-normal.lg:text-end
+                  = invoice.period_start.strftime("%-d %b, %Y")
+                %td.text-sm.text-secondary-foreground.font-normal.lg:text-end
+                  = number_to_currency(invoice.amount, unit: "$")
+                %td
+                  = link_to member_subscription_invoice_path(Current.subscription, invoice, format: :pdf), class: "kt-link kt-link-primary" do
+                    = icon "invoice"

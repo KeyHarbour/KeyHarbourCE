@@ -1,0 +1,41 @@
+= turbo_frame_tag "team_members_#{item.id}", class: "col-md-12" do
+  .card
+    .card-header
+      %h3.card-title
+        Members
+      .card-actions
+        - team_user = item.team_users.new
+        = form_with(model: team_user, url: member_team_users_path(team_user), data: { turbo_frame: "_top" }) do |f|
+          = f.collection_select :user_id, Current.users.where.not(id: item.team_users.pluck(:user_id)), :id, :name, { prompt: "Choisir un membre" }, { class: "votre-classe-css" }
+          -# = f.select :role, TeamUser.roles.keys.map { |role| [role.humanize, role] }, { prompt: "Choisir un rôle" }
+          = f.hidden_field :team_id, value: item.id
+          = f.submit t('globals.add')
+    .table-responsive
+      %table.table.table-vcenter.card-table
+        %thead
+          %tr
+            %th{:class => "min-w-[300px]"}
+              Email
+            %th.text-secondary-foreground.font-normal{:class => "min-w-[220px]"}
+              Roles
+            %th{:class => "min-w-[165px]"}
+              Last Activities
+            %th
+              Action
+
+        %tbody
+          - item.team_users.each do |user_role|
+            - next if user_role.user.nil? # Skip if the associated user is nil
+            %tr
+              %td
+                = user_role.user.email_address
+              %td= render partial: "member/team_users/role", locals: { user_role: user_role }
+              %td
+                - if user_role.user.last_access_at.present?
+                  = time_ago_in_words(user_role.user.last_access_at) + " ago"
+                - else
+                  No activity yet
+              %td.text-center{:class => "w-[60px]"}
+                - if user_role.user != Current.user
+                  = link_to member_team_user_path(user_role), method: :delete, data: { turbo_confirm: t('globals.confirm'), turbo_method: :delete }, class: "text-red-500 hover:text-red-700" do
+                    = icon "trash", class: "icon-xs"

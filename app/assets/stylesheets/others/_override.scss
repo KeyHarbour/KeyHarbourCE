@@ -1,0 +1,117 @@
+a:hover {
+    color: #008080;
+}
+@font-face {
+    font-family: 'poxel';
+    src: url('poxel-font.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'lcddot';
+    src: url('lcddot_tr.ttf') format('truetype');
+}
+.navbar-brand span {
+    font-family: 'poxel', sans-serif;
+}
+.navbar-brand span.biggest {
+    font-family: 'poxel', sans-serif;
+}
+/*:root {*/
+/*    --tblr-primary: #00a2b8;*/
+/*    --tblr-primary-rgb: 23, 162, 184;*/
+/*}*/
+:root, [data-bs-theme="light"] {
+    --tblr-primary: var(--tblr-cyan);
+    --tblr-primary-rgb: var(--tblr-cyan-rgb);
+    --tblr-primary-hover: #118da0;
+    --tblr-primary-active: #0e798a;
+    --tblr-border-radius-scale: 2;
+}
+.offcanvas {
+    --tblr-offcanvas-padding-y:1.0rem;
+}
+[data-bs-theme="dark"] {
+    --tblr-primary: var(--tblr-cyan);
+    --tblr-primary-rgb: var(--tblr-cyan-rgb);
+}
+.no-arrow .dropdown-toggle:after {
+    display: none;
+}
+
+.icon-xs {
+    width: 16px;
+    height: 16px;
+}
+
+.icon-sm {
+    width: 20px;
+    height: 20px;
+}
+.icon-lg {
+    width: 32px;
+    height: 32px;
+}
+.icon-64{
+    width: 64px;
+    height: 64px;
+}
+.icon-vg {
+    width: 128px;
+    height: 128px;
+}
+.col-form-label.required:after, .form-label.required:after {
+    content: ""
+}
+.col-form-label.required abbr, .form-label.required abbr {
+    color: #d63939;
+}
+.form-check {
+    padding-left: 1.50rem;
+}
+.navbar-brand {
+    display: flex;
+    justify-content: flex-start; /* Aligne le contenu au début (gauche) */
+    margin-right: auto;          /* Pousse tout le reste vers la droite */
+    margin-left: 20px;
+}
+.icon_with_number {
+    font-size: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+#offcanvasFloatingTopHelp {
+  height: 550px !important; /* Remplacez 400px par la hauteur souhaitée */
+}
+pre {
+    code {
+        font-size: 12px;
+        width: 95%;
+    }
+}
+// 1. État par défaut : l'icône de copie est invisible
+.btn-icon .clipboard-label {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out; // Animation fluide pour l'apparition
+  color:#555555
+}
+
+// 2. État survolé : l'icône devient visible au survol du bouton
+.btn-icon:hover .clipboard-label {
+  opacity: 1;
+}
+
+// 3. Cas particulier : si le bouton est activé/cliqué (classe .show de Tabler)
+// On s'assure que l'icône de succès (check) reste visible, même si on ne survole plus
+.btn-icon.show {
+  .clipboard-label {
+    opacity: 0 !important; // Force la disparition du calque d'origine
+  }
+  .clipboard-feedback {
+    display: inline-block !important;
+    opacity: 1 !important;
+  }
+}
+.btn, .btn * {
+  --bs-text-opacity: 1 !important;
+  opacity: unset; /* Annule un éventuel opacity: 0 hérité par erreur */
+}

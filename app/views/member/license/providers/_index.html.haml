@@ -1,0 +1,21 @@
+- @items.each do |item|
+  .col-md-4
+    .card
+      .card-body
+        %h3.card-title
+          .row
+            .col.text-truncate= item.name
+            .col-auto
+              .dropdown.no-arrow
+                %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+                .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+                  = link_to edit_member_license_provider_path(item), class: "dropdown-item" do
+                    = icon "edit"
+                    = t('.update')
+                  = link_to member_license_provider_path(item), method: :delete, data:  { turbo_method: :delete, turbo_confirm: t('globals.confirm') }, class: "dropdown-item" do
+                    = icon "trash"
+                    = t('.remove')        
+      .card-footer.d-flex.text-secondary
+        %div
+          %span.fw-medium.text-body #{item.quotes.count} #{t('.quote')}
+        .ms-auto #{item.quotes.where.not(approved_at: nil).count} #{t('.approved_quote')}

@@ -1,0 +1,37 @@
+# kh IT & Cloud Engineering team
+kh_it_director_in_it_team:
+  team: kh_it_team
+  user: kh_it_director
+  role: 0
+kh_devops_in_it_team:
+  team: kh_it_team
+  user: kh_devops
+  role: 1
+kh_it_admin_in_it_team:
+  team: kh_it_team
+  user: kh_it_admin
+  role: 1
+
+# kh Field Operations team
+kh_ops_manager_in_ops_team:
+  team: kh_ops_team
+  user: kh_ops_manager
+  role: 0
+kh_fleet_manager_in_ops_team:
+  team: kh_ops_team
+  user: kh_fleet_manager
+  role: 1
+
+# kh Finance & Corporate Systems team
+kh_cfo_in_finance_team:
+  team: kh_finance_team
+  user: kh_cfo
+  role: 0
+kh_hr_director_in_finance_team:
+  team: kh_finance_team
+  user: kh_hr_director
+  role: 1
+kh_sales_director_in_finance_team:
+  team: kh_finance_team
+  user: kh_sales_director
+  role: 1

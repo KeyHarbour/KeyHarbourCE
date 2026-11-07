@@ -1,0 +1,60 @@
+.grid.lg:grid-cols-3.gap-5.items-stretch{:class => "lg:gap-7.5"}
+  .lg:col-span-3
+    .grid
+      .kt-card.kt-card-grid.h-full.min-w-full
+        .kt-card-header
+          %h3.kt-card-title
+            = t('.your_organizations')
+          #{DateTime.now.at_beginning_of_month.to_date} - #{DateTime.now.to_date}
+        .kt-card-table
+          .grid{"data-kt-datatable" => "true", "data-kt-datatable-page-size" => "5"}
+            .kt-scrollable-x-auto
+              %table.kt-table.kt-table-border.table-fixed{"data-kt-datatable-table" => "true"}
+                %thead
+                  %tr
+                    %th{:class => "w-[150px]"}
+                      %span.kt-table-col
+                        %span.kt-table-col-label
+                          = t('globals.name')
+                    %th.text-center{:class => "w-[85px]"}
+                      %span.kt-table-col
+                        %span.kt-table-col-label
+                          = t('activerecord.models.project').pluralize
+                    %th.text-center{:class => "w-[85px]"}
+                      %span.kt-table-col
+                        %span.kt-table-col-label
+                          = t('activerecord.models.workspace').pluralize
+                    %th.text-center{:class => "w-[85px]"}
+                      %span.kt-table-col
+                        %span.kt-table-col-label
+                          = t('globals.api_request')
+                    %th.text-center{:class => "w-[85px]"}
+                      %span.kt-table-col
+                        %span.kt-table-col-label
+                          = t('globals.user_license')
+                    %th.text-center{:class => "w-[85px]"}
+                      %span.kt-table-col
+                        %span.kt-table-col-label
+                          = t('globals.assets')
+                          
+
+                %tbody
+                  - Current.organizations.each do |organization|
+                    %tr
+                      %td
+                        = link_to member_organization_path(organization, locale: I18n.locale), class: "text-secondary-foreground hover:text-primary" do
+                          = organization.name
+                      %td.text-center
+                        = organization.projects.count
+                      %td.text-center
+                        = organization.workspaces.count
+                      %td.text-right
+                        = organization.usage_daily_organizations.where(day: @days_range).where(service_name: Cost.query_service_names).sum(:credits)
+                        %br/
+                        %sup.superscript.text-gray-500{:class => "text-[10px]"}
+                          = organization.usage_daily_organizations.where(day: @days_range).where(service_name: Cost.query_service_names).sum(:units)
+                          not billable
+                      %td.text-right
+                        = organization.usage_daily_organizations.where(day: @days_range).where(service_name: "License").average(:units)
+                      %td.text-right
+                        = organization.usage_daily_organizations.where(day: @days_range).where(service_name: "TrustAsset").average(:units)                        

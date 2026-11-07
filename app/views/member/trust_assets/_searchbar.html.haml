@@ -1,0 +1,17 @@
+.kt-card-header.p-0.m-0
+  = simple_form_for @item, url: member_workspace_trust_assets_path(@workspace), method: :get, html: { class: "w-full" }  do |f|
+    .flex.w-full.justify-items-stretch.justify-center.gap-5.py-3.shadow-lg.bg-gray-100.rounded-xl.mb-10.px-9
+      -# .py-1.flex-1
+      -#   -# = f.association :workspace, collection: @organization.workspaces, include_blank: "All Workspaces", label: false, input_html: { class: "shadow-md w-full py-1 px-2 rounded-md bg-white" }
+      -#   = f.select :packages, {}, { }, { multiple: true, data: { controller: "select2-adv", select2_adv_url_value: member_organization_select2_workspace_ids_path(@organization), select2_adv_placeholder_value: "Workspace", select2_adv_initial_values_value: @organization.workspaces.where(id: @instance.workspace_ids).map { |w| { id: w.id, text: w.name } } } }
+      -# .py-1.flex-1
+      -#   = f.select :environment_ids, {}, { }, { multiple: true, data: { controller: "select2-adv", select2_adv_url_value: member_organization_select2_environment_ids_path(@organization), select2_adv_placeholder_value: "Environment", select2_initial_values_value: @organization.environments.where(id: @instance.environment_ids).map { |e| { id: e.id, text: e.name } } } }
+      -# .py-1.flex-1
+      -#   = f.select :model_category_ids, {}, { }, { multiple: true, data: { controller: "select2-adv", select2_adv_url_value: member_organization_select2_model_category_ids_path(@organization), select2_adv_placeholder_value: "Model Category", select2_adv_initial_values_value: @organization.model_categories.where(id: @instance.model_category_ids).map { |mc| { id: mc.id, text: mc.name } } } }
+      .py-1.flex-1
+        %label.kt-input
+          %i.ki-filled.ki-magnifier
+          = f.text_field :name, placeholder: t('.placeholder')
+          = f.hidden_field :environment, value: @environment.name
+      .py-1.flex-1
+        = f.submit t('.filter'), class: 'kt-btn text-sm  kt-btn-mono px-7 py-1'

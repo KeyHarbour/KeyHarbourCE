@@ -1,0 +1,36 @@
+.w-full
+  = f.input :name
+.w-full
+  = f.input :description, input_html: { style: 'min-height:200px;' }
+.w-full
+  = f.input :source, as: :select, collection: Team.sources.keys.map { |source| [source.titleize, source] }, include_blank: false, wrapper: :horizontal_form
+-# .w-full
+-#   %hr/
+-# .w-full  
+-#   .kt-card-title With Admin role
+-# .w-full  
+-#   = f.input :organization_admin_ids, collection: Current.organizations.all, label: "Organizations", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs organizations" } }, hint: "You can provide acces to the full organization"
+-# .w-full  
+-#   = f.input :project_admin_ids, collection: Current.projects.all, label: "Projets", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs projets" } }, hint: "You can provide acces to a specific project (the team will only have access to the project and its workspaces, not the full organization)"
+-# .w-full  
+-#   = f.input :workspace_admin_ids, collection: Current.workspaces.all, label: "Workspaces", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs workspaces" } }, hint: "You can provide acces to a specific workspace (the team will only have access to the workspace, not the full organization or project)"
+-# .w-full
+-#   %hr/
+-# .w-full  
+-#   .kt-card-title With Editor role  
+-# .w-full  
+-#   = f.input :organization_editor_ids, collection: Current.organizations.all, label: "Organizations", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs organizations" } }, hint: "You can provide acces to the full organization"
+-# .w-full  
+-#   = f.input :project_editor_ids, collection: Current.projects.all, label: "Projets", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs projets" } }, hint: "You can provide acces to a specific project (the team will only have access to the project and its workspaces, not the full organization)"
+-# .w-full  
+-#   = f.input :workspace_editor_ids, collection: Current.workspaces.all, label: "Workspaces", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs workspaces" } }, hint: "You can provide acces to a specific workspace (the team will only have access to the workspace, not the full organization or project)"  
+-# .w-full
+-#   %hr/
+-# .w-full  
+-#   .kt-card-title With Viewer role
+-# .w-full  
+-#   = f.input :organization_viewer_ids, collection: Current.organizations.all, label: "Organizations", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs organizations" } }, hint: "You can provide acces to the full organization"
+-# .w-full  
+-#   = f.input :project_viewer_ids, collection: Current.projects.all, label: "Projets", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs projets" } }, hint: "You can provide acces to a specific project (the team will only have access to the project and its workspaces, not the full organization)"
+-# .w-full  
+-#   = f.input :workspace_viewer_ids, collection: Current.workspaces.all, label: "Workspaces", input_html: { multiple: true, data: { controller: "select2", select2_placeholder_value: "Choisir un ou plusieurs workspaces" } }, hint: "You can provide acces to a specific workspace (the team will only have access to the workspace, not the full organization or project)"  

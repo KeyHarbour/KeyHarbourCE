@@ -1,0 +1,7 @@
+#offcanvasEnd.offcanvas.offcanvas-end{"aria-labelledby" => "offcanvasEndLabel", :tabindex => "-1"}
+  .offcanvas-header
+    Search
+    %button.btn-close.text-reset{"aria-label" => "Close", "data-bs-dismiss" => "offcanvas", :type => "button"}
+  .offcanvas-body
+    %div
+      = render partial: "search_form", locals: {item: item}

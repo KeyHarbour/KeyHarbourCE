@@ -1,0 +1,10 @@
+-# %td= item.name
+-# %td= item.expires_at
+-# %td= item.issuer
+-# %td= item.consumer
+-# %td= item.format
+-# %td
+-#   = render partial: "item_menu", locals: { delete_link: member_trust_asset_path(item), edit_link: edit_member_trust_asset_path(item) }
+.col.text-truncate
+  %h4= item.name
+  .d-block.text-secondary.text-truncate.mt-1 Expires at: #{item.expires_at}

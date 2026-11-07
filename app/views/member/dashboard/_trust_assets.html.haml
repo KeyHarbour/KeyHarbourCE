@@ -1,0 +1,62 @@
+.col-md-6.col-lg-4
+  .card
+    .card-header
+      %h2.card-title Token expiration
+    %table.table.card-table.table-vcenter
+      %thead
+        %tr
+          %th Name
+          %th{:colspan => "2"} Expires at
+      %tbody
+        - if  Current.account.trust_assets.where(format: "token").count == 0
+          %tr
+            %td{:colspan => "2"}
+              .alert.alert-info{:role => "alert"}
+                .alert-icon
+                  = icon "info-circle"
+                They are no tokens in your account. You can add one by 
+                = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
+
+        - Current.account.trust_assets.where(format: "token").each do |ta|
+          = render partial: "member/trust_assets/item", locals: { ta: ta }
+.col-md-6.col-lg-4
+  .card
+    .card-header
+      %h2.card-title Domain expiration
+    %table.table.card-table.table-vcenter
+      %thead
+        %tr
+          %th Name
+          %th{:colspan => "2"} Expires at
+      %tbody
+        - if  Current.account.trust_assets.where(format: "domain").count == 0
+          %tr
+            %td{:colspan => "2"}
+              .alert.alert-info{:role => "alert"}
+                .alert-icon
+                  = icon "info-circle"
+                They are no domains in your account. You can add one by
+                = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
+        - Current.account.trust_assets.where(format: "domain").each do |ta|
+          = render partial: "member/trust_assets/item", locals: { ta: ta }
+
+.col-md-6.col-lg-4
+  .card
+    .card-header
+      %h2.card-title Certificate expiration
+    %table.table.card-table.table-vcenter
+      %thead
+        %tr
+          %th Name
+          %th{:colspan => "2"} Expires at
+      %tbody
+        - if  Current.account.trust_assets.where(format: "tls_certificate").count == 0
+          %tr
+            %td{:colspan => "2"}
+              .alert.alert-info{:role => "alert"}
+                .alert-icon
+                  = icon "info-circle"
+                They are no certificates in your account. You can add one by
+                = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
+        - Current.account.trust_assets.where(format: "tls_certificate").each do |ta|
+          = render partial: "member/trust_assets/item", locals: { ta: ta }

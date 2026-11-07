@@ -1,0 +1,9 @@
+%td
+  = item.key
+  -# = link_to item.name, member_project_path(item), class: "hover:text-primary"
+%td= item.private == true ? "***" : item.value
+%td= item.expires_at
+%td.text-center= item.private == true  ? t('globals.bool_yes') : t('globals.bool_no')
+%td.text-center= item.one_time_only == true  ? t('globals.bool_yes') : t('globals.bool_no')
+%td
+  = render partial: "item_menu", locals: { delete_link: member_key_value_store_path(item), edit_link: edit_member_key_value_store_path(item) }    

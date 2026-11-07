@@ -1,0 +1,44 @@
+- if @project
+  = render partial: "project_menu", locals: { actif: index_page_name, organization: @organization }
+- else
+  = render partial: "org_menu", locals: { actif: index_page_name, organization: @organization }
+
+.kt-container-fluid
+  .flex.flex-wrap.items-center.gap-5.justify-between.mb-4
+    %h3.text-lg.text-foreground.font-semibold
+      = "#{t('views.member.tokens.token_for')} #{@item.environment ? @item.environment.name : 'Applications'}"
+    .flex.items-center.flex-wrap{:class => "gap-1.5 lg:gap-3.5"}
+      = link_to back_path, class: "kt-btn kt-btn-primary" do
+        %i.ki-filled.ki-arrow-left
+        = t('globals.back')
+  .grid.grid-cols-1.lg:grid-cols-3{class: "gap-5 lg:gap-7.5"}
+    .col-span-1.lg:col-span-3
+      .kt-card
+        #external_services_manage_api.kt-card-header.mb-5
+          %h3.kt-card-title
+            = t('views.member.tokens.token')
+            
+        .kt-card-content.grid.gap-5{:class => "lg:py-7.5 lg:gap-7.5"}
+          .flex.items-center.flex-wrap.sm:flex-nowrap.justify-between.grow.border.border-border.rounded-xl.gap-2.p-5.bg-no-repeat.user-access-bg{:class => "rtl:[background-position:-195px_-85px] [background-position:195px_-85px] bg-[length:650px]"}
+            .flex.items-center.gap-4
+              .relative.shrink-0{:class => "size-[50px]"}
+                %svg.w-full.h-full.fill-primary-soft{:class => "stroke-primary/10", :fill => "none", :height => "48", :viewbox => "0 0 44 48", :width => "44", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M16 2.4641C19.7128 0.320509 24.2872 0.320508 28 2.4641L37.6506 8.0359C41.3634 10.1795 43.6506 14.141 43.6506 \r\n\t\t\t18.4282V29.5718C43.6506 33.859 41.3634 37.8205 37.6506 39.9641L28 45.5359C24.2872 47.6795 19.7128 47.6795 16 45.5359L6.34937 \r\n\t\t\t39.9641C2.63655 37.8205 0.349365 33.859 0.349365 29.5718V18.4282C0.349365 14.141 2.63655 10.1795 6.34937 8.0359L16 2.4641Z", :fill => ""}
+                  %path{:d => "M16.25 2.89711C19.8081 0.842838 24.1919 0.842837 27.75 2.89711L37.4006 8.46891C40.9587 10.5232 43.1506 14.3196 43.1506 \r\n\t\t\t18.4282V29.5718C43.1506 33.6804 40.9587 37.4768 37.4006 39.5311L27.75 45.1029C24.1919 47.1572 19.8081 47.1572 16.25 45.1029L6.59937 \r\n\t\t\t39.5311C3.04125 37.4768 0.849365 33.6803 0.849365 29.5718V18.4282C0.849365 14.3196 3.04125 10.5232 6.59937 8.46891L16.25 2.89711Z", :stroke => ""}
+                .absolute.leading-none{:class => "start-2/4 top-2/4 -translate-y-2/4 -translate-x-2/4 rtl:translate-x-2/4"}
+                  %i.ki-filled.ki-security-user.text-xl.text-primary
+              .flex.flex-col{:class => "gap-1.5"}
+                .flex.items-center.flex-wrap{:class => "gap-2.5"}
+                  %a.text-base.font-medium.text-mono.hover:text-primary{:href => "#"}
+                    = t('views.member.tokens.user_access')
+                  %span.kt-badge.kt-badge-sm.kt-badge-outline.shrink-0
+                    = distance_of_time_in_words(Time.current, @item.expiration) 
+                    (expires at #{@item.expiration.strftime("%Y-%m-%d %H:%M")})
+                .kt-form-description.text-2sm
+                  %i.text-sm.text-secondary-foreground.text-gray-700{id: "text_#{@item.id}"}= @item.generate_token_for(:statefile)
+                  %button.flex.items-center.text-sm.gap-2.hover:bg-gray-50.font-semibold{id: "btn_#{@item.id}", :onclick => "copierTexte('text_#{@item.id}', 'btn_#{@item.id}')"}
+                    %i.ki-filled.ki-menu
+          %p.text-sm.text-foreground
+            = t('views.member.tokens.token_visibility_warning')
+- content_for :page_name do
+  = "#{t('views.member.tokens.token_for')} #{@item.scopable.name} - #{@item.environment ? @item.environment.name : 'Applications'}"

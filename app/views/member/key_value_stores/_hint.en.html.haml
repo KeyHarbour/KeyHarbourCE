@@ -1,0 +1,12 @@
+.kt-card-header
+  %h3.kt-card-title
+    Key Value Store
+.kt-card-content
+  %p.text-sm.text-foreground-secondary
+    This form allows you to store specific information and define its access and validity rules.
+    %ul.mt-4
+      %li.mb-2 1. Key (Required): Enter the unique identifier for your data (e.g. api_key or data.abc.def). Lowercase letters and underscores are recommended.
+      %li.mb-2 2. Value (Required): Enter the content associated with this key (e.g. 12345-ABCDE).
+      %li.mb-2 3. Expiration date (Optional): Click to choose a deadline. Once expired, the data will be automatically deleted or invalidated.
+      %li.mb-2 4. Private: Check this box if you want the data to be hidden and only accessible via API calls (invisible in the standard interface).
+      %li.mb-2 5. * One time only: Check this option to make the value readable only once. It will self-destruct after the first read (via API only).

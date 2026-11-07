@@ -1,0 +1,5 @@
+= simple_form_for item, url: member_organization_projects_path(@organization), method: :get, html: {class: "simple_form"}  do |f|
+  = render partial: "form_error", locals: { form_table: item }
+  = f.input :name
+  .mt-3
+    = f.submit 'Search', class: 'btn btn-primary'

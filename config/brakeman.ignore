@@ -1,0 +1,74 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "7b3c1d10d79bb67d5ff99ab0861e443bf3aa1fa53b8d9c46009d64612f48a36d",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/member/team_users_controller.rb",
+      "line": 41,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:team_user).permit(:role, :user_id, :team_id)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Member::TeamUsersController",
+        "method": "team_user_params"
+      },
+      "user_input": ":role",
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "9bd85285f544788ba3fb424b6ef6000b23dbf79c74843aa9f4f90f22ff8e1485",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/member/subscriptions_controller.rb",
+      "line": 81,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Plan.client.v1.checkout.sessions.create(:mode => \"subscription\", :line_items => ([{ :quantity => 1, :price => Plan.find(params[:plan]).price_id!(params[:period]) }]), :success_url => (root_url + \"/member/subscriptions/#{Current.subscription.id}/success?session_id={CHECKOUT_SESSION_ID}&plan=#{Plan.find(params[:plan]).id}&period=#{params[:period]}\"), :cancel_url => (root_url + \"/member/subscriptions/#{Current.subscription.id}/fail?session_id={CHECKOUT_SESSION_ID}&plan=#{Plan.find(params[:plan]).id}&period=#{params[:period]}\"), :discounts => ([{ :coupon => Current.subscription.subscription_coupons.where(:used => nil).first.coupon.stripe_id }])).url, :allow_other_host => true)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Member::SubscriptionsController",
+        "method": "create"
+      },
+      "user_input": "Plan.client.v1.checkout.sessions.create(:mode => \"subscription\", :line_items => ([{ :quantity => 1, :price => Plan.find(params[:plan]).price_id!(params[:period]) }]), :success_url => (root_url + \"/member/subscriptions/#{Current.subscription.id}/success?session_id={CHECKOUT_SESSION_ID}&plan=#{Plan.find(params[:plan]).id}&period=#{params[:period]}\"), :cancel_url => (root_url + \"/member/subscriptions/#{Current.subscription.id}/fail?session_id={CHECKOUT_SESSION_ID}&plan=#{Plan.find(params[:plan]).id}&period=#{params[:period]}\"), :discounts => ([{ :coupon => Current.subscription.subscription_coupons.where(:used => nil).first.coupon.stripe_id }])).url",
+      "confidence": "Weak",
+      "cwe_id": [
+        601
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "e9e5af5437f14bfe0aae588de5961641ba58c18e60c0f64d242ca2d6552eb4a1",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/member/team_roles_controller.rb",
+      "line": 57,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:team_role).permit(:organization_id, :project_id, :workspace_id, :team_id, :role)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Member::TeamRolesController",
+        "method": "team_role_params"
+      },
+      "user_input": ":role",
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    }
+  ],
+  "brakeman_version": "8.0.6"
+}

@@ -1,0 +1,10 @@
+- if form_table.errors.any?
+  .alert.alert-danger.alert-dismissible{:role => "alert"}
+    .alert-icon
+      = icon "alert-triangle"
+    %div
+      %h4.alert-heading= "#{pluralize(form_table.errors.count, "erreur", "erreurs")} ont empêché la sauvegarde :"
+      .alert-description
+        %ul.alert-list
+          - form_table.errors.full_messages.each do |message|
+            %li= message

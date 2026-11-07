@@ -1,0 +1,13 @@
+.kt-card-header
+  %h3.kt-card-title
+    Dépot Clé / Valeur
+.kt-card-content
+  %p.text-sm.text-foreground-secondary
+    Ce formulaire vous permet de stocker une information spécifique et d'en définir les règles d'accès et de validité.
+    %ul.mt-4
+      %li.mb-2 1. Clé (Obligatoire) : Saisissez l'identifiant unique de votre donnée (ex: api_key ou data.abc.def). Utilisez de préférence des minuscules et des underscores.
+      %li.mb-2 2. Valeur (Obligatoire) : Entrez le contenu associé à cette clé (ex: 12345-ABCDE).
+      %li.mb-2 3. Date d'expiration (Optionnel) : Cliquez pour choisir une date limite. Passé ce délai, la donnée sera automatiquement supprimée ou invalidée.
+      %li.mb-2 4. Privé : Cochez cette case si vous voulez que la donnée soit masquée et uniquement accessible via les appels API (invisible dans l'interface classique).
+      %li.mb-2 5. * One time only : Cochez cette option pour que la valeur ne soit consultable qu'une seule fois. Elle s'auto-détruira après la première lecture (uniquement par API).      
+

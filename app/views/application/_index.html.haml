@@ -1,0 +1,38 @@
+.grid.grid-cols-1.lg:grid-cols-3{class: "gap-5 lg:gap-7.5"}
+  .col-span-1.lg:col-span-3
+    .kt-card
+      .kt-card-header
+        %h3.kt-card-title
+        - if !local_assigns[:no_create] && respond_to?(:new_item_url) && new_item_url.present?
+          .kt-menu{"data-kt-menu" => "true"}
+            .kt-menu-item{"data-kt-menu-item-offset" => "0, 10px", "data-kt-menu-item-placement" => "bottom-end", "data-kt-menu-item-placement-rtl" => "bottom-start", "data-kt-menu-item-toggle" => "dropdown", "data-kt-menu-item-trigger" => "click"}
+              .flex.items-center.flex-wrap{:class => "gap-1.5 lg:gap-3.5"}
+                = link_to new_item_url, class: "kt-btn kt-btn-dark" do
+                  %i.ki-filled.ki-plus
+                  #{index_page_name.capitalize}
+        - if defined?(buttons)
+          .kt-menu{"data-kt-menu" => "true"}
+            .kt-menu-item{"data-kt-menu-item-offset" => "0, 10px", "data-kt-menu-item-placement" => "bottom-end", "data-kt-menu-item-placement-rtl" => "bottom-start", "data-kt-menu-item-toggle" => "dropdown", "data-kt-menu-item-trigger" => "click"}
+              .flex.items-center.flex-wrap{:class => "gap-1.5 lg:gap-3.5"}
+                - buttons.each do |button|
+                  = link_to button[:link], class: "kt-btn kt-btn-dark" do
+                    %i.ki-filled.ki-plus
+                    = button[:key]
+      .kt-card-table.kt-scrollable-x-auto
+        %table.kt-table.table-fixed
+          %thead
+            %tr
+              = render partial: 'headers'
+          %tbody
+            - items.each do |item|
+              %tr
+                = render partial: 'body', locals: { item: item }
+      .kt-card-footer.justify-center
+        .flex.justify-between.items-center.mt-4.mb-4.w-full
+          .text-sm.text-gray-600
+            != pagy.info_tag
+          .flex.items-center
+            .pagination-container
+              != pagy.series_nav()    
+- content_for :page_name do
+  = index_page_name

@@ -1,0 +1,58 @@
+.card
+  .row.g-0
+    = render partial: "menu", locals: {application: @item, active: :applications}
+    .col-12.col-md-9.d-flex.flex-column
+      .card-body
+        %h2.mb-4= @item.name
+        %h2.card-title= t('.details')
+        .row.align-items-center
+          .col-md-2
+            %span.avatar.avatar-xl{:style => "background-image: url(#{url_for @item.logo.variant(resize_to_limit: [100, 100])})"}
+          .col-md-5
+            %label.form-label Short name
+            = @item.short_name
+          .col-md-5
+            %label.form-label Owner
+            = @item.owner
+        %hr/
+        %h2.card-title.mt-4= t('.usage')
+        .row.g-3
+          .progressbg
+            .progress.progressbg-progress
+              .progress-bar{class: bg_progress_color(@item.usage_rate), "aria-label" => "#{@item.usage_rate}% Complete", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{(@item.usage_rate * 100).round(2)}", :role => "progressbar", :style => "width: #{(@item.usage_rate * 100).to_i}%"}                        
+
+            .progressbg-text= "#{@item.seat_used} / #{@item.seats || 'unlimited'}"
+            .progressbg-value #{(@item.usage_rate * 100).round(2)}%  
+        %hr/
+        %h2.card-title.mt-4= t('.alerts')
+        .row.g-3.mt-2
+          .col-md
+            %label.form-label Seats alert 1
+            = number_to_percentage @item.alert_seats_1 * 100, precision: 0
+          .col-md
+            %label.form-label Seats alert 2
+            = number_to_percentage @item.alert_seats_2 * 100, precision: 0
+        %hr/
+        %h2.card-title.mt-4= t('.renewal')
+        .row.g-3
+          .col-md
+            %label.form-label= t('.renewal_date')
+            = @item.renewal_date
+            %br/
+            = distance_of_time_in_words(DateTime.now,  @item.renewal_date)
+          .col-md
+            %label.form-label= t('.vendor')
+            = @item.vendor
+          .col-md
+            %label.form-label= t('.tier')
+            = @item.tier
+          .col-md
+            %label.form-label= t('.unit_cost')
+            = @item.unit_cost
+        .row.g-3.mt-2
+          .col-md
+            %label.form-label= t('.first_renewal_alert')
+            = distance_of_time_in_words(DateTime.now, DateTime.now.advance(days: @item.alert_renewal_1))
+          .col-md
+            %label.form-label= t('.second_renewal_alert')
+            = distance_of_time_in_words(DateTime.now, DateTime.now.advance(days: @item.alert_renewal_2))

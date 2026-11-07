@@ -1,0 +1,67 @@
+
+.col-12
+  .card
+    .card-header.flex-wrap.gap-3
+      .row.g-0
+        .col-auto
+          .card-body
+            - if @instance.application.logo.attached?
+              %span.avatar.avatar-md{:style => "background-image: url('#{url_for(@instance.application.logo.variant(resize_to_limit: [100, 100]))}')"} 
+        .col
+          .card-body.ps-0
+            %h2.card-title.text-lg.leading-5.font-semibold.text-mono
+              #{@instance.application.name} / #{@instance.name}
+    .card-body
+      #tree-container.d-flex.justify-content-center{"data-controller" => "tree-chart", "data-tree-chart-data-value" => "#{@licensees.to_json}"}
+        %svg#tree-svg
+.col-lg-12
+  .row.row-cards
+    .col-12
+      .card
+        .card-header
+          %div
+            %h2.card-title= t('.details')
+          .card-actions
+            %button.btn.btn-sm{:type => "button"}
+              = succeed t('.download') do
+                = icon "download"
+        .card-body
+          .table-responsive
+            %table.table.table-vcenter.card-table
+              %thead
+                %tr
+                  %th= t('.user')
+                  %th= t('.manager')
+                  %th= t('.direct_cost')
+                  %th= t('.team_cost')
+              %tbody
+                - @licensees.each do |item|
+                  %tr
+                    %td
+                      .flex-fill
+                        .fw-medium= item[:role]
+                        .text-secondary= item[:name]
+                    %td
+                      .flex-fill
+                        .fw-medium= item[:manager_role]
+                        .text-secondary= item[:manager_name]
+                    %td= item[:cost]
+                    %td= item[:total_cost]
+:css
+  /* Style des lignes de connexion */
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+  }
+
+  .node circle {
+    stroke: steelblue;
+    stroke-width: 2px;
+  }
+
+  .node text {
+    font: 12px sans-serif;
+  }
+- content_for :page_name do
+  = index_page_name

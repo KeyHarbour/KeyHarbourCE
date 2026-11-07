@@ -1,0 +1,11 @@
+.w-full
+  = f.input :email_address
+.w-full
+  .flex.items-baseline.flex-wrap.lg:flex-nowrap.string.optional.user_user_role{:class => "gap-2.5"}
+    %label.kt-form-label.flex.items-center.gap-1.max-w-56.string.optional{:for => "user_user_role"} Role
+    = f.select :global_role, User.global_roles.keys.map { |k| [k.humanize, k]}, { selected: @item.global_role }
+= f.simple_fields_for :account_user, @user.account_user do |ff|
+  .w-full
+    = ff.input :account_id, collection: Account.all, label_method: :name, value_method: :id, prompt: "Choisir un compte", label: "Compte"
+  .w-full
+    = ff.input :role_id, collection: Role.all, prompt: "Choisir un role", label: "Role"    

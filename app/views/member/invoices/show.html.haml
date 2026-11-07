@@ -1,0 +1,61 @@
+.card.card-lg
+  .card-body
+    .row
+      .col-6
+        - logo_path = Rails.root.join('app/assets/images/harbor.png')
+        - if File.exist?(logo_path)
+          - base64_image = Base64.strict_encode64(File.read(logo_path))
+          %img{src: "data:image/png;base64,#{base64_image}"}
+        %p.h3 Ikigai Lab Inc.
+        %address
+          3227 bd Désourdy
+          %br/
+          J3L 6L1 Carignan, Quebec, Canada
+          %br/
+          info@keyharbour.ca
+      .col-6.text-end
+        %p.h3= @item.account.name
+        %address
+          - if @item.account.address1
+            = @item.account.address1
+            %br/
+          - if @item.account.address2
+            = @item.account.address2
+            %br/
+          #{@item.account.city}, #{@item.account.province_code}, #{@item.account.zip}
+          %br/
+          = @item.account.billing_contact
+          %br/
+          #{Carmen::Country.coded(@item.account.country_code).name}
+      .col-12.my-5
+        %h1 Facture N° #{@item.ref} - #{@item.date.strftime('%d/%m/%Y')}
+    %table.table.table-transparent.table-responsive
+      %thead
+        %tr
+          %th.text-center{:style => "width: 1%"}
+          %th Description
+          %th.text-center{:style => "width: 1%"} Prix Unitaire
+      %tbody
+        %tr
+          %td.text-center 1
+          %td
+            %p.strong.mb-1= @item.subscription.plan.full_name
+            .text-secondary Période: #{@item.period_start.strftime('%d/%m/%Y')} - #{@item.period_end.strftime('%d/%m/%Y')}
+            .text-secondary Crédits: #{@item.subscription.plan.credits}
+          %td.text-end= number_to_currency(@item.amount)
+        %tr
+          %td.strong.text-end{:colspan => "2"} Subtotal
+          %td.text-end= number_to_currency(@item.amount)
+        %tr
+          %td.strong.text-end{:colspan => "2"} TPS
+          %td.text-end= number_to_currency(@item.tps)
+        %tr
+          %td.strong.text-end{:colspan => "2"} TVQ
+          %td.text-end= number_to_currency(@item.tvq)
+        %tr
+          %td.strong.text-end{:colspan => "2"}Total avec taxes
+          %td.text-end= number_to_currency(@item.total)
+    %p.text-secondary.text-center.mt-5
+      tps: 75379 3439 RT0001
+      |
+      tvq: 1233241764 TQ0001

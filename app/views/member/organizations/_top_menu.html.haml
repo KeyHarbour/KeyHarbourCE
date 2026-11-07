@@ -1,0 +1,20 @@
+%ul.nav.nav-tabs.card-header-tabs{"data-bs-toggle" => "tabs", :role => "tablist"}
+  %li.nav-item{:role => "presentation"}
+    = link_to member_organization_path(organization), class: "nav-link #{actif=='organization' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('.profile')
+  %li.nav-item{:role => "presentation"}
+    = link_to member_organization_environments_path(organization), class: "nav-link #{actif=='environments' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('activerecord.models.environment').pluralize
+  %li.nav-item{:role => "presentation"}
+    = link_to member_organization_projects_path(organization), class: "nav-link #{actif=='projects' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('activerecord.models.project').pluralize
+  %li.nav-item{:role => "presentation"}
+    = link_to member_organization_org_tokens_path(organization), class: "nav-link #{actif=='tokens' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('activerecord.models.token').pluralize
+  -# %li.nav-item{:role => "presentation"}
+  -#   %a.nav-link.active{"aria-selected" => "true", "data-bs-toggle" => "tab", :href => "#tabs-profile-4", :role => "tab"} Profile
+  -# %li.nav-item.dropdown
+  -#   %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :role => "button"} Dropdown
+  -#   .dropdown-menu{:style => ""}
+  -#     %a.dropdown-item{:href => "#"} Action
+  -#     %a.dropdown-item{:href => "#"} Another action

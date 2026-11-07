@@ -1,0 +1,69 @@
+.col-md-12
+  .card
+    .card-header
+      = render partial: "member/projects/top_menu", locals: { organization: @item, actif: "workspaces" }
+    .card-body
+      .col-sm-12.col-lg-12
+        .card
+          .card-body
+            .row.gy-3
+              .col-6.col-sm.d-flex.flex-column
+                %h3.h2= @item.name
+                %p.text-muted= @item.description
+                .row.g-5.mt-auto
+                  .col-auto
+                    .subheader.icon_with_number= trust_icon('icon icon-1 icon-lg', @item.trust_assets.count)
+                  .col-auto
+                    .subheader.icon_with_number= tf_icon('icon icon-1 icon-lg', @item.statefiles.resource_count)
+                  .col-auto
+                    .subheader.icon_with_number= key_icon('icon icon-1 icon-lg', @item.key_value_stores.count)
+              .col-6.col-sm-auto.d-flex.justify-content-center{class: "kh_greendark"}
+                = render inline: Rails.root.join('app/assets/svg/illustration/undraw_puzzle-solved.svg').read
+      .col-sm-12.col-lg-6.mt-4
+        %h2 #{@item.project.environments.count} #{t(".environments")}
+      .col-sm-12.col-lg-12
+        .row.g-3.align-items-start
+          - @item.project.environments.each do |environment|
+            .col-sm-6.col-lg-6
+              .card
+                .card-body
+                  %h3.card-title= environment.name
+                  .card-meta.d-flex.justify-content-between
+                    .d-flex.align-items-center
+                      = tf_icon("icon icon-1")
+                      = t(".terraform_state_files")
+                    %span
+                      - if KeyHarbour.tf_statefile?
+                        = link_to member_workspace_statefiles_path(@item, environment: environment.name), class: "text-sm font-medium hover:text-primary text-mono" do
+                          %span.kt-badge.kt-badge-outline
+                            = @item.statefiles_by_env(environment.name).resource_count
+                            = icon "external-link", class: "icon-sm"
+                      - else
+                        %span.text-secondary-foreground.text-xs
+                          Unavailable
+                  .card-meta.d-flex.justify-content-between.mt-3
+                    .d-flex.align-items-center
+                      = key_icon("icon icon-1")
+                      = t(".key_value_stores")
+                    %span
+                      - if KeyHarbour.key_value?
+                        = link_to member_workspace_key_value_stores_path(@item, environment: environment.name), class: "text-sm font-medium hover:text-primary text-mono" do
+                          %span.kt-badge.kt-badge-outline
+                            = @item.key_values_by_env(environment.name).count
+                            = icon "external-link", class: "icon-sm"
+                      - else
+                        %span.text-secondary-foreground.text-xs
+                          Unavailable
+                  .card-meta.d-flex.justify-content-between.mt-3
+                    .d-flex.align-items-center
+                      = trust_icon("icon icon-1")
+                      = t(".trust_assets")
+                    %span
+                      - if KeyHarbour.trust_assets?
+                        = link_to member_workspace_trust_assets_path(@item, environment: environment.name), class: "text-sm font-medium hover:text-primary text-mono" do
+                          %span.kt-badge.kt-badge-outline
+                            = @item.trust_assets_by_env(environment.name).count
+                            = icon "external-link", class: "icon-sm"
+                      - else
+                        %span.text-secondary-foreground.text-xs
+                          Unavailable

@@ -1,0 +1,45 @@
+.col-12.col-md-6.d-flex.flex-column  
+  .card 
+    .card-header 
+      %h2.card-title= t('.calendar_overview')
+      .card-actions
+    .card-body
+      :css
+        :root {
+          --chart-demo-pie-color-0: #D63939;
+          --chart-demo-pie-color-1: #E08B42;
+          --chart-demo-pie-color-2: #0B5351;
+          --chart-demo-pie-color-3: #5DEC89;
+        }
+      %div{"data-pie-chart-labels-value" => @pie_chart_labels, "data-pie-chart-series-value" => @pie_chart_values, "data-controller" => "pie-chart"}
+        %div{"data-pie-chart-target" => "canvas"}
+
+
+.col-12.col-md-6.d-flex.flex-column  
+  .card 
+    .card-header 
+      %h2.card-title= t('.rate_overview')
+      .card-actions
+    .card-body
+      %div{"data-controller" => "treemap-chart", "data-treemap-chart-series-value" => @treemap_data.to_json}
+        %div{"data-treemap-chart-target" => "canvas"}
+
+.col-12.col-md-12.d-flex.flex-column   
+  .card 
+    .card-header 
+      %h2.card-title= t('.calendar')
+      .card-actions
+    .card-body
+      %div{"data-controller": "calendar"} 
+.col-12.col-md-12.d-flex.flex-column   
+  .card
+    .card-body
+      %h2.card-title= t('.usage_rate')
+      .space-y
+        - @applications.each do |application|
+          .progressbg
+            .progress.progressbg-progress
+              .progress-bar{class: bg_color(application.usage_rate), "aria-label" => "#{application.usage_rate}% Complete", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{(application.usage_rate * 100).round(2)}", :role => "progressbar", :style => "width: #{(application.usage_rate * 100).to_i}%"}
+
+            .progressbg-text= link_to "#{application.name} - #{application.seats}",member_license_application_path(application)
+            .progressbg-value #{(application.usage_rate * 100).round(2)}%

@@ -1,0 +1,40 @@
+.col-md-12
+  .card
+    .card-header
+      = render partial: "member/projects/top_menu", locals: { organization: @item, actif: "workspaces" }
+    .card-body
+      .tab-content
+        = render partial: "flash"
+        .row.row-cards
+          - @items.each do |workspace|
+            .col-md-6.col-xl-6
+              .card
+                .card-body.text-center
+                  .card-title.mb-1.d-flex.align-items-center.justify-content-between
+                    = link_to member_workspace_path(workspace), class: "text-lg text-mono text-center hover:text-primary mb-px" do
+                      = workspace.name
+                    .text-end
+                      .dropdown.no-arrow
+                        %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+                        .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+                          = link_to edit_member_workspace_path(workspace), class: "dropdown-item" do
+                            = icon "edit"
+                            = t('.update')
+                          = link_to member_workspace_path(workspace), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+                            = icon "trash"
+                            = t('.remove')
+                  .text-secondary.mb-3= workspace.description
+                  .card-meta.d-flex.justify-content-between
+                    .d-flex.align-items-center
+
+                      %a.text-secondary{:href => "#"}
+                        = trust_icon('icon icon-1', workspace.trust_assets.count)
+                      %a.ms-2.text-secondary{:href => "#"}
+                        = tf_icon('icon icon-1', workspace.statefiles.resource_count)
+                      %a.ms-2.text-secondary{:href => "#"}
+                        = key_icon('icon icon-1', workspace.key_value_stores.count)
+                    %span
+                      - if workspace.last_update
+                        = l workspace.last_update, format: :long
+                      - else
+                        Never used

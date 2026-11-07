@@ -1,0 +1,11 @@
+%td= item.email_address
+%td.text-center= role_badge(item.global_role || "user")
+%td.text-center= item.account&.name
+%td= item.account_user&.role&.name
+%td.text-center
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      = link_to edit_admin_user_path(item), class: "dropdown-item" do
+        = icon "edit"
+        = t('.update')

@@ -1,0 +1,21 @@
+%td
+  = link_to item.name, member_license_application_path(item)
+  -# = item.name
+  .text-secondary= item.short_name
+%td.text-center= item.vendor
+%td.text-center
+  - if item.renewal_date
+    %span.badge{class: renewal_color(item)}
+      = item.renewal_date.to_date
+%td.text-center= item.tier
+%td.text-center
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      = link_to edit_member_license_application_path(item), class: "dropdown-item" do
+        = icon "edit"
+        = t('.update')
+      .dropdown-divider
+      = link_to member_license_application_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash"
+        = t('.remove')

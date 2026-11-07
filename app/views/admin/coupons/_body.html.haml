@@ -1,0 +1,15 @@
+%td
+  = item.name
+%td    
+  = item.plan.name
+%td    
+  = number_to_currency item.amount_off
+%td    
+  = number_to_percentage item.percent_off, precision: 0
+%td    
+  = item.status
+%td
+  - if item.active?
+    = render partial: "item_menu", locals: {delete_link: admin_coupon_path(item) }
+  - elsif item.disabled?
+    = render partial: "item_menu", locals: {reactivate_link: activate_admin_coupon_path(item) }

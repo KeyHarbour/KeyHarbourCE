@@ -1,0 +1,35 @@
+%td.text-center
+  .col-auto
+    - if item.active?
+      %span.badge.bg-green
+    - else
+      %span.badge.bg-red
+    - if (item.valid_at..item.valid_until).cover?(Time.zone.today)
+      %span.badge.bg-green
+    - else
+      %span.badge.bg-red
+    - if item.subscription_coupons.count < item.redeem_limit
+      %span.badge.bg-green
+    - else
+      %span.badge.bg-red
+%td= item.name
+%td.text-center= item.plan.name
+%td.text-end= number_to_currency item.amount_off
+%td.text-end= number_to_percentage item.percent_off, precision: 0
+-# %td.text-center= item.account&.name
+-# %td= item.account_user&.role&.name
+%td.text-center
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      - if item.active?
+        = link_to desactivate_admin_coupon_path(item), class: "dropdown-item", method: :put, data:  { turbo_method: :put, turbo_confirm: t('globals.confirm') } do
+          = icon "activity"
+          = t('.desactivate')
+      - elsif item.disabled?
+        = link_to activate_admin_coupon_path(item), class: "dropdown-item", method: :put, data:  { turbo_method: :put, turbo_confirm: t('globals.confirm') } do
+          = icon "activity"
+          = t('.activate')
+      = link_to admin_coupon_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: t('globals.confirm') } do
+        = icon "trash"
+        = t('.delete')

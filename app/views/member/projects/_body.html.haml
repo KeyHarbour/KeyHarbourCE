@@ -1,0 +1,22 @@
+.col-auto
+  %span.badge{class: status_color(item)}
+.col.text-truncate
+  = item.name
+  .d-block.text-secondary.text-truncate.mt-1= item.uuid
+  .d-block.text-secondary.text-truncate.mt-1
+    - item.environments.each do |env|
+      %span.tag
+        = icon ApplicationHelper::CONTROLLERS[:"member/environments"][:icon], class: "icon-xs"
+        = env.name
+
+.col-auto
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      = link_to edit_member_project_path(item), class: "dropdown-item" do
+        = icon "edit"
+        = t('.update')
+      .dropdown-divider
+      = link_to member_project_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash"
+        = t('.remove')

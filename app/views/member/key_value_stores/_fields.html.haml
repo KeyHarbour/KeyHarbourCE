@@ -1,0 +1,16 @@
+.mb-3
+  = f.input :key
+- if @item.private
+  .mb-3
+    = f.input :value, placeholder: t('activerecord.placeholders.key_value_store.value'), input_html: { style: 'min-height:200px;', value: "" }, wrapper: "horizontal_form"
+- else
+  .mb-3
+    = f.input :value, input_html: { style: 'min-height:200px;' }
+.mb-3
+  = f.input :expires_at, as: :string, input_html: { value: DateTime.now.advance(days: 7), data: { controller: "datepicker", datepicker_max_date_value: DateTime.now.advance(years: 1, days: -1) } }
+.mb-3
+  = f.input :private, hint: t('activerecord.hints.key_value_store.private')
+.mb-3
+  = f.input :one_time_only, hint: t('activerecord.hints.key_value_store.one_time_only')
+.mb-3
+  = f.input :environment_id, as: :hidden

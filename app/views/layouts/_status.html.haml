@@ -1,0 +1,14 @@
+-# Partial attendu: local variable organization
+- stat = item.status
+- classes = case stat
+  - when "active"
+    - "bg-green kh_white"
+  - when "disabled"
+    - "bg-yellow kh_white"
+  - when "archived"
+    - "bg-red kh_white"
+  - when "deleted"
+    - "bg-red kh_white"
+  - else
+    - "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-50 text-gray-500"
+.badge{ class: classes }= I18n.t("status.#{stat}")

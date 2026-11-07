@@ -1,0 +1,4 @@
+.flex.items-center.flex-wrap{:class => "gap-1.5 lg:gap-3.5"}
+  = link_to export_member_organization_inventory_instances_path(@organization,format: :json), class: "kt-btn kt-btn-dark" do
+    %i.ki-filled.ki-plus
+    Export

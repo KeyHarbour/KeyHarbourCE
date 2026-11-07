@@ -1,0 +1,31 @@
+.row.justify-content-lg-center.mt-3.mb-3
+  .col-sm-6.col-lg-4
+    .card.card-sm
+      .card-body
+        .row.align-items-center
+          .col-auto
+            %span.bg-primary.text-white.avatar
+              = icon ApplicationHelper::CONTROLLERS[:"member/trust_assets"][:icon]
+          .col
+            .font-weight-medium= project.trust_assets.count
+            .text-secondary TrustAssets
+  .col-sm-6.col-lg-4
+    .card.card-sm
+      .card-body
+        .row.align-items-center
+          .col-auto
+            %span.bg-primary.text-white.avatar
+              = icon ApplicationHelper::CONTROLLERS[:"member/key_value_stores"][:icon]
+          .col
+            .font-weight-medium= project.key_value_stores.count
+            .text-secondary Key Value items
+  .col-sm-6.col-lg-4
+    .card.card-sm
+      .card-body
+        .row.align-items-center
+          .col-auto
+            %span.bg-primary.text-white.avatar
+              = icon ApplicationHelper::CONTROLLERS[:"member/statefiles"][:icon]
+          .col
+            .font-weight-medium= project.statefiles.resource_count
+            .text-secondary Resources Terraform

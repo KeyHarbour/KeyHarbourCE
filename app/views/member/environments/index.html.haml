@@ -1,0 +1,6 @@
+.col-md-12
+  .card
+    .card-header
+      = render partial: "top_menu", locals: { organization: @organization, actif: "environments" }
+    .card-body.mt-3
+      = render partial: "lists", locals: {items: @items, title: "Environments"}

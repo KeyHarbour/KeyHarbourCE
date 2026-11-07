@@ -1,0 +1,26 @@
+.col.text-truncate
+  = link_to item.name, member_team_path(item)
+  .d-block.text-secondary.text-truncate.mt-1= item.description
+  .d-block.text-secondary.text-truncate.mt-1
+    Role:
+    - item.team_roles.each do |team_role|
+      %span.badge.bg-default
+        = "#{team_role.resource_type}:#{team_role.resource.name}:#{team_role.role}"
+  .d-block.text-secondary.text-truncate.mt-1
+    = item.users.pluck(:email_address).join(', ')
+  .d-block.text-secondary.text-truncate.mt-1
+    Source #{item.source}
+.col-auto
+  .dropdown.no-arrow
+    %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical"
+    .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown", :style => ""}
+      = link_to edit_member_team_path(item), class: "dropdown-item" do
+        = icon "edit"
+        = t('.update')
+      = link_to member_team_path(item), class: "dropdown-item" do
+        = icon "lock"
+        = t('.permissions')
+      .dropdown-divider
+      = link_to member_team_path(item), class: "dropdown-item", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+        = icon "trash"
+        = t('.remove')

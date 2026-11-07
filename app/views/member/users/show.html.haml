@@ -1,0 +1,50 @@
+.kt-container-fluid.mb-4
+  / begin: grid
+  .grid.grid-cols-1.xl:grid-cols-3.gap-5{:class => "lg:gap-7.5"}
+    .col-span-2
+      .flex.flex-col.gap-5{:class => "lg:gap-7.5"}
+        .kt-card.min-w-full
+          .kt-card-header
+            %h3.kt-card-title
+              User Info
+          .kt-card-table.kt-scrollable-x-auto.pb-3
+            %table.kt-table.align-middle.text-sm
+              %tbody
+                %tr
+                  %td.py-2.min-w-32.text-secondary-foreground.font-normal
+                    Email
+                  %td.py-2.text-secondary-foreground.font-normal.min-w-32.text-sm
+                    = @item.email_address
+                %tr
+                  %td.py-2.min-w-32.text-secondary-foreground.font-normal
+                    Teams
+                  %td.py-2.text-secondary-foreground.font-normal.min-w-32.text-sm
+                    = @item.teams.pluck(:name).join(', ')
+                %tr
+                  %td.py-2.text-secondary-foreground.font-normal
+                    Last connection
+                  %td.py-2.text-secondary-foreground.font-normal
+                    = @item.last_access_at ? l(@item.last_access_at, format: :short) : "never"
+    .col-span-1
+      .flex.flex-col.gap-5{:class => "lg:gap-7.5"}
+        .kt-card
+          .kt-card-header
+            %h3.kt-card-title
+              Help
+          .kt-card-content.flex.flex-col{:class => "gap-2.5"}
+            Here some text to help you      
+- unless @item.last_access_at         
+  .kt-container-fluid.mb-4
+    .kt-card
+      .kt-card-header
+        %h3.kt-card-title
+          Invitation link
+      .kt-card-content.flex.flex-col{:class => "gap-2.5"}
+        .kt-form-description.max-w-full
+          .text-gray-700{id: "text_#{@item.id}", style: "word-break: break-all; overflow-wrap: break-word; max-width: 100%;"}= edit_password_url(@item.password_reset_token, locale: I18n.locale)
+          %button.flex.items-center.text-sm.gap-2.hover:bg-gray-50.font-semibold{id: "btn_#{@item.id}", :onclick => "copierTexte('text_#{@item.id}', 'btn_#{@item.id}')"}
+            %i.ki-filled.ki-menu
+            click here to copy
+        
+- content_for :page_name do
+  User details

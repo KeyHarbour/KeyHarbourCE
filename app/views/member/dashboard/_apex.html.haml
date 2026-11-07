@@ -1,0 +1,61 @@
+.flex.flex-wrap.items-center.gap-5.justify-between{:class => "mt-4"}
+  %h3.text-lg.text-mono.font-semibold
+    Api Query Usage This Month per day
+
+.grid.lg:grid-cols-3.gap-5.items-stretch{:class => "lg:gap-7.5"}
+  .lg:col-span-2
+    .kt-card.h-full
+      .kt-card-header
+        %h4.kt-card-title
+          By days
+      .px-3.py-1
+        %div{ "data-chart-type-value" => "area", "data-chart-labels-value" => "#{@chart_labels}", "data-chart-series-value" => "#{@chart_series_api}", "data-controller" => "chart"}
+          %div{"data-chart-target" => "canvas"}
+  .lg:col-span-1
+    .kt-card
+      .kt-card-header
+        %h3.kt-card-title
+          By organization
+      .px-3.py-1
+        %div{"data-chart-type-value" => "pie","data-chart-labels-value" => "#{@chart_organizations}", "data-chart-series-value" => "#{@chart_organization_series_api}", "data-controller" => "chart"}
+          %div{"data-chart-target" => "canvas"}
+.flex.flex-wrap.items-center.gap-5.justify-between{:class => "mt-4"}
+  %h3.text-lg.text-mono.font-semibold
+    Users licenses This Month per day          
+.grid.lg:grid-cols-3.gap-5.items-stretch{:class => "lg:gap-7.5"}
+  .lg:col-span-2
+    .kt-card.h-full
+      .kt-card-header
+        %h3.kt-card-title
+          By days
+      .px-3.py-1
+        %div{ "data-chart-type-value" => "line", "data-chart-labels-value" => "#{@chart_labels}", "data-chart-series-value" => "#{@chart_series_license}", "data-controller" => "chart"}
+          %div{"data-chart-target" => "canvas"}  
+  .lg:col-span-1
+    .kt-card
+      .kt-card-header
+        %h3.kt-card-title
+          By organization
+      .px-3.py-1
+        %div{"data-chart-type-value" => "pie","data-chart-labels-value" => "#{@chart_organizations}", "data-chart-series-value" => "#{@chart_organization_series_license}", "data-controller" => "chart"}
+          %div{"data-chart-target" => "canvas"}
+.flex.flex-wrap.items-center.gap-5.justify-between{:class => "mt-4"}
+  %h3.text-lg.text-mono.font-semibold
+    Trust Asset Usage This Month per day          
+.grid.lg:grid-cols-3.gap-5.items-stretch{:class => "lg:gap-7.5"}
+  .lg:col-span-2
+    .kt-card.h-full
+      .kt-card-header
+        %h3.kt-card-title
+          Api Query Usage This Month per day
+      .px-3.py-1
+        %div{ "data-chart-type-value" => "line", "data-chart-labels-value" => "#{@chart_labels}", "data-chart-series-value" => "#{@chart_series_trust_asset}", "data-controller" => "chart"}
+          %div{"data-chart-target" => "canvas"} 
+  .lg:col-span-1
+    .kt-card
+      .kt-card-header
+        %h3.kt-card-title
+          By organization
+      .px-3.py-1
+        %div{"data-chart-type-value" => "pie","data-chart-labels-value" => "#{@chart_organizations}", "data-chart-series-value" => "#{@chart_organization_series_trust_asset}", "data-controller" => "chart"}
+          %div{"data-chart-target" => "canvas"}       

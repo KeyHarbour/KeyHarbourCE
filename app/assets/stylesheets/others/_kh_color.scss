@@ -1,0 +1,97 @@
+:root {
+  --kh_green: #5DEC89;
+  --kh_greendark: #0B5351;
+  --kh_lightgrey: #889696;
+  --kh_grey: #092327;
+  --kh_orange: #ED6A5A;
+  --primary: var(--kh_greendark);
+  --tblr-link-hover-color-rgb: var(--kh_green);
+  --kh_trust_asset: #5DEC89;
+  --kh_statefile: #0B5351;
+  --kh_keyvalue: #889696;
+  --kh_license: #ED6A5A;
+}
+.btn {
+  .btn-dark {
+    background-color: var(--kh_greendark);
+    color: white;
+  }
+
+  .btn-mono {
+    background-color: var(--kh_grey);
+    color: white;
+  }
+
+  .btn-primary {
+    background-color: var(--kh_greendark);
+    color: white;
+
+    &:hover {
+      background-color: var(--kh_lightgrey);
+    }
+  }
+
+  .btn-success {
+    background-color: var(--kh_green);
+    color: var(--kh_grey);
+  }
+}
+.badge {
+  &.badge-success {
+    background-color: var(--kh_orange);
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  &.badge-primary {
+    background-color: var(--kh_lightgrey);
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  &.kh_white{
+    color: #ffffff;
+  }
+}
+[data-bs-theme-primary=kh] {
+  --tblr-primary: var(--kh_greendark);
+  --tblr-primary-rgb:11, 83, 82;
+  --tblr-link-color: var(--kh_greendark);
+  --tblr-link-color-rgb:  var(--kh_greendark);
+}
+h1, h2, h3 {
+  a {
+    color: var(--kh_greendark) !important;
+  }
+}
+.kh_green {
+  color: var(--kh_green)
+}
+.kh_greendark {
+  color: var(--kh_greendark)
+}
+
+.kh_bg_keyvalue {
+  --tblr-bg-opacity: 1;
+  background-color: color-mix(in oklab, var(--kh_keyvalue) calc(var(--tblr-bg-opacity, 1) * 100%), transparent) !important;
+}
+.kh_bg_statefile{
+  --tblr-bg-opacity: 1;
+  background-color: color-mix(in oklab, var(--kh_statefile) calc(var(--tblr-bg-opacity, 1) * 100%), transparent) !important;
+}
+.kh_bg_trust_asset {
+  --tblr-bg-opacity: 1;
+  background-color: color-mix(in oklab, var(--kh_trust_asset) calc(var(--tblr-bg-opacity, 1) * 100%), transparent) !important;
+}
+.kh_bg_license {
+  --tblr-bg-opacity: 1;
+  background-color: color-mix(in oklab, var(--kh_license) calc(var(--tblr-bg-opacity, 1) * 100%), transparent) !important;
+}
+.tag {
+  .kh_bg_greendark {
+    background-color: var(--kh_orange);
+    color: white;
+  }
+}

@@ -1,0 +1,95 @@
+#!/bin/bash -e
+
+generate_key() {
+  # On utilise Ruby car il est déjà présent dans le conteneur
+  ruby -r securerandom -e 'print SecureRandom.alphanumeric(32)'
+}
+
+if [ -z "${LD_PRELOAD+x}" ]; then
+    LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
+    export LD_PRELOAD
+fi
+
+SECRET_FILE="/rails/storage/secret_key_base.txt"
+
+if [ -n "${SECRET_KEY_BASE}" ]; then
+  echo "SECRET_KEY_BASE fourni via l'environnement, utilisation prioritaire."
+else
+  if [ ! -f "$SECRET_FILE" ]; then
+    echo "Aucun SECRET_KEY_BASE fourni, génération d'une nouvelle clé..."
+    mkdir -p "$(dirname "$SECRET_FILE")"
+    bundle exec rails secret > "$SECRET_FILE"
+    echo "Clé stockée dans $SECRET_FILE"
+  fi
+  export SECRET_KEY_BASE=$(cat "$SECRET_FILE")
+fi
+
+
+DB_KEY="/rails/storage/db_key"
+if [ -n "${ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY}" ]; then
+  echo "ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY fourni via l'environnement, utilisation prioritaire."
+else
+  if [ ! -f "$DB_KEY" ]; then
+    echo "Aucun PRIMARY_KEY fourni, génération d'une nouvelle clé..."
+    PRIMARY_KEY=$(generate_key)
+    DETERMINISTIC_KEY=$(generate_key)
+    KEY_DERIVATION_SALT=$(generate_key)  
+    cat << EOF > "$DB_KEY"
+export ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY="$PRIMARY_KEY"
+export ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY="$DETERMINISTIC_KEY"
+export ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT="$KEY_DERIVATION_SALT"
+export MEILISEARCH_API
+EOF
+    echo "✅ Clés sauvegardées de manière persistante dans $DB_KEY"
+  fi
+  source "$DB_KEY"
+  echo "PrimaryKey now defined"
+fi
+
+
+RAILS_MASTER_KEY_FILE="/rails/storage/master_key.txt"
+if [ -n "${RAILS_MASTER_KEY}" ]; then
+  echo "RAILS_MASTER_KEY fourni via l'environnement, utilisation prioritaire."
+else
+  if [ ! -f "$RAILS_MASTER_KEY_FILE" ]; then
+    echo "Aucun RAILS_MASTER_KEY fourni, génération d'une nouvelle clé..."
+    mkdir -p "$(dirname "$RAILS_MASTER_KEY_FILE")"
+    openssl rand -hex 16 > "$RAILS_MASTER_KEY_FILE"
+    echo "Clé stockée dans RAILS_MASTER_KEY"
+    echo "🗑️ Suppression de l'ancienne licence incompatible..."
+    rm -f "/rails/storage/license.enc"
+  fi
+  export RAILS_MASTER_KEY=$(cat "$RAILS_MASTER_KEY_FILE")
+fi
+
+if [[ "${@: -2:1}" == "./bin/rails" && "${@: -1:1}" == "server" ]]; then
+  ./bin/rails db:prepare
+  ./bin/rails db:migrate
+  DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails db:schema:load SCHEMA=db/queue_schema.rb
+fi
+
+echo -e "\e[32mSUCCESS : Docker Entry point executé avec les arguments: $@"
+
+export $(grep -v '^#' $SECRET_DB | xargs)
+
+cd /rails
+
+echo "Vérification et préparation de la base de données..."
+./bin/rails db:prepare
+./bin/rails db:migrate
+./bin/rails meilisearch:reindex
+./bin/rake db:seed
+
+if [ $# -gt 0 ]; then
+  exec "$@"
+else
+  # Only prepare database if schema.rb doesn't exist (first run)
+  if [ ! -f db/schema.rb ]; then
+    echo "First run: preparing database..."
+    ./bin/rails db:prepare
+  else
+    echo "Database schema already exists, skipping db:prepare"
+  fi
+  echo "Starting Rails server on port ${PORT:-8080}..."
+  exec bundle exec rails server -b 0.0.0.0 -p "${PORT:-8080}"
+fi

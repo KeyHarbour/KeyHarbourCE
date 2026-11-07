@@ -1,0 +1,14 @@
+- if flash[:notice]
+  .alert.alert-green.alert-dismissible
+    .alert-icon
+      = icon "info-triangle"
+    %div
+      %h4.alert-heading= flash[:notice]
+    %a.btn-close{"aria-label" => "close", "data-bs-dismiss" => "alert"}
+- if flash[:alert]
+  .alert.alert-red.alert-dismissible
+    .alert-icon
+      = icon "info-triangle"
+    %div
+      %h4.alert-heading= flash[:alert]
+    %a.btn-close{"aria-label" => "close", "data-bs-dismiss" => "alert"}

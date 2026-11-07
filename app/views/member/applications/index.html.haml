@@ -1,0 +1,99 @@
+.card.mt-4
+  .cart-body
+    .row.justify-content-lg-center.mt-3.mb-3
+      .col-sm-6.col-lg-3
+        .card.card-sm
+          .card-body
+            .row.align-items-center
+              .col-auto
+                %span.bg-primary.text-white.avatar
+                  = icon ApplicationHelper::CONTROLLERS[:"member/licenses"][:icon]
+              .col
+                .font-weight-medium= Current.account.applications.sum(:seats)
+                .text-secondary Seats managed
+      .col-sm-6.col-lg-3
+        .card.card-sm
+          .card-body
+            .row.align-items-center
+              .col-auto
+                %span.bg-primary.text-white.avatar
+                  = icon "device-desktop"
+              .col
+                .font-weight-medium #{Current.account.app_instances.count}
+                .text-secondary instances
+      .col-sm-6.col-lg-3
+        .card.card-sm
+          .card-body
+            .row.align-items-center
+              .col-auto
+                %span.bg-primary.text-white.avatar
+                  = icon "users"
+              .col
+                .font-weight-medium= Current.account.applications.seat_used
+                .text-secondary Actif users managed
+      .col-sm-6.col-lg-3
+        .card.card-sm
+          .card-body
+            .row.align-items-center
+              .col-auto
+                %span.bg-primary.text-white.avatar
+                  = icon "user-star"
+              .col
+                .font-weight-medium= Current.account.application_uniq_users.count
+                .text-secondary Actif uniq users
+    .row.justify-content-lg-center.mt-3.mb-3
+      .col-sm-6
+        .card
+          .card-header
+            %h3.card-title Allocation rate per contract
+          .card-body
+            .table-responsive
+              %table.table.table-vcenter.card-table
+                %thead
+                  %tr
+                    %th.text-start{:class => "w-[150px]"}
+                      Application
+                    %th.text-end{:class => "w-[100px]"}
+                      Licenses
+                    %th.text-end{:class => "w-[100px]"}
+                      Assigned
+                    %th.text-end{:class => "w-[110px]"}
+                      Rate
+                    %th{:class => "w-[30px]"}
+                %tbody
+                  - Current.account.applications.each do |application|
+                    %tr
+                      %td.text-start
+                        = link_to member_license_application_path(application), class: "text-sm font-medium text-mono hover:text-primary" do
+                          = application.name
+                      %td.text-sm.text-foreground.text-end
+                        = application.seats
+                      %td.text-end
+                        = application.seat_used
+                      %td.text-sm.text-foreground.text-end
+                        .kt-badge.kt-badge-sm.kt-badge-outline{class: bg_color(application.seat_level)}
+                          = number_to_percentage application.usage_rate * 100, precision: 2
+      .col-sm-6
+        .card
+          .card-header
+            %h3.card-title Renewal calendar
+          .card-body
+            .table-responsive
+              %table.table.table-vcenter.card-table
+                %thead
+                  %tr
+                    %th.text-start
+                      Application
+                    %th.text-start
+                      Time before renewal
+                    %th.text-start
+                      Renewal date
+                %tbody
+                  - Current.account.renewals.each do |item|
+                    %tr
+                      %td.text-sm
+                        = item[:application].name
+                      %td.text-sm
+                        = distance_of_time_in_words(DateTime.now, item[:renewal_date])
+                      %td.text-sm.text-mono.pb-3
+                        = item[:renewal_date].to_date

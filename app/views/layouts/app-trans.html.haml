@@ -1,0 +1,294 @@
+!!!
+/
+  * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+  * @version 1.4.0
+  * @link https://tabler.io
+  * Copyright 2018-2026 The Tabler Authors
+  * Copyright 2018-2026 codecalm.net Paweł Kuna
+  * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+%html
+  %head
+    = render partial: "layouts/google_tag"
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= content_for(:title) || "Cnd Fin Track"
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "Cnd Fin Track", :name => "application-name"}/
+    %meta{:content => "yes", :name => "mobile-web-app-capable"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    %link{:href => "/apple-touch-icon.png", :rel => "apple-touch-icon", :sizes => "180x180"}/
+    %link{:href => "/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    %link{:href => "/site.webmanifest", :rel => "manifest"}/
+    = stylesheet_link_tag :app, "data-turbo-track": "reload"
+    = javascript_importmap_tags
+  %body.layout-fluid{"data-bs-theme-primary" => "cyan"}
+    .page
+      = render partial: 'layouts/sticky_top'
+      = render partial: 'layouts/navbar'
+      .page-wrapper
+        / BEGIN PAGE HEADER
+        .page-header.d-print-none{"aria-label" => "Page header"}
+          .container-xl
+            .row.g-2.align-items-center
+              .col
+                = render partial: 'breadcrumbs'
+                %h2.page-title= page_title
+              .col-auto.ms-auto.d-print-none
+                .btn-list
+                  - if add_button(:top)
+                    = link_to add_button(:top)[:path], class: "btn btn-primary btn-5 d-none d-sm-inline-block" do
+                      = icon add_button(:top)[:icon]
+                      = add_button(:top)[:title]
+        .page-body
+          .container-xl
+            .row.row-deck.row-cards
+              = yield
+        %footer.footer.footer-transparent.d-print-none
+          .container-xl
+            .row.text-center.align-items-center.flex-row-reverse
+              .col-lg-auto.ms-lg-auto
+                %ul.list-inline.list-inline-dots.mb-0
+                  %li.list-inline-item
+                    %a.link-secondary{:href => "https://docs.tabler.io", :rel => "noopener", :target => "_blank"} Documentation
+                  %li.list-inline-item
+                    %a.link-secondary{:href => "./license.html"} License
+                  %li.list-inline-item
+                    %a.link-secondary{:href => "https://github.com/tabler/tabler", :rel => "noopener", :target => "_blank"} Source code
+                  %li.list-inline-item
+                    %a.link-secondary{:href => "https://github.com/sponsors/codecalm", :rel => "noopener", :target => "_blank"}
+                      / Download SVG icon from http://tabler.io/icons/icon/heart
+                      %svg.icon.text-pink.icon-inline.icon-4{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+                        %path{:d => "M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"}
+                      Sponsor
+              .col-12.col-lg-auto.mt-3.mt-lg-0
+                %ul.list-inline.list-inline-dots.mb-0
+                  %li.list-inline-item
+                    Copyright © 2026
+                    %a.link-secondary{:href => "."} Tabler
+                    \. All rights reserved.
+                  %li.list-inline-item
+                    %a.link-secondary{:href => "./changelog.html", :rel => "noopener"} v1.4.0
+        / END FOOTER
+    / BEGIN PAGE MODALS
+    #modal-report.modal.modal-blur.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog.modal-lg{:role => "document"}
+        .modal-content
+          .modal-header
+            %h5.modal-title New report
+            %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+          .modal-body
+            .mb-3
+              %label.form-label Name
+              %input.form-control{:name => "example-text-input", :placeholder => "Your report name", :type => "text"}/
+            %label.form-label Report type
+            .form-selectgroup-boxes.row.mb-3
+              .col-lg-6
+                %label.form-selectgroup-item
+                  %input.form-selectgroup-input{:checked => "checked", :name => "report-type", :type => "radio", :value => "1"}/
+                  %span.form-selectgroup-label.d-flex.align-items-center.p-3
+                    %span.me-3
+                      %span.form-selectgroup-check
+                    %span.form-selectgroup-label-content
+                      %span.form-selectgroup-title.strong.mb-1 Simple
+                      %span.d-block.text-secondary Provide only basic data needed for the report
+              .col-lg-6
+                %label.form-selectgroup-item
+                  %input.form-selectgroup-input{:name => "report-type", :type => "radio", :value => "1"}/
+                  %span.form-selectgroup-label.d-flex.align-items-center.p-3
+                    %span.me-3
+                      %span.form-selectgroup-check
+                    %span.form-selectgroup-label-content
+                      %span.form-selectgroup-title.strong.mb-1 Advanced
+                      %span.d-block.text-secondary Insert charts and additional advanced analyses to be inserted in the report
+            .row
+              .col-lg-8
+                .mb-3
+                  %label.form-label Report url
+                  .input-group.input-group-flat
+                    %span.input-group-text https://tabler.io/reports/
+                    %input.form-control.ps-0{:autocomplete => "off", :type => "text", :value => "report-01"}/
+              .col-lg-4
+                .mb-3
+                  %label.form-label Visibility
+                  %select.form-select
+                    %option{:selected => "selected", :value => "1"} Private
+                    %option{:value => "2"} Public
+                    %option{:value => "3"} Hidden
+          .modal-body
+            .row
+              .col-lg-6
+                .mb-3
+                  %label.form-label Client name
+                  %input.form-control{:type => "text"}/
+              .col-lg-6
+                .mb-3
+                  %label.form-label Reporting period
+                  %input.form-control{:type => "date"}/
+              .col-lg-12
+                %div
+                  %label.form-label Additional information
+                  %textarea.form-control{:rows => "3"}
+          .modal-footer
+            %a.btn.btn-link.link-secondary.btn-3{"data-bs-dismiss" => "modal", :href => "#"} Cancel
+            %a.btn.btn-primary.btn-5.ms-auto{"data-bs-dismiss" => "modal", :href => "#"}
+              / Download SVG icon from http://tabler.io/icons/icon/plus
+              %svg.icon.icon-2{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M12 5l0 14"}
+                %path{:d => "M5 12l14 0"}
+              Create new report
+    / END PAGE MODALS
+    .settings
+      %a.btn.btn-floating.btn-icon.btn-primary{"aria-controls" => "offcanvasSettings", "aria-label" => "Theme Settings", "data-bs-target" => "#offcanvasSettings", "data-bs-toggle" => "offcanvas", :href => "#"}
+        / Download SVG icon from http://tabler.io/icons/icon/brush
+        %svg.icon.icon-1{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+          %path{:d => "M3 21v-4a4 4 0 1 1 4 4h-4"}
+          %path{:d => "M21 3a16 16 0 0 0 -12.8 10.2"}
+          %path{:d => "M21 3a16 16 0 0 1 -10.2 12.8"}
+          %path{:d => "M10.6 9a9 9 0 0 1 4.4 4.4"}
+      %form#offcanvasSettings.offcanvas.offcanvas-start.offcanvas-narrow{:tabindex => "-1"}
+        .offcanvas-header
+          %h2.offcanvas-title Theme Settings
+          %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "offcanvas", :type => "button"}
+        .offcanvas-body.d-flex.flex-column
+          %div
+            .mb-4
+              %label.form-label Color mode
+              %p.form-hint Choose the color mode for your app.
+              %label.form-check
+                .form-selectgroup-item
+                  %input.form-check-input{:checked => "checked", :name => "theme", :type => "radio", :value => "light"}/
+                  .form-check-label Light
+              %label.form-check
+                .form-selectgroup-item
+                  %input.form-check-input{:name => "theme", :type => "radio", :value => "dark"}/
+                  .form-check-label Dark
+            .mb-4
+              %label.form-label Color scheme
+              %p.form-hint The perfect color mode for your app.
+              .row.g-2
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "blue"}/
+                    %span.form-colorinput-color.bg-blue
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "azure"}/
+                    %span.form-colorinput-color.bg-azure
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "indigo"}/
+                    %span.form-colorinput-color.bg-indigo
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "purple"}/
+                    %span.form-colorinput-color.bg-purple
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "pink"}/
+                    %span.form-colorinput-color.bg-pink
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "red"}/
+                    %span.form-colorinput-color.bg-red
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "orange"}/
+                    %span.form-colorinput-color.bg-orange
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "yellow"}/
+                    %span.form-colorinput-color.bg-yellow
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "lime"}/
+                    %span.form-colorinput-color.bg-lime
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "green"}/
+                    %span.form-colorinput-color.bg-green
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "teal"}/
+                    %span.form-colorinput-color.bg-teal
+                .col-auto
+                  %label.form-colorinput
+                    %input.form-colorinput-input{:name => "theme-primary", :type => "radio", :value => "cyan"}/
+                    %span.form-colorinput-color.bg-cyan
+            .mb-4
+              %label.form-label Font family
+              %p.form-hint Choose the font family that fits your app.
+              %div
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:checked => "checked", :name => "theme-font", :type => "radio", :value => "sans-serif"}/
+                    .form-check-label Sans-serif
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-font", :type => "radio", :value => "serif"}/
+                    .form-check-label Serif
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-font", :type => "radio", :value => "monospace"}/
+                    .form-check-label Monospace
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-font", :type => "radio", :value => "comic"}/
+                    .form-check-label Comic
+            .mb-4
+              %label.form-label Theme base
+              %p.form-hint Choose the gray shade for your app.
+              %div
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-base", :type => "radio", :value => "slate"}/
+                    .form-check-label Slate
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:checked => "checked", :name => "theme-base", :type => "radio", :value => "gray"}/
+                    .form-check-label Gray
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-base", :type => "radio", :value => "zinc"}/
+                    .form-check-label Zinc
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-base", :type => "radio", :value => "neutral"}/
+                    .form-check-label Neutral
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-base", :type => "radio", :value => "stone"}/
+                    .form-check-label Stone
+            .mb-4
+              %label.form-label Corner Radius
+              %p.form-hint Choose the border radius factor for your app.
+              %div
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-radius", :type => "radio", :value => "0"}/
+                    .form-check-label 0
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-radius", :type => "radio", :value => "0.5"}/
+                    .form-check-label 0.5
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:checked => "checked", :name => "theme-radius", :type => "radio", :value => "1"}/
+                    .form-check-label 1
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-radius", :type => "radio", :value => "1.5"}/
+                    .form-check-label 1.5
+                %label.form-check
+                  .form-selectgroup-item
+                    %input.form-check-input{:name => "theme-radius", :type => "radio", :value => "2"}/
+                    .form-check-label 2
+          .mt-auto.space-y
+            %button#reset-changes.btn.w-100{:type => "button"}
+              / Download SVG icon from http://tabler.io/icons/icon/rotate
+              %svg.icon.icon-1{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5"}
+              Reset changes
+            %a.btn.btn-primary.w-100{"data-bs-dismiss" => "offcanvas", :href => "#"} Save

@@ -1,0 +1,8 @@
+.w-full
+  = f.input :name
+.w-full
+  = f.association :model_family, collection: @organization.model_families, include_blank: false, wrapper: :horizontal_form
+.w-full
+  = f.input :resource_type  
+.w-full
+  = f.input :active, as: :select, collection: [[t('globals.bool_yes'), true], [t('globals.bool_no'), false]], selected: (@item.active.nil? ? true : @item.active), include_blank: false, wrapper: :horizontal_form

@@ -1,0 +1,13 @@
+%td
+  = link_to item.name, member_project_path(item), class: "hover:text-primary"
+%td   
+  = link_to member_team_path(item), class: "hover:text-primary" do
+    = item.users.count
+    = t('activerecord.attributes.team.team_users').pluralize(item.users.count)
+%td    
+  = item.projects.count
+  = t('activerecord.attributes.team.projects').pluralize(item.projects.count) 
+%td    
+  = item.source
+%td
+  = render partial: "item_menu", locals: { delete_link: member_team_path(item), edit_link: edit_member_team_path(item) }    

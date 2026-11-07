@@ -1,0 +1,18 @@
+= turbo_frame_tag "modal" do
+  #TagModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "articleModalLabel", "data-controller" => "modal", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %h5#tagModalLabel.modal-title New tag
+          %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+        .modal-body
+          = simple_form_for @item, url: form_url, html: {class: "card"}, wrapper: "horizontal_form"  do |f|
+            .card-body
+              .mt-2
+                = render partial: "form_error", locals: { form_table: @item }
+                = render partial: "flash"
+                = render partial: "fields", locals: { f: f }
+            .card-footer.text-end
+              .d-flex
+                %button.btn.me-auto{"data-bs-dismiss" => "modal", :type => "button"} Close
+                %button.btn.btn-primary.ms-auto{:type => "submit"}=  t('globals.save')

@@ -1,0 +1,249 @@
+.card
+  .row.g-0
+    = render partial: "menu", locals: {application: @application, active: :quotes}
+    .col-12.col-md-9.d-flex.flex-column
+      .card.card-borderless
+        .card-header
+          %h2.card-title
+            = @application.name
+          .card-actions.d-flex.align-items-center.gap-3
+        .card-body
+          .row
+            .col-12.col-md-6
+              .row
+                .col-6
+                  .card.card-borderless
+                    .card-body
+                      %h2.card-title.text-center Qtt
+                      %div.text-center
+                        = turbo_frame_tag [dom_id(@quote_application), :seats] do
+                          = @quote_application.seats
+                          = link_to edit_member_license_quote_application_path(@quote_application, field: :seats) do 
+                            = icon "edit", class: "icon-xs"
+                .col-6
+                  .card.card-borderless
+                    .card-body
+                      %h2.card-title.text-center Base amount
+                      %div.text-center
+                        = turbo_frame_tag [dom_id(@quote_application), :amount] do
+                          = number_to_currency @quote_application.amount
+                          = link_to edit_member_license_quote_application_path(@quote_application, field: :amount) do 
+                            = icon "edit", class: "icon-xs"
+            .col-6.col-md-6.d-flex.align-items-center.gap-3
+              .card.card-sm
+                .card-body
+                  .row.align-items-center
+                    .col-auto
+                      %span.bg-info.text-white.avatar.avatar-square
+                        = icon "currency-dollar"
+                    .col
+                      .fw-medium= number_to_currency @quote_application.unit_cost      
+                      .text-secondary unit cost
+              .card.card-sm
+                .card-body
+                  .row.align-items-center
+                    .col-auto
+                      %span.bg-primary.text-white.avatar.avatar-square
+                        = icon "currency-dollar"
+                    .col
+                      .fw-medium= number_to_currency @quote_application.total
+                      .text-secondary total
+
+      #accordion-flush.accordion.accordion-flush
+        - first = false
+        - @quote_application.quote_instances.each do |quote_instance|
+          - instance = quote_instance.instance
+          .accordion-item
+            %h2.accordion-header
+              %button.accordion-button{class: "#{first == true ? '' : 'collapsed'}", id: "accordion-#{instance.id}", "aria-controls" => "collapse-#{instance.id}", "aria-expanded" => "true", "data-bs-target" => "#collapse-#{instance.id}", "data-bs-toggle" => "collapse", :type => "button"}
+                = instance.name
+                %span.accordion-button-toggle
+                  = icon "chevron-down"
+            .accordion-collapse.collapse{class: "#{first == true ? 'show' : ''}", id: "collapse-#{instance.id}", "aria-labelledby" => "accordion-#{instance.id}", "data-bs-parent" => "#accordion-flush", :role => "region"}
+              - first = false
+              .accordion-body
+                .row
+                  .col-12.col-md-9
+                    .card.h-100.d-flex.flex-column
+                      .card-header
+                        %h2.card-title Instance base cost
+                      .card-body
+                        .row
+                          .col-6
+                            .card-body.card-borderless
+                              %h2.card-title.text-center Qtt
+                              %div.text-center
+                                = turbo_frame_tag [dom_id(quote_instance), :seats] do
+                                  = quote_instance.seats
+                                  = link_to edit_member_license_quote_instance_path(quote_instance, field: :seats) do 
+                                    = icon "edit", class: "icon-xs"
+                          .col-6
+                            .card.card-borderless
+                              .card-body
+                                %h2.card-title.text-center Amount
+                                %div.text-center
+                                  = turbo_frame_tag [dom_id(quote_instance), :amount] do
+                                    = number_to_currency quote_instance.amount
+                                    = link_to edit_member_license_quote_instance_path(quote_instance, field: :amount) do 
+                                      = icon "edit", class: "icon-xs"
+                      .card-footer.text-center
+                        - if quote_instance.unused
+                          = link_to activate_member_license_quote_instance_path(quote_instance), class: "btn btn-success btn-sm" do
+                            = icon "plus"
+                            = t('.activate')
+                        - else
+                          = link_to deactivate_member_license_quote_instance_path(quote_instance), class: "btn btn-danger btn-sm" do
+                            = icon "minus"
+                            = t('.deactivate')
+                  .col-3.col-md-3.gap-3
+                    .card.card-sm.mb-1
+                      .card-body
+                        .row.align-items-center
+                          .col-auto
+                            %span.bg-info.text-white.avatar.avatar-square
+                              = icon "currency-dollar"
+                          .col
+                            .fw-medium= number_to_currency quote_instance.unit_cost_with_application
+                            .text-secondary unit with app.
+                    .card.card-sm.mb-1
+                      .card-body
+                        .row.align-items-center
+                          .col-auto
+                            %span.bg-info.text-white.avatar.avatar-square
+                              = icon "currency-dollar"
+                          .col
+                            .fw-medium= number_to_currency quote_instance.unit_cost
+                            .text-secondary unit
+                    .card.card-sm.mb-1
+                      .card-body
+                        .row.align-items-center
+                          .col-auto
+                            %span.bg-primary.text-white.avatar.avatar-square
+                              = icon "currency-dollar"
+                          .col
+                            .fw-medium= number_to_currency quote_instance.total_with_application
+                            .text-secondary total with app.
+                    .card.card-sm
+                      .card-body
+                        .row.align-items-center
+                          .col-auto
+                            %span.bg-primary.text-white.avatar.avatar-square
+                              = icon "currency-dollar"
+                          .col
+                            .fw-medium= number_to_currency quote_instance.total
+                            .text-secondary total
+
+                .row.mt-4
+                  - quote_instance.quote_add_ons.each do |quote_add_on|
+                    - add_on = quote_add_on.add_on
+                    .col-md-6.col-lg-6
+                      .card.bg-primary-lt
+                        .card-body
+                          %h2.card-title= "Extension: #{add_on.uuid}"
+                          %p.text-secondary
+                          .row
+                            .col-12.col-md-6
+                              .card.card-borderless.card-footer-transparent
+                                .card-body
+                                  %h2.card-title.text-center Amount
+                                  %div.text-center
+                                    = turbo_frame_tag [dom_id(quote_add_on), :amount] do
+                                      = number_to_currency quote_add_on.amount
+                                      = link_to edit_member_license_quote_add_on_path(quote_add_on, field: :amount) do 
+                                        = icon "edit", class: "icon-xs"
+                            .col-6.col-md-6.d-flex.align-items-center.gap-3
+                              .card.card-sm
+                                .card-body
+                                  .row.align-items-center
+                                    .col-auto
+                                      %span.bg-info.text-white.avatar.avatar-square
+                                        = icon "currency-dollar"
+                                    .col
+                                      .fw-medium= number_to_currency (quote_add_on.amount || 0) / quote_instance.seats
+                                      .text-secondary unit cost
+                        .card-footer.text-center
+                          - if quote_add_on.unused
+                            = link_to activate_member_license_quote_add_on_path(quote_add_on), class: "btn btn-success btn-sm" do
+                              = icon "plus"
+                              = t('.activate')
+                          - else
+                            = link_to deactivate_member_license_quote_add_on_path(quote_add_on), class: "btn btn-danger btn-sm" do
+                              = icon "minus"
+                              = t('.deactivate')
+
+-# .col-md-12.col-lg-12
+-#   .card
+-#     .card-header 
+-#       %h2.card-title= @application.name
+-#     .card-body
+      
+-#       %table.table.table-transparent.table-responsive
+-#         %thead
+-#           %tr
+-#             %th.text-center{:style => "width: 1%"}
+-#             %th{:style => "width: 10%"} Type
+-#             %th Name
+-#             %th.text-end{:style => "width: 15%"} Unit Cost
+-#             %th.text-end{:style => "width: 10%"} Qtt
+-#             %th.text-end{:style => "width: 15%"} Amount
+-#         %tbody
+-#           - line = 1
+-#           %tr
+-#             %td.text-center= line
+-#             %td Application
+-#             %td
+-#               %p.strong.mb-1 Application #{@application.name}
+-#               .text-secondary= @application.uuid
+-#             %td.text-end= number_to_currency (@quote_application.total || 0) / @quote_application.seats
+-#             %td.text-end
+-#               = turbo_frame_tag [dom_id(@quote_application), :seats] do
+-#                 = @quote_application.seats
+-#                 = link_to edit_member_license_quote_application_path(@quote_application, field: :seats) do 
+-#                   = icon "edit", class: "icon-xs"
+-#             %td.text-end
+-#               = turbo_frame_tag [dom_id(@quote_application), :amount] do
+-#                 = number_to_currency @quote_application.amount
+-#                 = link_to edit_member_license_quote_application_path(@quote_application, field: :amount) do 
+-#                   = icon "edit", class: "icon-xs"
+-#           - line += 1
+-#           - @quote_application.quote_instances.each do |quote_instance|
+-#             - instance = quote_instance.instance
+-#             %tr{style: "border-top: 3px double #000"}
+-#               %td.text-center= line
+-#               %td Instance
+-#               %td
+-#                 %p.strong.mb-1= instance.name
+-#                 .text-secondary= instance.uuid
+-#               %td.text-end= number_to_currency (quote_instance.total || 0) / quote_instance.seats
+-#               %td.text-end
+-#                 = turbo_frame_tag [dom_id(quote_instance), :seats] do
+-#                   = quote_instance.seats
+-#                   = link_to edit_member_license_quote_instance_path(quote_instance, field: :seats) do 
+-#                     = icon "edit", class: "icon-xs"
+-#               %td.text-end
+-#                 = turbo_frame_tag [dom_id(quote_instance), :amount] do
+-#                   = number_to_currency quote_instance.amount
+-#                   = link_to edit_member_license_quote_instance_path(quote_instance, field: :amount) do 
+-#                     = icon "edit", class: "icon-xs"
+-#             - line += 1
+-#             - quote_instance.quote_add_ons.each do |quote_add_on|
+-#               - add_on = quote_add_on.add_on
+-#               %tr{style: "border-top: 2px double #000"}
+-#                 %td.text-center= line
+-#                 %td Add On
+-#                 %td
+-#                   %p.strong.mb-1 #{instance.name} / #{add_on.name}
+-#                   .text-secondary= add_on.uuid
+-#                 %td.text-end= number_to_currency (quote_add_on.amount || 0) / quote_instance.seats
+-#                 %td.text-end
+-#                 %td.text-end
+-#                   = turbo_frame_tag [dom_id(quote_add_on), :amount] do
+-#                     = number_to_currency quote_add_on.amount
+-#                     = link_to edit_member_license_quote_add_on_path(quote_add_on, field: :amount) do 
+-#                       = icon "edit", class: "icon-xs"
+-#               - line += 1
+-#           %tr
+-#             %td.fw-semibold.text-uppercase.text-end{:colspan => "5"} Total Due
+-#             %td.fw-semibold.text-end
+-#               #quote_application_total
+-#                 = render "total", quote: @item

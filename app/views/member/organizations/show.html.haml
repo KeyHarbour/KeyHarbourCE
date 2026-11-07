@@ -1,0 +1,19 @@
+.col-md-12
+  .card
+    .card-header
+      = render partial: "member/organizations/top_menu", locals: { organization: @item, actif: "organization" }
+    .card-body
+      .tab-content
+        #tabs-profile-4.tab-pane.active.show{:role => "tabpanel"}
+          = render partial: "top_stats", locals: { organization: @item }
+          .row
+            .col-md-4
+              .mt-2
+                = render partial: "summary", locals: { organization: @item }
+              .mt-4
+                = render partial: "renewal", locals: { organization: @item }
+            .col-md-8.mt-2
+              = render partial: "projects", locals: { organization: @item }
+
+- content_for :page_name do
+  = t('activerecord.models.organization')

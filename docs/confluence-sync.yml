@@ -1,0 +1,60 @@
+# Confluence Documentation Sync Configuration
+# This file defines which markdown files should be synced to Confluence
+
+confluence:
+  # Customer-facing documentation space
+  base_url: "https://keyharbour.atlassian.net/wiki"
+  space_key: "docs"
+
+# Documents to sync to Confluence
+documents:
+  # Customer-Facing Documentation
+  - source: "ONPREM.md"
+    title: "On-Premise Installation Guide"
+    parent: "Getting Started"
+    labels:
+      - "installation"
+      - "on-premise"
+      - "self-hosted"
+
+  - source: "DOCKER-QUICKSTART.md"
+    title: "Docker Quick Start"
+    parent: "Getting Started"
+    labels:
+      - "docker"
+      - "quickstart"
+
+  # Deployment Documentation
+  - source: "DEPLOYMENT-STRATEGY.md"
+    title: "Deployment Options"
+    parent: "Deployment"
+    labels:
+      - "deployment"
+      - "architecture"
+    # Only sync sections relevant to customers (exclude internal SaaS details)
+    sections:
+      include:
+        - "On-Premise Edition"
+        - "Azure Container Apps"
+
+# Files explicitly excluded from sync (for documentation purposes)
+exclude:
+  - ".github/*.md"           # Copilot AI instructions
+  - "README.md"              # Internal development docs
+  - "DOCKER.md"              # Internal Docker guide (use DOCKER-QUICKSTART for customers)
+
+# Sync settings
+settings:
+  # Convert relative links to absolute GitHub links
+  convert_links: true
+  github_base_url: "https://github.com/KeyHarbour/app/blob/main"
+  
+  # Handle images
+  upload_images: true
+  
+  # Add footer with source link
+  add_source_footer: true
+  footer_template: |
+    ---
+    *This documentation is automatically synced from [GitHub]({{github_url}}).*
+    *Last updated: {{timestamp}}*

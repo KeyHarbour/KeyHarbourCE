@@ -1,0 +1,20 @@
+-# .card
+-#   .card-header
+-#     %h3.card-title License renewal
+-#   .card-body
+-#     .list-group.list-group-flush.list-group-hoverable
+-#       - organization.renewals.each do |item|
+-#         .list-group-item
+-#           .row.align-items-center
+-#             .col.text-truncate
+-#               - if item[:application].present?
+-#                 = link_to member_license_application_path(item[:application]), class: "text-sm font-medium text-mono cursor-pointer hover:text-primary mb-px" do
+-#                   = item[:application].name
+-#               - else
+-#                 = link_to member_license_instance_path(item[:instance]), class: "text-sm font-medium text-mono cursor-pointer hover:text-primary mb-px" do
+-#                   = item[:instance].name
+-#               .d-block.text-secondary.text-truncate.mt-1
+-#                 %span.text-xs.text-secondary-foreground
+-#                 - if item[:renewal_date]
+-#                   %span.badge{class: renewal_color(item)}
+-#                     = item[:renewal_date].to_date

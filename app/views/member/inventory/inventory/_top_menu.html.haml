@@ -1,0 +1,10 @@
+%ul.nav.nav-tabs.card-header-tabs{"data-bs-toggle" => "tabs", :role => "tablist"}
+  %li.nav-item{:role => "presentation"}
+    = link_to member_organization_inventory_instances_path(organization), class: "nav-link #{actif=='inventory' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('.dashboard').capitalize
+  %li.nav-item{:role => "presentation"}
+    = link_to member_organization_inventory_model_categories_path(organization), class: "nav-link #{actif=='categories' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('.model_categories')
+  %li.nav-item{:role => "presentation"}
+    = link_to member_organization_inventory_model_families_path(organization), class: "nav-link #{actif=='families' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('.model_families')

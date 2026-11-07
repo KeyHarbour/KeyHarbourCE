@@ -1,0 +1,16 @@
+.mb-3
+  = f.input :name
+.mb-3
+  = f.input :description, input_html: { style: 'min-height:200px;' }
+.mb-3
+  = f.association :environments,
+    collection: @organization.environments.all.pluck(:name, :id),
+    as: :select,
+    wrapper: :horizontal_form,
+    include_blank: false,
+    input_html: { multiple: true, data: { controller: "tom-select" } }
+  -# .flex.items-baseline.flex-wrap.lg:flex-nowrap.string.optional.project_environment_ids{:class => "gap-2.5"}
+  -#   %label.kt-form-label.flex.items-center.gap-1.max-w-56.string.optional{:for => "project_environment_ids"}= t('activerecord.attributes.project.environments')
+  -#   = f.select :environment_ids, @organization.environments.all.pluck(:name, :id), {multiple: "multiple"}, wrapper: "horizontal_form", data: { controller: "select2" }
+.mb-3
+  = f.input :status, as: :select, wrapper: "horizontal_form", collection: Organization.statuses.keys.map { |status| [status.titleize, status] }, include_blank: false

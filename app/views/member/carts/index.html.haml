@@ -1,0 +1,115 @@
+.flex.items-center.justify-center.flex-wrap.lg:flex-nowrap.gap-8.pt-5.mb-12{:class => "lg:gap-1.5"}
+  .text-2sm.leading-none.relative.flex.items-center.px-3.rounded-full.border.font-medium.text-primary{:class => "gap-1.5 h-8.5 border-primary/10 bg-primary/10 [&_.kt-step-icon]:text-primary"}
+    %span.kt-step-icon
+      %i.ki-filled.ki-subtitle.text-base
+    Order Summary
+  .hidden.lg:block.w-12.h-px.border-t.border-dashed.border-zinc-300.dark:border-zinc-600
+  .text-2sm.leading-none.relative.flex.items-center.px-3.rounded-full.border.border-border.text-foreground{:class => "gap-1.5 h-8.5 [&_.kt-step-icon]:text-muted-foreground"}
+    %span.kt-step-icon
+      %i.ki-filled.ki-two-credit-cart.text-base
+    Payment Method
+  .hidden.lg:block.w-12.h-px.border-t.border-dashed.border-zinc-300.dark:border-zinc-600
+  .text-2sm.leading-none.relative.flex.items-center.px-3.rounded-full.border.border-border.text-foreground{:class => "gap-1.5 h-8.5 [&_.kt-step-icon]:text-muted-foreground"}
+    %span.kt-step-icon
+      %i.ki-filled.ki-cheque.text-base
+    Order Placed
+.kt-container-fixed
+  .grid.grid-cols-1.xl:grid-cols-3.gap-5.lg:gap-9.mb-5.lg:mb-10
+    .col-span-2.space-y-5
+      .grid.sm:grid-cols-1.gap-5
+        .kt-card
+          .kt-card-content.flex.items-center.flex-wrap.justify-between.p-2.pe-5{:class => "gap-4.5"}
+            .flex.items-center{:class => "gap-3.5"}
+              %i.text-8xl.ki-filled.ki-ocean
+              .flex.flex-col.gap-1
+                %a.hover:text-primary.text-sm.font-medium.text-mono{:class => "leading-5.5", "data-kt-drawer-toggle" => "#drawers_shop_product_details", :href => "#"}
+                  Api Query
+                .flex.items-center{:class => "gap-1.5"}
+                  %span.text-xs.font-normal.text-secondary-foreground.uppercase
+                    sku:
+                    %span.text-xs.font-medium.text-foreground
+                      BT-A1-YLW-8
+            .flex.flex-col{:class => "gap-1.5"}
+              %span.text-xs.font-normal.text-secondary-foreground.text-end
+                1 x
+              .flex.items-center.flex-wrap{:class => "gap-1.5"}
+                %span.text-sm.font-normal.text-secondary-foreground.line-through
+                %span.text-sm.font-semibold.text-mono
+                  $120.00
+        .kt-card
+          .kt-card-content.flex.items-center.flex-wrap.justify-between.p-2.pe-5{:class => "gap-4.5"}
+            .flex.items-center{:class => "gap-3.5"}
+              %i.text-8xl.ki-filled.ki-tab-tablet
+              .flex.flex-col.gap-1
+                %a.hover:text-primary.text-sm.font-medium.text-mono{:class => "leading-5.5", "data-kt-drawer-toggle" => "#drawers_shop_product_details", :href => "#"}
+                  Licence
+                .flex.items-center{:class => "gap-1.5"}
+                  %span.text-xs.font-normal.text-secondary-foreground.uppercase
+                    sku:
+                    %span.text-xs.font-medium.text-foreground
+                      SNK-888-RED-42
+            .flex.flex-col{:class => "gap-1.5"}
+              %span.text-xs.font-normal.text-secondary-foreground.text-end
+                1 x
+              .flex.items-center.flex-wrap{:class => "gap-1.5"}
+                %span.text-sm.font-normal.text-secondary-foreground.line-through
+                %span.text-sm.font-semibold.text-mono
+                  $99.00
+        .kt-card
+          .kt-card-content.flex.items-center.flex-wrap.justify-between.p-2.pe-5{:class => "gap-4.5"}
+            .flex.items-center{:class => "gap-3.5"}
+              -# = image_tag "trust_asset.svg", class: "size-14"
+              %i.text-8xl.ki-filled.ki-calendar-tick
+              .flex.flex-col.gap-1
+                %a.hover:text-primary.text-sm.font-medium.text-mono{:class => "leading-5.5", "data-kt-drawer-toggle" => "#drawers_shop_product_details", :href => "#"}
+                  Trust assets
+                .flex.items-center{:class => "gap-1.5"}
+                  %span.text-xs.font-normal.text-secondary-foreground.uppercase
+                    sku:
+                    %span.text-xs.font-medium.text-foreground
+                      SD-999-TAN-38
+            .flex.flex-col{:class => "gap-1.5"}
+              %span.text-xs.font-normal.text-secondary-foreground.text-end
+                1 x
+              .flex.items-center.flex-wrap{:class => "gap-1.5"}
+                %span.text-sm.font-normal.text-secondary-foreground.line-through
+                %span.text-sm.font-semibold.text-mono
+                  $120.00
+      .flex.justify-end.items-center.flex-wrap.gap-3
+        %button.kt-btn.kt-btn-outline
+          Cancel
+        %a.kt-btn.kt-btn-primary{:href => "html/demo6/store-client/checkout/shipping-info.html"}
+          Shiiping Info
+          %i.ki-filled.ki-black-right.text-base
+    .col-span-1
+      .space-y-5
+        / begin: Card
+        .kt-card{:class => "bg-accent/50"}
+          .kt-card-header.px-5
+            %h3.kt-card-title
+              Order Summary
+          .kt-card-content.px-5.py-4.space-y-2
+            %h4.text-sm.font-medium.text-mono{:class => "mb-3.5"}
+              Price Details
+            .flex.justify-between.items-center
+              %span.text-sm.font-normal.text-secondary-foreground
+                Subtotal
+              %span.text-sm.font-medium.text-mono
+                $492.0
+            .flex.justify-between.items-center
+              %span.text-sm.font-normal.text-secondary-foreground
+                Shipping
+              %span.text-sm.font-medium.text-mono
+                $0.0
+            .flex.justify-between.items-center
+              %span.text-sm.font-normal.text-secondary-foreground
+                VAT
+              %span.text-sm.font-medium.text-mono
+                $0.0
+          .kt-card-footer.flex.justify-between.items-center.px-5
+            %span.text-sm.font-normal.text-secondary-foreground
+              Total
+            %span.text-base.font-semibold.text-mono
+              $492.00
+        / end: Card
+  / end: grid

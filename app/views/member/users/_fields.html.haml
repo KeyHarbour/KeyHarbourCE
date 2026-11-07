@@ -1,0 +1,14 @@
+.w-full
+  = f.input :email_address
+  -# = f.input :role_ids, collection: Role.all, label: "Rôles de l'utilisateur", input_html: { multiple: true, data: { controller: "select2" } }
+-# .w-full
+-#   = f.input :password, hint: t(".password_hint")
+.w-full  
+  = f.simple_fields_for :account_user do |ff|
+    -# C'est ici que l'on gère les IDs des rôles
+    = ff.input :role_id, collection: Role.all, label: "Rôles", input_html: { multiple: false, data: { controller: "select2" } }
+    = ff.input :account_id, as: :hidden, input_html: { value: Current.account.id }
+-# .w-full
+-#   = f.input :description, input_html: { style: 'min-height:200px;' }
+-# .w-full
+-#   = f.input :source, as: :select, collection: Team.sources.keys.map { |source| [source.titleize, source] }, include_blank: false  

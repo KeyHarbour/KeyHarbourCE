@@ -1,0 +1,9 @@
+
+-# = link_to "Root", project_pr_estimate_trees_path(@project, @project_revision), class: "text-sm font-medium text-mono hover:text-primary"
+
+-# - unless @parent_item.nil?
+-#   %span.text-sm.text-secondary-foreground{:class => "mx-1"} &rsaquo;
+-#   - @parent_item.paths.reverse.each do |tree|
+-#     = link_to tree.name, project_pr_estimate_trees_path(@project, @project_revision, estimates_tree_id: tree.id), class: "text-sm font-medium text-mono hover:text-primary"
+-#     - if tree != @parent_item.paths.reverse.last
+-#       %span.text-sm.text-secondary-foreground{:class => "mx-1"} &rsaquo;

@@ -1,0 +1,10 @@
+%ul.nav.nav-tabs.card-header-tabs{"data-bs-toggle" => "tabs", :role => "tablist"}
+  %li.nav-item{:role => "presentation"}
+    = link_to member_workspace_statefiles_path(workspace, environment: @environment.name), class: "nav-link #{actif=='statefiles' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('activerecord.models.statefile').pluralize
+  %li.nav-item{:role => "presentation"}
+    = link_to member_workspace_key_value_stores_path(workspace, environment: @environment.name), class: "nav-link #{actif=='key_value_stores' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('activerecord.models.key_value_store').pluralize
+  %li.nav-item{:role => "presentation"}
+    = link_to member_workspace_trust_assets_path(workspace, environment: @environment.name), class: "nav-link #{actif=='trust_assets' ? 'active' : ''}", "aria-selected" => "false", :tabindex => "-1" do
+      = t('activerecord.models.trust_asset').pluralize

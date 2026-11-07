@@ -1,0 +1,96 @@
+.card
+  .table-responsive
+    %table.table.table-vcenter.table-bordered.table-nowrap.card-table
+      %thead
+        %tr
+          %td.w-50
+            %h2 #{t('.compare')} #{@application.name}
+          - @quotes.each do |quote|
+            %td.text-center
+              %h2= quote.uuid
+      %tbody
+        %tr
+          %td #{t('.base_cost')}
+          - @quotes.each do |quote|
+            - quote_application = quote.quote_applications.first
+            %td.text-center
+              - if quote_application
+                #{number_to_currency quote_application.amount || 0}
+        %tr
+          %td #{t('.seats')}Seats
+          - @quotes.each do |quote|
+            - quote_application = quote.quote_applications.first
+            %td.text-center
+              - if quote_application
+                = quote_application.seats
+        %tr
+          %td #{t('.cost_per_site_with_add_on')}Cost per seat (with add-ons)
+          - @quotes.each do |quote|
+            - quote_application = quote.quote_applications.first
+            %td.text-center
+              - if quote_application
+                #{number_to_currency quote_application.unit_cost || 0}
+        - @application.app_instances.each do |instance|
+          %tr.bg-surface-tertiary
+            %th.subheader{:colspan => "4"}= instance.name
+          %tr
+            %td #{t('.base_cost')}
+            - @quotes.each do |quote|
+              - quote_instance = quote.quote_instances.find_by(instance: instance)
+              %td.text-center
+                - if quote_instance.unused?
+                  = icon "x", class: "text-red"
+                - else
+                  #{number_to_currency quote_instance.amount || 0} / #{quote_instance.seats} seats 
+                  %br/
+                  %strong
+                    #{number_to_currency quote_instance.unit_cost || 0}
+                  = " / seats"
+          %tr
+            %td #{t('.seats')}
+            - @quotes.each do |quote|
+              - quote_instance = quote.quote_instances.find_by(instance: instance)
+              %td.text-center
+                - if quote_instance.unused?
+                  = icon "x", class: "text-red"
+                - else
+                  #{quote_instance.seats}     
+          %tr
+            %td #{t('.cost_per_site_with_add_on')}
+            - @quotes.each do |quote|
+              - quote_instance = quote.quote_instances.find_by(instance: instance)
+              %td.text-center
+                #{number_to_currency quote_instance.unit_cost || 0}
+          %tr
+            %td #{t('.cost_per_site_with_add_on_and_application')}
+            - @quotes.each do |quote|
+              - quote_instance = quote.quote_instances.find_by(instance: instance)
+              %td.text-center
+                #{number_to_currency quote_instance.unit_cost_with_application || 0}
+          - instance.add_ons.each do |add_on|
+            %tr.bg-primary-lt
+              %td.ps-6 #{add_on.name} #{t('.cost')}
+              - @quotes.each do |quote|
+                - quote_instance = quote.quote_instances.find_by(instance: instance)
+                - quote_add_on = quote.quote_add_ons.find_by(add_on: add_on)
+                %td.text-center
+                  - if quote_instance.unused? || quote_add_on.unused?
+                    = icon "x", class: "text-red"
+                  - else
+                    #{number_to_currency quote_add_on.amount || 0}
+            %tr.bg-primary-lt
+              %td.ps-8 #{add_on.name} #{t('.per_seat')}
+              - @quotes.each do |quote|
+                - quote_instance = quote.quote_instances.find_by(instance: instance)
+                - quote_add_on = quote.quote_add_ons.find_by(add_on: add_on)
+                %td.text-center
+                  - if quote_instance.unused? || quote_add_on.unused?
+                    = icon "x", class: "text-red"
+                  - else
+                    #{number_to_currency (quote_add_on.amount || 0) / (quote_instance.seats || 1)}
+      %tfoot
+        %tr
+          %td
+          - @quotes.each do |quote|
+            %td.text-center
+              %h2= number_to_currency quote.total

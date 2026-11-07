@@ -1,0 +1,58 @@
+
+- items.each do |statefile|
+  .card.mb-2
+    .row.g-0
+      .col.ms-2
+        .card-body.ps-0
+          .row
+            .col
+              %h3.mb-0
+                = link_to member_statefile_path(statefile), class: "" do
+                  = statefile.uuid
+                  - if statefile.statefile_tag
+                    .badge.badge-pill.badge-primary
+                      = icon "tag", class: "icon-xs"
+                      #{statefile.statefile_tag.tag}
+            .col-auto
+              .dropdown.no-arrow
+                %a.dropdown-toggle.text-secondary{"aria-expanded" => "false", "aria-haspopup" => "true", "aria-label" => "Select time range for revenue", "data-bs-toggle" => "dropdown", :href => "#"}= icon "dots-vertical", class: "icon-xs"
+                .dropdown-menu.dropdown-menu-end{"aria-labelledby" => "revenue-dropdown"}
+                  -# = link_to edit_member_statefile_path(statefile), class: "dropdown-item text-secondary fs-5" do
+                  -#   = icon "edit", class: "icon-xs"
+                  -#   = t('.update')
+                  = link_to duplicate_member_statefile_path(statefile), class: "dropdown-item text-secondary fs-5", method: :put, data:  { turbo_method: :put, turbo_confirm: t('globals.confirm_copy') } do
+                    = icon "edit", class: "icon-xs"
+                    = t('.duplicate')
+                  - if statefile != items.first
+                    = link_to push_member_statefile_path(statefile), class: "dropdown-item text-secondary fs-5", method: :put, data:  { turbo_method: :put, turbo_confirm: t('globals.confirm_push') } do
+                      = icon "edit", class: "icon-xs"
+                      = t('.make_primary')
+                  - if statefile.statefile_tag.nil?
+                    = link_to new_member_statefile_statefile_tag_path(statefile), data: { turbo_frame: "modal" }, class: "dropdown-item text-secondary fs-5" do
+                      = icon "tag", class: "icon-xs"
+                      = t('.tag')
+                  - else
+                    = link_to member_statefile_tag_path(statefile.statefile_tag), class: "dropdown-item text-secondary fs-5" , method: :delete, data:  { turbo_method: :delete, turbo_confirm: t('globals.confirm_remove_tag') } do
+                      = icon "tag", class: "icon-xs"
+                      = t('.remove_tag')
+                  .dropdown-divider
+                  = link_to member_statefile_path(statefile), class: "dropdown-item text-secondary fs-5", method: :delete, data:  { turbo_method: :delete, turbo_confirm: "Confirm ?" } do
+                    = icon "trash", class: "icon-xs"
+                    = t('.remove')
+          .row
+            .col-md
+              .mt-3.list-inline.list-inline-dots.mb-0.text-secondary.d-sm-block.d-none
+                .list-inline-item
+                  #{statefile.resource_count}
+                  = t('.resources')
+                .list-inline-item
+                  #{statefile.content.size/1000.0}
+                  ko
+                .list-inline-item
+                  = l(statefile.published_at, format: :date_with_time)
+            .col-md-auto
+              .mt-3.badges
+                - if statefile == items.first
+                  .badge.badge-pill.badge-success
+                    = icon "star", class: "icon-xs"
+                    Primary

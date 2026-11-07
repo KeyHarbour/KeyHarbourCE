@@ -1,0 +1,237 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keyharbour-secrets
+type: Opaque
+stringData:
+  # Valeurs par défaut pour le développement local (Kind / Minikube)
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "your_secure_password_here"
+  MEILI_MASTER_KEY: "your_meilisearch_master_key_here"
+  SECRET_KEY_BASE: "local_rails_secret_key_base_only_for_dev_purposes_12345"
+  ENV: "Production"
+  MEILI_ENV: "Production"
+  
+  # use bin/rails db:encryption:init to generate the following key
+  RAILS_MASTER_KEY: "votre_master_key_de_developpement_ici"
+  ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: "collez_ici_la_primary_key_generee"
+  ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: "collez_ici_la_deterministic_key_generee"
+  ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: "collez_ici_le_salt_genere"
+  MAILER_USERNAME: "MAILER_USERNAME"
+  MAILER_PASSWORD: "MAILER_PASSWORD"
+  MAILER_PORT: "MAILER_PORT"
+  MAILER_ADDRESS: "MAILER_ADDRESS"
+  HOST: "localhost"
+  
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: meilisearch-pvc
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: web-storage-pvc
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 2Gi
+---
+# --- BASE DE DONNÉES POSTGRES ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:18-alpine
+          envFrom:
+            - secretRef:
+                name: keyharbour-secrets
+          ports:
+            - containerPort: 5432
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "postgres"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: db
+---
+# --- MEILISEARCH ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meilisearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: meilisearch
+  template:
+    metadata:
+      labels:
+        app: meilisearch
+    spec:
+      containers:
+        - name: meilisearch
+          image: getmeili/meilisearch:v1.12
+          env:
+            - name: MEILI_ENV
+              value: "production"
+          envFrom:
+            - secretRef:
+                name: keyharbour-secrets
+          ports:
+            - containerPort: 7700
+          volumeMounts:
+            - name: meili-data
+              mountPath: /meili_data
+      volumes:
+        - name: meili-data
+          persistentVolumeClaim:
+            claimName: meilisearch-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: meilisearch
+spec:
+  ports:
+    - port: 7700
+  selector:
+    app: meilisearch
+---
+# --- APPLICATION WEB (RAILS) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: postgres:18-alpine
+          envFrom:
+            - secretRef:
+                name: keyharbour-secrets
+          command:
+            - sh
+            - -c
+            - |
+              echo "Waiting for PG"
+              until pg_isready -h db -U "$POSTGRES_USER"; do
+                echo "En attente de la base de données..."
+                sleep 2
+              done
+        - name: db-prepare
+          image: keyharbour/keyharbouree:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: RAILS_ENV
+              value: "production"
+            - name: DB_HOST
+              value: "db"
+          envFrom:
+            - secretRef:
+                name: keyharbour-secrets
+          command: ["bundle", "exec", "rails", "db:prepare"]
+      containers:
+        - name: rails
+          image: keyharbour/keyharbouree:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - bash
+            - -c
+            - |
+              rm -f tmp/pids/server.pid
+              echo "Lancement de la réindexation Meilisearch..."
+              bundle exec rails meilisearch:reindex || echo "⚠️ Échec de la réindexation, poursuite du démarrage..."
+              echo "Démarrage du serveur Rails..."
+              bundle exec rails s -b '0.0.0.0'
+          env:
+            - name: RAILS_ENV
+              value: "production"
+            - name: DB_HOST
+              value: "db"
+            - name: MEILISEARCH_HOST
+              value: "http://meilisearch:7700"
+          envFrom:
+            - secretRef:
+                name: keyharbour-secrets
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: web-storage
+              mountPath: /rails/storage
+            - name: web-log
+              mountPath: /rails/log
+      volumes:
+        - name: web-storage
+          persistentVolumeClaim:
+            claimName: web-storage-pvc
+        - name: web-log
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 32300
+  selector:
+    app: web

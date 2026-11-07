@@ -1,0 +1,17 @@
+default: &default
+  secret_key: "c7923cec-6e1d-4deb-b384-c911bb47acb7"
+
+development:
+  <<: *default
+  verify_mode: OpenSSL::SSL::VERIFY_PEER
+  serveur_url: "https://app.ikigailab.ca/api/v1/instances" 
+# 
+test:
+  <<: *default
+  verify_mode: null
+  serveur_url: null 
+
+production:
+  <<: *default
+  verify_mode: OpenSSL::SSL::VERIFY_PEER
+  serveur_url: "https://app.ikigailab.ca/api/v1/instances" 

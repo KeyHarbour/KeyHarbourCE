@@ -1,0 +1,51 @@
+!!!
+/
+  * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+  * @version 1.4.0
+  * @link https://tabler.io
+  * Copyright 2018-2026 The Tabler Authors
+  * Copyright 2018-2026 codecalm.net Paweł Kuna
+  * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+%html
+  %head
+    = render partial: "layouts/google_tag"
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= content_for(:title) || "KeyHarbour"
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "KeyHarbour", :name => "application-name"}/
+    %meta{:content => "yes", :name => "mobile-web-app-capable"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    %link{:href => "/apple-touch-icon.png", :rel => "apple-touch-icon", :sizes => "180x180"}/
+    %link{:href => "/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    %link{:href => "/site.webmanifest", :rel => "manifest"}/
+    = stylesheet_link_tag :app, "data-turbo-track": "reload"
+    = javascript_importmap_tags
+  %body{"data-bs-theme-primary" => "kh"}
+    .page.page-center
+      .container.container-tight.py-4
+        .text-center.mb-4
+          = link_to root_path do
+            = image_tag "harbor.png"
+        .card.card-md
+          = yield
+        .row.align-items-center.g-4
+          .col-lg
+            .container-tight
+              .row.mt-3
+                .col-md-12
+                  .text-center.text-xs
+                    - if locale == :fr
+                      = link_to t(".switch_account_to_english"), new_session_path(locale: :en), class: "kt-link kt-link-underlined kt-link-dashed"
+                    - else
+                      = link_to t(".switch_account_to_french"), new_session_path(locale: :fr), class: "kt-link kt-link-underlined kt-link-dashed"
+              .text-center.text-xs.mt-5
+                %span.text-muted-foreground
+                  © 2025-#{DateTime.now.year} KeyHarbour Entreprise Edition
+                  %br/
+                  v#{Rails.configuration.version}
+                  %br/
+                  by Ikigai Lab Inc
