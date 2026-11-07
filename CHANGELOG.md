@@ -1,3 +1,15 @@
+## v1.13.1 (2026-11-07)
+
+### Bug Fixes
+* target branch name (6d715ec)
+
+### Maintenance
+* Adding coverage [skip ci] (3679c3a)
+* Adding coverage [skip ci] (cd94122)
+* Adding coverage [skip ci] (49c4e61)
+
+---
+
 ## v1.13.0 (2026-11-05)
 
 ### Features
