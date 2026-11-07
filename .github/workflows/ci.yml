@@ -164,7 +164,7 @@ jobs:
           echo "ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=$(openssl rand -hex 16)" >> $GITHUB_ENV
           echo "ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=$(openssl rand -hex 16)" >> $GITHUB_ENV
           echo "ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=$(openssl rand -hex 16)" >> $GITHUB_ENV
-          echo "MEILI_MASTER_KEY=$(openssl rand -hex 16)" >> $GITHUB_ENV
+          echo "MEILI_MASTER_KEY=password123" >> $GITHUB_ENV
           echo "SECRET_KEY_BASE=$(openssl rand -hex 64)" >> $GITHUB_ENV
 
       - name: Install packages
