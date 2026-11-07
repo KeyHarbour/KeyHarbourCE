@@ -5,22 +5,26 @@
 # docker build -t key_harbour_ee .
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name key_harbour_ee key_harbour_ee
 
-# For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
-
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=4.0.9
-FROM docker.io/library/ruby:$RUBY_VERSION-slim-trixie AS base
+FROM docker.io/library/ruby:$RUBY_VERSION-alpine AS base
 
 ARG PORT=3000
 # Rails app lives here
 WORKDIR /rails
 
-# Install base packages
-RUN apt-get update -qq && \
-    apt-get upgrade -y && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client && \
-    ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+# Install base packages (Alpine equivalents of curl, libjemalloc2, libvips, postgresql-client + tzdata/bash)
+RUN apk update && \
+    apk upgrade --no-cache && \
+    apk add --no-cache \
+      bash \
+      curl \
+      jemalloc \
+      openssl \
+      postgresql-client \
+      tzdata \
+      vips && \
+    ln -s /usr/lib/libjemalloc.so.2 /usr/local/lib/libjemalloc.so
 
 # Set production environment variables and enable jemalloc for reduced memory usage and latency.
 ENV RAILS_ENV="production" \
@@ -32,10 +36,14 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips libyaml-dev pkg-config && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+# Install packages needed to build gems (Alpine equivalents of build-essential, git, libpq-dev, libvips, libyaml-dev, pkg-config)
+RUN apk add --no-cache \
+      build-base \
+      git \
+      gcompat \
+      postgresql-dev \
+      vips-dev \
+      yaml-dev
 
 # Install application gems
 COPY vendor/* ./vendor/
@@ -56,14 +64,12 @@ RUN bundle exec bootsnap precompile -j 1 app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
-
-
 # Final stage for app image
 FROM base
 
-# Run and own only the runtime files as a non-root user for security
-RUN groupadd --system --gid 1000 rails && \
-    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash
+# Run and own only the runtime files as a non-root user for security (Alpine addgroup/adduser)
+RUN addgroup -g 1000 -S rails && \
+    adduser -u 1000 -S rails -G rails -s /bin/bash
 USER 1000:1000
 
 # Copy built artifacts: gems, application
