@@ -78,24 +78,6 @@ docker compose exec web bundle exec rspec
 
 ---
 
-## ⛵ Production Deployment (Kamal)
-
-KeyHarbourCE is pre-configured to deploy to bare-metal or cloud VPS servers within minutes using **Kamal**. The `config/deploy.yml` template leverages local environment variables dynamically.
-
-To deploy:
-1. Configure your local `.env` file with your target server's public IP (`PROD_SERVER_IP`) and domain name (`PROD_DOMAIN_NAME`). Use env.sample as example
-2. Run the initialization routine:
-```bash
-kamal setup
-```
-
-### Connect to the console from Kamal
-```
-export SECRET_KEY_BASE=$(cat storage/secret_key_base.txt)
-kamal shell -d prod
-```
----
-
 ## 📄 License
 
 KeyHarbourCE is an open-source project distributed under the terms of the **Business Source License 1.1 (BSL 1.1)**.
