@@ -9,10 +9,11 @@
 [![License](https://img.shields.io/github/license/KeyHarbour/KeyHarbourCE)](https://github.com/KeyHarbour/KeyHarbourCE/blob/main/LICENSE.md)
 
 
-# KeyHarbour Enterprise Edition (KeyHarbourCE)
+# KeyHarbour Communauty Edition (KeyHarbourCE)
 
 KeyHarbourCE is a robust enterprise management platform built with **Ruby on Rails 8**, designed for maximum security and optimal performance through a containerized architecture. It natively integrates PostgreSQL for data persistence and Meilisearch for an ultra-fast search experience.
 
+<img src="docs/images/dashboard.png" height="550">
 ---
 
 ## 🚀 Key Features
@@ -21,6 +22,97 @@ KeyHarbourCE is a robust enterprise management platform built with **Ruby on Rai
 * **High-Performance Search**: Full out-of-the-box integration with Meilisearch.
 * **Hardened Security**: At-rest data encryption powered by Active Record Encryption.
 * **Production Ready**: Optimized Docker multi-stage build setup and native compatibility with Kamal.
+
+### 🏢 Hierarchical RBAC & Strict Environment Data Isolation
+
+KeyHarbourCE implements a robust, multi-tenant hierarchical permission model coupled with an absolute security boundary down to the environment level, ensuring bulletproof access control and preventing cross-contamination.
+
+- **Enterprise Governance Hierarchy:** Access control is structured across three cascading layers:
+  - **Organization Level:** The highest boundary to manage global compliance, billing, and top-level administrative access.
+  - **Project Level:** Logical groupings within an Organization (e.g., *E-Commerce Platform*, *Data Engineering*). Permissions granted here automatically cascade down.
+  - **Workspace Level:** The finest granularity for separating specific scopes and teams.
+- **Hierarchical Environment Selection:** Environments (e.g., *Development*, *Staging*, *Production*) can be defined and customized at the Organization, Project, or Workspace level, giving you total flexibility to enforce different deployment lifecycle rules where they make sense.
+- **Airtight Data & Secret Segregation:** Within any designated environment, secrets, and configuration item are architecturally walled off. A leak or misconfiguration in a lower environment can never affect or expose production data.
+- **Cryptographic Token Binding:** Access rules, API keys, and pipeline tokens are bound directly to their designated hierarchy and environment, ensuring that production secrets remain strictly inaccessible to unauthorized systems or developers.
+
+| Enterprise Governance Hierarchy | Hierarchical Environment Selection |
+| :---: | :---: |
+| <img src="docs/images/kh-organization.png" height="300"> | <img src="docs/images/kh-envs.png" height="300"> |
+
+<h3>
+  <img src="app/assets/svg/icons/tabler/outline/kh-terraform.svg" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+  Secure Terraform State File Storage & Management
+</h3>
+
+KeyHarbourCE acts as a centralized, secure, and production-ready backend for your **Terraform State Files**, eliminating the need for complex cloud-specific storage setups. Beyond native Terraform commands, it provides an intuitive interface to easily manipulate your state.
+
+- **Advanced State Manipulation:** Effortlessly create snapshots, backup your states, or manually add and remove specific resources directly through the platform, bridging the gap between raw CLI tools and user-friendly management.
+- **Custom Version Tagging:** Assign specific version tags (e.g., `v1.0.0-stable`, `pre-migration-backup`) to critical state revisions, making it easy to bookmark milestones, freeze deployment states, or pinpoint stable infrastructure baselines.
+- **State Locking:** Prevents race conditions and state corruption by automatically locking the state during concurrent `terraform apply` operations.
+- **At-Rest Encryption:** Leverages Rails 8's native Active Record Encryption to ensure your infrastructure secrets and state data are safely encrypted before touching the database.
+- **Version Control & Backups:** Keeps a full historical track of your state files, allowing you to audit changes, trigger automated backups, and roll back safely if an infrastructure deployment goes wrong.
+
+
+| Version Control & Backups | Advanced State Manipulation |
+| :---: | :---: |
+| <img src="docs/images/statefile-duplicate.png" height="300"> | <img src="docs/images/statefile.png" height="300"> |
+
+
+<h3>
+  <img src="app/assets/svg/icons/tabler/outline/kh-certificat.svg" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+  TrustAssets: Domain, SSL, and Token Lifecycle Tracking
+</h3>
+
+KeyHarbourCE introduces **TrustAssets**, a built-in inventory system designed to monitor and secure your external tech debt by keeping a continuous watch over expirations and lifecycle events.
+
+- **Unified Asset Inventory:** Centralize and catalog all your critical infrastructure assets, including domain names, SSL/TLS certificates, and API tokens or credentials, in a single pane of glass.
+- **Smart Expiration Alerts:** Prevent unexpected outages or service disruptions with proactive tracking that monitors expiration dates and alerts you before your domains or certificates lapse.
+- **Token & Credential Governance:** Keep track of internal and third-party token lifetimes, ensuring no orphaned keys are left active and that rotation schedules are enforced.
+- 
+<img src="docs/images/trustassets-overview.png" height="400">
+
+<h3>
+  <img src="app/assets/svg/icons/tabler/outline/kh-application.svg" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+  Smart License Lifecycle Management
+</h3>
+
+KeyHarbourCE provides a comprehensive tracking and compliance system for all your software licenses, allowing your team to optimize costs and stay audit-ready.
+
+- **Centralized License Inventory:** Keep a clear, structured record of all internal, commercial, and open-source licenses used across your organization's projects and infrastructure.
+- **Compliance & Optimization:** Track seat allocations and usage metrics to detect underutilized software seats, avoiding over-purchasing and optimizing your IT budget.
+- **Renewal & Expiration Guard:** Stay ahead of maintenance contracts and subscription renewals with automated tracking, ensuring your teams never lose access to critical tools.
+- **Smart License Lifecycle Management:** Keep a clear, structured record of all internal, commercial, and open-source licenses used across your organization. Track seat allocations and usage metrics to detect underutilized software, optimize your IT budget, and stay ahead of maintenance contract renewals.
+- **Quote Comparison & Procurement Optimization:** Centralize multi-vendor price quotes during software or infrastructure procurement. Directly compare renewal offers against new proposals to ensure your team always secures the most cost-effective option before signing off on a purchase.
+
+
+| Centralized License Inventory | Smart License Lifecycle Management | Quote Comparison & Procurement Optimization|
+| :---: | :---: | :---: |
+| <img src="docs/images/license-followup.png" height="300"> | <img src="docs/images/license-showback.png" height="300"> | <img src="docs/images/license-quote-comparaison.png" height="300"> |
+
+
+<h3>
+  <img src="app/assets/svg/icons/tabler/outline/kh-keyvalue.svg" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+  Secure Key-Value & Pipeline Artifact Store
+</h3>
+
+KeyHarbourCE includes a highly flexible and secure **Key-Value Store** tailored for modern CI/CD pipelines, allowing you to manage configurations, secrets, and metadata dynamically.
+
+- **Encrypted or Plaintext Storage:** Choose between storing standard configuration metadata in plaintext or leveraging native database encryption to safely house pipeline secrets, API tokens, and sensitive variables.
+- **One-Time Read (Ephemeral Data):** Enforce strict security for sensitive tokens or credentials by configuring them as "one-time read". Once retrieved by a pipeline or user, the record is immediately and permanently purged from the system.
+- **Pipeline Artifact Integration:** Easily store, retrieve, and share ephemeral data, build flags, or deployment states across different stages of your pipelines or between separate environments.
+
+<img src="docs/images/kv-view.png" height="400">
+
+### 💻 KeyHarbour Unified CLI (`kh`)
+
+KeyHarbourCE comes with a powerful, lightweight Command Line Interface (`kh`) designed to seamlessly bridge your terminal, automated scripts, and CI/CD pipelines with the platform.
+
+- **Pipeline Native Integration:** Drive your automated workflows by fetching secrets, storing one-time artifacts, or verifying asset statuses directly from GitHub Actions, GitLab CI, or any other automation engine.
+- **State & Asset Manipulation:** Interact with your Terraform backends, trigger manual state snapshots, or update your TrustAssets and software licenses directly from your command line without opening a browser.
+- **Secure Token Authentication:** Authenticate securely using environment-based API tokens, with built-in support for short-lived sessions to maintain an airtight security posture.
+- **Cross-Platform Compatibility:** Compiled to run natively wherever your code lives—supporting Linux, macOS, and Windows environments.
+
+<img src="docs/images/kh-cli.png" height="400">
 
 ---
 
@@ -83,11 +175,11 @@ docker compose exec web bundle exec rspec
 KeyHarbourCE is an open-source project distributed under the terms of the **Business Source License 1.1 (BSL 1.1)**.
 
 * You are fully permitted to use the source code for development, testing, and non-commercial purposes.
-* Commercial production use is restricted subject to the clear provisions detailed in the `LICENSE.md` file.
-* The source code automatically converts to a standard open-source license (Change License) after a specified time frame.
+* Commercial production use is restricted subject to the clear provisions detailed in the `LICENSE` file.
+* The source code automatically converts to a standard open-source license Apache License, Version 2.0 after a specified time frame.
 
-Please read the full [LICENSE.md](LICENSE.md) file for comprehensive usage terms.
+Please read the full [LICENSE](LICENSE) file for comprehensive usage terms.
 
 ---
-© 2025-2026 KeyHarbour Enterprise Edition — Maintained by Ikigai Lab Inc.
+© 2025-2026 KeyHarbour Communauty Edition — Maintained by Ikigai Lab Inc.
 

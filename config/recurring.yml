@@ -2,3 +2,29 @@ production:
   clear_solid_queue_finished_jobs:
     command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
     schedule: every hour at minute 12
+  daily_usage_task:
+    class: UsageJob
+    schedule: "10 0 * * *"
+  ssl_validation:
+    class: SslCheckerJob
+    schedule: "20 0 * * *"
+  trust_assets:
+    class: TrustAssetsJob
+    schedule: "30 0 * * *"
+  registering:
+    class: RegisteringJob
+    schedule: "40 0 * * *"
+
+development: 
+  daily_usage_task:
+    class: UsageJob
+    schedule: "10 0 * * *"
+  ssl_validation:
+    class: SslCheckerJob
+    schedule: "20 0 * * *"
+  trust_assets:
+    class: TrustAssetsJob
+    schedule: "30 0 * * *"
+  registering:
+    class: RegisteringJob
+    schedule: "40 0 * * *"

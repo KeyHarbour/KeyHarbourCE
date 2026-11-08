@@ -2,7 +2,7 @@ class Member::License::LicenseController < Member::AccountsController
   before_action :validate_licence
 
   def validate_licence
-    license?
+    KeyHarbour.license?
   end
 
   private
