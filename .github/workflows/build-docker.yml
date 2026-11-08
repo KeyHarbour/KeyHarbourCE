@@ -107,7 +107,10 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: keyharbour/keyharbource      
+          repository: keyharbour/keyharbource   
+          readme-filepath: ./README.md
+          enable-url-completion: true
+          image-extensions: bmp,gif,jpg,jpeg,png,svg,webp
 
       - name: Build and release image on docker
         uses: docker/build-push-action@v7
