@@ -238,7 +238,7 @@ docker compose exec web bundle exec rspec
 
 ## 📄 License
 
-KeyHarbourCE is an open-source project distributed under the terms of the **Business Source License 1.1 (BSL 1.1)**.
+KeyHarbourCE is an Source Available project distributed under the terms of the **Business Source License 1.1 (BSL 1.1)**.
 
 * You are fully permitted to use the source code for development, testing, and non-commercial purposes.
 * Commercial production use is restricted subject to the clear provisions detailed in the `LICENSE` file.
