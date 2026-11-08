@@ -39,9 +39,11 @@ class Member::StatefileTagsController < Member::WorkspacesController
     def item_params
       params.expect(statefile_tag: [ :tag ])
     end
+
     def set_items
       @item = StatefileTag.find_by(id: params[:id]) if params[:id]
-      @statefile = Statefile.find_by(uuid: params[:statefile_id]) if params[:statefile_id]
+      @statefile = Statefile.find_by(id: params[:statefile_id]) if params[:statefile_id]
+      logger.debug "Statefile: #{@statefile.inspect}"
       @statefile = @item.statefile if @item
       @workspace = @statefile.workspace
       @project = @workspace.project
