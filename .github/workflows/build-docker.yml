@@ -102,6 +102,13 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: keyharbour/keyharbource      
+
       - name: Build and release image on docker
         uses: docker/build-push-action@v7
         with:
@@ -111,4 +118,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             keyharbour/keyharbource:latest
-            keyharbour/keyharbource:${{ needs.increment_version.outputs.version }}          
+            keyharbour/keyharbource:${{ needs.increment_version.outputs.version }}
