@@ -13,6 +13,11 @@
 
 KeyHarbourCE is a robust enterprise management platform built with **Ruby on Rails 8**, designed for maximum security and optimal performance through a containerized architecture. It natively integrates PostgreSQL for data persistence and Meilisearch for an ultra-fast search experience.
 
+💡 **Get Started & Feature Activation**
+
+KeyHarbourCE is completely free to use and test in any non-production environment. Please note that certain advanced features within this Community Edition are locked by default; you can easily unlock them for your testing by activating a free trial. Do not hesitate to request your trial key or ask about our Enterprise Edition by contacting us at [[Support](https://keyharbour.atlassian.net/servicedesk/customer/portal/1/group/71/create/143)].
+
+
 <img src="docs/images/dashboard.png" height="550">
 ---
 
@@ -130,6 +135,67 @@ The development environment is fully containerized. Follow these steps to get up
 
 ### 1. Start the services
 This command builds the application image and downloads the required dependent services (PostgreSQL & Meilisearch):
+
+Here the docker compose file
+```bash
+services:
+  db:
+    image: postgres:18-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: your_secure_password_here
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.54
+    ports:
+      - "7800:7700"
+    environment:
+      - MEILI_MASTER_KEY=your_meilisearch_master_key_here
+      - MEILI_ENV=development
+    volumes:
+      - meili_data:/meili_data
+
+  web:
+    image: keyharbour/keyharbource:latest
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    volumes:
+      - bundle_cache:/usr/local/bundle
+      - key_harbour_storage:/rails/storage
+      - key_harbour_log:/rails/log
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - DB_HOST=db
+      - RAILS_ENV=production
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=your_secure_password_here
+      - MEILISEARCH_HOST=http://meilisearch:7700
+      - MEILI_MASTER_KEY=your_meilisearch_master_key_here
+    depends_on:
+      db:
+        condition: service_healthy
+      meilisearch:
+        condition: service_started
+
+volumes:
+  postgres_data:
+  meili_data:
+  bundle_cache:
+  key_harbour_storage:
+  key_harbour_log:
+```
+
+And the command to start the application
 ```bash
 docker compose up --build
 ```
