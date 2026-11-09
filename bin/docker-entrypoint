@@ -5,6 +5,10 @@ generate_key() {
   ruby -r securerandom -e 'print SecureRandom.alphanumeric(32)'
 }
 
+generate_lockbox_key() {
+  ruby -r securerandom -e 'print SecureRandom.hex(32)'
+}
+
 if [ -z "${LD_PRELOAD+x}" ]; then
     LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
     export LD_PRELOAD
@@ -26,7 +30,7 @@ fi
 
 
 DB_KEY="/rails/storage/db_key"
-if [ -n "${ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY}" ]; then
+if [ -n "${ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY}" ] && [ -n "${LOCKBOX_MASTER_KEY}" ]; then
   echo "ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY fourni via l'environnement, utilisation prioritaire."
 else
   if [ ! -f "$DB_KEY" ]; then
@@ -34,10 +38,12 @@ else
     PRIMARY_KEY=$(generate_key)
     DETERMINISTIC_KEY=$(generate_key)
     KEY_DERIVATION_SALT=$(generate_key)  
+    LOCKBOX_KEY=$(generate_lockbox_key)
     cat << EOF > "$DB_KEY"
 export ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY="$PRIMARY_KEY"
 export ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY="$DETERMINISTIC_KEY"
 export ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT="$KEY_DERIVATION_SALT"
+export LOCKBOX_MASTER_KEY="$LOCKBOX_KEY"
 export MEILISEARCH_API
 EOF
     echo "✅ Clés sauvegardées de manière persistante dans $DB_KEY"
