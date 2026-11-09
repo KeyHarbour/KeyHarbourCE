@@ -1,3 +1,10 @@
+## v2.1.0 (2026-11-09)
+
+### Features
+* Allow encryption of kvstore (f493be1)
+
+---
+
 ## v2.0.1 (2026-11-08)
 
 ### Bug Fixes
