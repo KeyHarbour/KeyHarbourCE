@@ -189,18 +189,25 @@ module Registration
       Rails.logger.debug "Ready to query" unless Rails.env.test?
 
       puts "  Query to ikigai to validate license".light_blue unless Rails.env.test?
+      http.open_timeout = 5
+      http.read_timeout = 10
+      http.write_timeout = 5
       request = Net::HTTP::Post.new(uri.path)
       request["Content-Type"] = "application/json"
       request["X-Signature"] = signature
       request["X-Timestamp"] = @timestamp
       request.body = payload
 
-      response = http.request(request)
-      data = JSON.parse(response.body)
-
-      Rails.logger.debug "Response: #{data}"
-      Rails.logger.debug "Response: #{data["license_id"]}"
-      [ data["licence_id"], data["features"] ]
+      begin
+        response = http.request(request)
+        data = JSON.parse(response.body)
+        Rails.logger.debug "Response: #{data}"
+        Rails.logger.debug "Response: #{data["license_id"]}"
+        [ data["licence_id"], data["features"] ]
+      rescue Net::OpenTimeout, Net::ReadTimeout, Net::WriteTimeout => e
+        # Gérer le dépassement de délai ici (ex: logger l'erreur ou réessayer)
+        puts "Erreur de timeout : #{e.message}"
+      end
     end
   end
 end
