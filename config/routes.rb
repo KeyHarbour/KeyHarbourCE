@@ -197,4 +197,5 @@ Rails.application.routes.draw do
   get 'errors/e403_invite', to: 'errors#e403_invite'
   get '/auth/:provider/callback', to: 'sessions#omniauth'
   get '/auth/failure', to: redirect('/')
+  draw(:custom) if Rails.root.join("config/routes/custom.rb").exist?
 end
