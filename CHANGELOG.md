@@ -1,3 +1,13 @@
+## v2.2.0 (2026-11-13)
+
+### Features
+* Allow custom route on downstream project (4d1a211)
+
+### Maintenance
+* Adding coverage [skip ci] (ca74624)
+
+---
+
 ## v2.1.1 (2026-11-13)
 
 ### Bug Fixes
