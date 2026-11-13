@@ -1,3 +1,13 @@
+## v2.1.1 (2026-11-13)
+
+### Bug Fixes
+* Add timeout to registration and update Gems (a9acca9)
+
+### Maintenance
+* Adding coverage [skip ci] (5d5913d)
+
+---
+
 ## v2.1.0 (2026-11-09)
 
 ### Features
