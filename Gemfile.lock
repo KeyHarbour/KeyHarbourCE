@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/KeyHarbour/KeyHarbourApi.git
-  revision: aedcc7bd2f61c3114ea02f6029c5afd1e6bad100
+  revision: 87c5234e173c2758cdebdf1f465156333a26fc94
   branch: main
   specs:
-    key_harbour_api (1.0.13)
+    key_harbour_api (1.0.15)
       rails (>= 8.1.3.1)
 
 GIT
@@ -870,7 +870,7 @@ CHECKSUMS
   json-schema (6.2.0) sha256=e8bff46ed845a22c1ab2bd0d7eccf831c01fe23bb3920caa4c74db4306813666
   jwt (3.3.0) sha256=44cc34fbc341c148233cf66641522b4bce0dfb1ce55e8073f05c56f44f4ee546
   kamal (2.12.0) sha256=c51d1ab085e515470f98d0c0f043637122b5ebf76e8b610cb1fbbed0b7f9b8fa
-  key_harbour_api (1.0.13)
+  key_harbour_api (1.0.15)
   key_harbour_core (1.3.2)
   language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   launchy (3.1.1) sha256=72b847b5cc961589dde2c395af0108c86ff0119f42d4648d25b5440ebb10059e
