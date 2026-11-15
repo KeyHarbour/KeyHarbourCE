@@ -5,9 +5,9 @@ Rswag::Api.configure do |c|
     Rails.logger.debug "----" * 50
     Rails.logger.debug swagger["info"]["title"]
     if swagger["info"]["title"] == "API V2"
-      swagger['servers'] = [{ 'url' => "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/api/v2/" }]
+      swagger['servers'] = [ { 'url' => "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/api/v2/" } ]
     else
-      swagger['servers'] = [{ 'url' => "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/statefiles/v1/" }]
+      swagger['servers'] = [ { 'url' => "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/statefiles/v1/" } ]
     end
   end  
 end
