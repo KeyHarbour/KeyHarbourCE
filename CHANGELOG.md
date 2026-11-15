@@ -1,3 +1,13 @@
+## v2.2.2 (2026-11-15)
+
+### Bug Fixes
+* Removing not license template item (1234adc)
+
+### Maintenance
+* Adding coverage [skip ci] (d26361d)
+
+---
+
 ## v2.2.1 (2026-11-15)
 
 ### Bug Fixes
