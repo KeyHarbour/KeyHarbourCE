@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/KeyHarbour/KeyHarbourApi.git
-  revision: 1ea05461fdb3798c417db428df948b4cb417a2b1
+  revision: aedcc7bd2f61c3114ea02f6029c5afd1e6bad100
   branch: main
   specs:
     key_harbour_api (1.0.13)
