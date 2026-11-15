@@ -206,7 +206,7 @@ module Registration
         [ data["licence_id"], data["features"] ]
       rescue Net::OpenTimeout, Net::ReadTimeout, Net::WriteTimeout => e
         # Gérer le dépassement de délai ici (ex: logger l'erreur ou réessayer)
-        puts "Erreur de timeout : #{e.message}"
+        puts "Erreur de timeout : #{e.message}" unless Rails.env.test? 
       end
     end
   end
