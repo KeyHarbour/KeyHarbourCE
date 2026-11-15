@@ -1,3 +1,17 @@
+## v2.2.1 (2026-11-15)
+
+### Bug Fixes
+* Fixing lack of test (46d4aa9)
+* #47 Adding doc for http backend pour terraform (fee74d4)
+* Adding Swagger from Gem Engine (f41a181)
+* Adding Swagger from Gem Engine (e1bb35d)
+* Including request api test from gem only, to prevent dupplication (5e5875e)
+
+### Maintenance
+* Adding coverage [skip ci] (fed3c1a)
+
+---
+
 ## v2.2.0 (2026-11-13)
 
 ### Features
