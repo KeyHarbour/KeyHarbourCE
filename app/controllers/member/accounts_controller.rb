@@ -39,14 +39,6 @@ class Member::AccountsController < Member::MemberController
   end
 
   def set_items
-    # return if controller_name == 'organizations'
-
-    # if params[:organization_id]
-    #   @organization = Current.organizations.find_by(uuid: params[:organization_id])
-    # else
-    #   set_item
-    #   @organization = @item.organization
-    # end
   end
 
   def item_params
