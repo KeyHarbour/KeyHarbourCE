@@ -20,25 +20,25 @@ module Member::MemberHelper
   end
 
   def trust_icon(size, value = nil)
-    icon_tag = icon(ApplicationHelper::CONTROLLERS[:"member/trust_assets"][:icon], class: "#{size}")
+    icon_tag = icon(ApplicationHelper.controller_items[:"member/trust_assets"][:icon], class: "#{size}")
     return icon_tag if value.nil?
     icon_tag + " " + value.to_s
   end
 
   def key_icon(size, value = nil)
-    icon_tag = icon(ApplicationHelper::CONTROLLERS[:"member/key_value_stores"][:icon], class: "#{size}")
+    icon_tag = icon(ApplicationHelper.controller_items[:"member/key_value_stores"][:icon], class: "#{size}")
     return icon_tag if value.nil?
     icon_tag + " " + value.to_s
   end
 
   def tf_icon(size, value = nil)
-    icon_tag = icon(ApplicationHelper::CONTROLLERS[:"member/statefiles"][:icon], class: "#{size}")
+    icon_tag = icon(ApplicationHelper.controller_items[:"member/statefiles"][:icon], class: "#{size}")
     return icon_tag if value.nil?
     icon_tag + " " + value.to_s
   end
 
   def license_icon(size, value = nil)
-    icon_tag = icon(ApplicationHelper::CONTROLLERS[:"member/license/applications"][:icon], class: "#{size}")
+    icon_tag = icon(ApplicationHelper.controller_items[:"member/license/applications"][:icon], class: "#{size}")
     return icon_tag if value.nil?
     icon_tag + " " + value.to_s
   end
