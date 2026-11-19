@@ -1,3 +1,13 @@
+## v2.2.5 (2026-11-19)
+
+### Bug Fixes
+* Signup registration redirection (10457b3)
+
+### Maintenance
+* Adding coverage [skip ci] (1efbb51)
+
+---
+
 ## v2.2.4 (2026-11-19)
 
 ### Bug Fixes
