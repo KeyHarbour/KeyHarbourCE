@@ -121,6 +121,7 @@ module ApplicationHelper
 
   def controller_from_path(path)
     return nil if path.blank?
+
     clean_path = URI.parse(path).path
     route_params = Rails.application.routes.recognize_path(clean_path)
     controller_name = route_params[:controller]
@@ -221,9 +222,11 @@ module ApplicationHelper
     items << item_for(member_license_root_path)
     items << item_for(member_license_applications_path)
     items << item_for(member_license_providers_path)
-    items << item_for(member_license_team_members_path)    
+    items << item_for(member_license_team_members_path)
+    items.compact!
+
     active = items.any? { |hash| hash[:active] == true }
-    item_for(member_license_applications_path).except(:path).merge(items: items, active: active)
+    item_for(member_license_applications_path)&.except(:path)&.merge(items: items, active: active)
   end
 
   def nav_items_for_organizations

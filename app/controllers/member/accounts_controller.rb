@@ -7,7 +7,7 @@ class Member::AccountsController < Member::MemberController
         if KeyHarbour.multi_org? == false
           Current.account.build_default_org_and_sub
         end
-        redirect_to member_root_path, notice: "#{datum_name.capitalize} #{t('globals.created')}."
+        redirect_to (session[:redirect_to] || member_root_path), notice: "#{datum_name.capitalize} #{t('globals.created')}."
       else
         render :new, status: :unprocessable_entity
       end
