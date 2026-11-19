@@ -1,3 +1,14 @@
+## v2.2.3 (2026-11-19)
+
+### Bug Fixes
+* Changing the constant in application helper (90a3b0d)
+* Fixing bundle install (0656141)
+
+### Maintenance
+* Adding coverage [skip ci] (3cbec4e)
+
+---
+
 ## v2.2.2 (2026-11-15)
 
 ### Bug Fixes
