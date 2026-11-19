@@ -5,7 +5,11 @@ class Member::SubscriptionsController < Member::MemberController
   # skip_before_action :require_authentication, only: [:webhook], raise: false
 
   def index
-    @subscription = Current.subscription
+    if params[:period]
+      create
+    else
+      @subscription = Current.subscription
+    end
   end
 
   def success
@@ -51,6 +55,7 @@ class Member::SubscriptionsController < Member::MemberController
   end
 
   def create
+    logger.debug "CREATE".red
     if params[:plan].to_s == 'free'
       Current.subscription.set_stripe_customer_id
       redirect_to member_root_path
