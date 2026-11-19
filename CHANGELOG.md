@@ -1,3 +1,10 @@
+## v2.2.4 (2026-11-19)
+
+### Bug Fixes
+* Fix permission issue and signup (23e9f35)
+
+---
+
 ## v2.2.3 (2026-11-19)
 
 ### Bug Fixes
