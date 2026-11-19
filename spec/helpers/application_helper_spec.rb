@@ -589,7 +589,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
 
     it "returns CONTROLLERS hash" do
-      expect(helper.controller_items).to eq(ApplicationHelper::CONTROLLERS)
+      expect(helper.controller_items).to eq(ApplicationHelper.controller_items)
     end
   end
 end

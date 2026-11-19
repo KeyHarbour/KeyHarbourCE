@@ -47,19 +47,19 @@
       - if KeyHarbour.oauth_google?
         .row.mb-3
           .col
-            = button_to '/auth/google_oauth2', method: :post, data: { turbo: false }, disabled: true, class: "submitBtnGG btn btn-4 w-100" do
+            = button_to '/auth/google_oauth2', method: :post, data: { turbo: false }, disabled: true, class: "submitBtnGG btn btn-default bg-body text-body w-100" do
               = icon "brand-google"
               Signup with Google
       - if KeyHarbour.oauth_microsoft?
         .row.mb-3
           .col
-            = button_to '/auth/microsoft_graph', method: :post, data: { turbo: false }, disabled: true, class: "submitBtnGG btn btn-4 w-100" do
+            = button_to '/auth/microsoft_graph', method: :post, data: { turbo: false }, disabled: true, class: "submitBtnGG btn btn-default bg-body text-body w-100" do
               = icon "brand-entra"
               Login with Microsoft
       - if KeyHarbour.oauth_github?
         .row.mb-3
           .col
-            = button_to '/auth/github', method: :post, data: { turbo: false }, disabled: true, class: "submitBtnGG btn btn-4 w-100" do
+            = button_to '/auth/github', method: :post, data: { turbo: false }, disabled: true, class: "submitBtnGG btn btn-default bg-body text-body w-100" do
               = icon "brand-github"
               Login with Github
 

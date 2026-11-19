@@ -5,7 +5,7 @@
         .row.align-items-center
           .col-auto
             %span.bg-primary.text-white.avatar
-              = icon ApplicationHelper::CONTROLLERS[:"member/trust_assets"][:icon]
+              = icon ApplicationHelper.controller_items[:"member/trust_assets"][:icon]
           .col
             .font-weight-medium= project.trust_assets.count
             .text-secondary TrustAssets
@@ -15,7 +15,7 @@
         .row.align-items-center
           .col-auto
             %span.bg-primary.text-white.avatar
-              = icon ApplicationHelper::CONTROLLERS[:"member/key_value_stores"][:icon]
+              = icon ApplicationHelper.controller_items[:"member/key_value_stores"][:icon]
           .col
             .font-weight-medium= project.key_value_stores.count
             .text-secondary Key Value items
@@ -25,7 +25,7 @@
         .row.align-items-center
           .col-auto
             %span.bg-primary.text-white.avatar
-              = icon ApplicationHelper::CONTROLLERS[:"member/statefiles"][:icon]
+              = icon ApplicationHelper.controller_items[:"member/statefiles"][:icon]
           .col
             .font-weight-medium= project.statefiles.resource_count
             .text-secondary Resources Terraform

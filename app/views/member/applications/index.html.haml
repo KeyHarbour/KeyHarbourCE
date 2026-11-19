@@ -7,7 +7,7 @@
             .row.align-items-center
               .col-auto
                 %span.bg-primary.text-white.avatar
-                  = icon ApplicationHelper::CONTROLLERS[:"member/licenses"][:icon]
+                  = icon ApplicationHelper.controller_items[:"member/licenses"][:icon]
               .col
                 .font-weight-medium= Current.account.applications.sum(:seats)
                 .text-secondary Seats managed

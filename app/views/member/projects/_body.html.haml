@@ -6,7 +6,7 @@
   .d-block.text-secondary.text-truncate.mt-1
     - item.environments.each do |env|
       %span.tag
-        = icon ApplicationHelper::CONTROLLERS[:"member/environments"][:icon], class: "icon-xs"
+        = icon ApplicationHelper.controller_items[:"member/environments"][:icon], class: "icon-xs"
         = env.name
 
 .col-auto

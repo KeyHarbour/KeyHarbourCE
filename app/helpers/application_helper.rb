@@ -35,49 +35,53 @@ module ApplicationHelper
     'bg-green kh_white'
   end
 
-  CONTROLLERS = {
-    "admin/dashboard": { title: I18n.t('member.member_controller.global_dashboard'), icon: 'dashboard' },
-    "admin/accounts": { title: I18n.t('member.member_controller.accounts_management'), icon: 'users-group' },
-    "admin/users": { title: I18n.t('member.member_controller.all_users'), icon: 'users' },
-    "admin/coupons": { title: I18n.t('activerecord.models.coupon').pluralize, icon: 'briefcase' },
-    "member/accounts": { title: (Current.account&.name || I18n.t('activerecord.models.account')), icon: 'home' },
-    "member/dashboard": { title: (Current.account&.name || I18n.t('activerecord.models.account')), icon: 'home' },
-    # "member/applications": { title: I18n.t('menu.account_applications'), icon: 'apps' },
-    "member/organizations": { title: I18n.t('menu.all_organizations'), icon: 'binary-tree-2', exclude_controllers: %w[member/license/team_members member/license/applications member/inventory/instances member/inventory/model_families member/inventory/model_categories member/inventory/model_category_attrs member/workspaces member/tokens member/trust_assets member/statefiles member/key_value_stores] },
-    "member/teams": { title: I18n.t('menu.teams'), icon: 'users-group' },
-    "member/users": { title: I18n.t('menu.users'), icon: 'users' },
-    "member/subscriptions": { title: I18n.t('activerecord.models.subscription'), icon: 'plug-connected' },
-    "member/pricings": { title: I18n.t('menu.pricings'), icon: 'home-dollar' },
-    "member/inventory/instances": { title: I18n.t('menu.inventory_instances'), icon: 'box', variables: %w[organization], exclude_controllers: %w[member/workspaces member/tokens member/trust_assets member/statefiles member/key_value_stores] },
-    "member/inventory/model_families": { title: I18n.t('menu.inventory_model_families'), icon: 'box', variables: %w[organization] },
-    "member/inventory/model_categories": { title: I18n.t('menu.inventory_model_categories'), icon: 'box', variables: %w[organization] },
-    "member/inventory/model_category_attrs": { title: I18n.t('menu.inventory_model_category_attrs'), icon: 'box', variables: %w[organization] },
-    "member/projects": { title: I18n.t('menu.projects'), icon: 'anchor' },
-    "member/licenses": { title: I18n.t('menu.licenses'), icon: 'license' },
-    "member/trust_assets": { title: I18n.t('menu.trust_assets'), icon: 'kh-certificat', variables: %w[organization project workspace] },
-    "member/statefiles": { title: I18n.t('menu.statefiles'), icon: 'kh-terraform', variables: %w[organization project workspace] },
-    "member/statefile_tags": { title: I18n.t('menu.statefile_tags'), icon: 'kh-terraform', variables: %w[organization project workspace] },
-    "member/key_value_stores": { title: I18n.t('menu.key_value_stores'), icon: 'kh-keyvalue', variables: %w[organization project workspace] },
-    "member/license/dashboard": { title: I18n.t("menu.licenses_dashboard"), icon: 'dashboard' },
-    "member/license/applications": { title: I18n.t("menu.applications"), icon: 'kh-application', sub_controllers: %w[member/license/quotes member/license/licensees] },
-    "member/license/instances": { title: I18n.t("menu.instances", name: @application&.name), icon: 'browser' },
-    "member/license/quotes": { title: I18n.t("menu.quotes"), icon: 'receipt-dollar', variables: %w[application] },
-    "member/license/add_ons": { title: I18n.t("menu.add_ons"), icon: 'package' },
-    "member/license/team_members": { title: I18n.t("menu.team_members"), icon: 'hierarchy-3' },
-    "member/license/providers": { title: I18n.t("menu.providers"), icon: 'octahedron' },
-    "member/license/licensees": { title: I18n.t("menu.licensees"), icon: 'hierarchy-3' },
-    "member/api_queries": { title: I18n.t('menu.api_queries'), icon: 'api-app' },
-    "member/environments": { title: I18n.t('menu.environments'), icon: 'stack-2', variables: %w[organization] },
-    "member/org_tokens": { title: I18n.t('menu.tokens'), icon: 'key', variables: %w[organization] },
-    "member/tokens": { title: I18n.t('menu.tokens'), icon: 'key', variables: %w[organization project] },
-    "member/workspaces": { title: I18n.t('menu.workspaces'), icon: 'virtual-space', variables: %w[organization project workspace] },
-    "member/wizard/statefiles/statefiles": { title: "Statefiles Wizard", icon: 'virtual-space' },
-    "member/wizard/key_values/key_values": { title: "KeyValue Wizard", icon: 'virtual-space' },
-    "member/wizard/trust_assets/trust_assets": { title: "TrustAssets Wizard", icon: 'virtual-space' }
-  }
+  
+
+  def self.controller_items
+    {
+      "admin/dashboard": { title: I18n.t('member.member_controller.global_dashboard'), icon: 'dashboard' },
+      "admin/accounts": { title: I18n.t('member.member_controller.accounts_management'), icon: 'users-group' },
+      "admin/users": { title: I18n.t('member.member_controller.all_users'), icon: 'users' },
+      "admin/coupons": { title: I18n.t('activerecord.models.coupon').pluralize, icon: 'briefcase' },
+      "member/accounts": { title: (Current.account&.name || I18n.t('activerecord.models.account')), icon: 'home' },
+      "member/dashboard": { title: (Current.account&.name || I18n.t('activerecord.models.account')), icon: 'home' },
+      # "member/applications": { title: I18n.t('menu.account_applications'), icon: 'apps' },
+      "member/organizations": { title: I18n.t('menu.all_organizations'), icon: 'binary-tree-2', exclude_controllers: %w[member/license/team_members member/license/applications member/inventory/instances member/inventory/model_families member/inventory/model_categories member/inventory/model_category_attrs member/workspaces member/tokens member/trust_assets member/statefiles member/key_value_stores] },
+      "member/teams": { title: I18n.t('menu.teams'), icon: 'users-group' },
+      "member/users": { title: I18n.t('menu.users'), icon: 'users' },
+      "member/subscriptions": { title: I18n.t('activerecord.models.subscription'), icon: 'plug-connected' },
+      "member/pricings": { title: I18n.t('menu.pricings'), icon: 'home-dollar' },
+      "member/inventory/instances": { title: I18n.t('menu.inventory_instances'), icon: 'box', variables: %w[organization], exclude_controllers: %w[member/workspaces member/tokens member/trust_assets member/statefiles member/key_value_stores] },
+      "member/inventory/model_families": { title: I18n.t('menu.inventory_model_families'), icon: 'box', variables: %w[organization] },
+      "member/inventory/model_categories": { title: I18n.t('menu.inventory_model_categories'), icon: 'box', variables: %w[organization] },
+      "member/inventory/model_category_attrs": { title: I18n.t('menu.inventory_model_category_attrs'), icon: 'box', variables: %w[organization] },
+      "member/projects": { title: I18n.t('menu.projects'), icon: 'anchor' },
+      "member/licenses": { title: I18n.t('menu.licenses'), icon: 'license' },
+      "member/trust_assets": { title: I18n.t('menu.trust_assets'), icon: 'kh-certificat', variables: %w[organization project workspace] },
+      "member/statefiles": { title: I18n.t('menu.statefiles'), icon: 'kh-terraform', variables: %w[organization project workspace] },
+      "member/statefile_tags": { title: I18n.t('menu.statefile_tags'), icon: 'kh-terraform', variables: %w[organization project workspace] },
+      "member/key_value_stores": { title: I18n.t('menu.key_value_stores'), icon: 'kh-keyvalue', variables: %w[organization project workspace] },
+      "member/license/dashboard": { title: I18n.t("menu.licenses_dashboard"), icon: 'dashboard' },
+      "member/license/applications": { title: I18n.t("menu.applications"), icon: 'kh-application', sub_controllers: %w[member/license/quotes member/license/licensees] },
+      "member/license/instances": { title: I18n.t("menu.instances", name: @application&.name), icon: 'browser' },
+      "member/license/quotes": { title: I18n.t("menu.quotes"), icon: 'receipt-dollar', variables: %w[application] },
+      "member/license/add_ons": { title: I18n.t("menu.add_ons"), icon: 'package' },
+      "member/license/team_members": { title: I18n.t("menu.team_members"), icon: 'hierarchy-3' },
+      "member/license/providers": { title: I18n.t("menu.providers"), icon: 'octahedron' },
+      "member/license/licensees": { title: I18n.t("menu.licensees"), icon: 'hierarchy-3' },
+      "member/api_queries": { title: I18n.t('menu.api_queries'), icon: 'api-app' },
+      "member/environments": { title: I18n.t('menu.environments'), icon: 'stack-2', variables: %w[organization] },
+      "member/org_tokens": { title: I18n.t('menu.tokens'), icon: 'key', variables: %w[organization] },
+      "member/tokens": { title: I18n.t('menu.tokens'), icon: 'key', variables: %w[organization project] },
+      "member/workspaces": { title: I18n.t('menu.workspaces'), icon: 'virtual-space', variables: %w[organization project workspace] },
+      "member/wizard/statefiles/statefiles": { title: "Statefiles Wizard", icon: 'virtual-space' },
+      "member/wizard/key_values/key_values": { title: "KeyValue Wizard", icon: 'virtual-space' },
+      "member/wizard/trust_assets/trust_assets": { title: "TrustAssets Wizard", icon: 'virtual-space' }
+    }
+  end
 
   def controller_items
-    ApplicationHelper::CONTROLLERS
+    ApplicationHelper.controller_items
   end
 
   def status_color(item)

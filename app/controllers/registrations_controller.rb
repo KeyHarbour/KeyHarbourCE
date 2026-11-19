@@ -5,6 +5,7 @@ class RegistrationsController < AuthController
   before_action :identify_token
 
   def new
+    session[:redirect_to] = params[:redirect_url] if params[:redirect_url]
     @user = User.new(user_params)
   end
 
