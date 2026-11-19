@@ -1,6 +1,18 @@
 ## v2.2.4 (2026-11-19)
 
 ### Bug Fixes
+* Fix permission issue and signup (d25d79b)
+* Fix permission issue and signup (2937fbc)
+* Fix permission issue and signup (23e9f35)
+
+### Maintenance
+* Adding coverage [skip ci] (3174ca7)
+
+---
+
+## v2.2.4 (2026-11-19)
+
+### Bug Fixes
 * Fix permission issue and signup (23e9f35)
 
 ---
