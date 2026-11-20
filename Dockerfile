@@ -6,7 +6,7 @@
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name key_harbour_ee key_harbour_ee
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=4.0.9
+ARG RUBY_VERSION=4.0.10
 FROM docker.io/library/ruby:$RUBY_VERSION-alpine AS base
 
 ARG PORT=3000
