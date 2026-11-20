@@ -10,7 +10,7 @@ production:
     schedule: "20 0 * * *"
   trust_assets:
     class: TrustAssetsJob
-    schedule: "30 0 * * *"
+    schedule: "30 0 * * 1"
   registering:
     class: RegisteringJob
     schedule: "40 0 * * *"
