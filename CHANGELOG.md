@@ -1,3 +1,11 @@
+## v2.2.6 (2026-11-20)
+
+### Bug Fixes
+* Moving recurring to daily (9513d2c)
+* Changing recurring (5288ea1)
+
+---
+
 ## v2.2.5 (2026-11-19)
 
 ### Bug Fixes
