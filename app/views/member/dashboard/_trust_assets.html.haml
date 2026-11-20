@@ -14,8 +14,11 @@
               .alert.alert-info{:role => "alert"}
                 .alert-icon
                   = icon "info-circle"
-                They are no tokens in your account. You can add one by 
-                = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
+                They are no tokens in your account. You can add one by
+                - if Current.account.workspaces.none?
+                  = link_to "clicking here", member_organization_path, class: "alert-link"
+                - else
+                  = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
 
         - Current.account.trust_assets.where(format: "token").each do |ta|
           = render partial: "member/trust_assets/item", locals: { ta: ta }
@@ -36,7 +39,10 @@
                 .alert-icon
                   = icon "info-circle"
                 They are no domains in your account. You can add one by
-                = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
+                - if Current.account.workspaces.none?
+                  = link_to "clicking here", member_organization_path, class: "alert-link"
+                - else
+                  = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
         - Current.account.trust_assets.where(format: "domain").each do |ta|
           = render partial: "member/trust_assets/item", locals: { ta: ta }
 
@@ -57,6 +63,9 @@
                 .alert-icon
                   = icon "info-circle"
                 They are no certificates in your account. You can add one by
-                = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
+                - if Current.account.workspaces.none?
+                  = link_to "clicking here", member_organization_path, class: "alert-link"
+                - else
+                  = link_to "clicking here", member_workspace_trust_assets_path(Current.account.workspaces.first, environment: Current.account.workspaces.first.environments.first.name), class: "alert-link"
         - Current.account.trust_assets.where(format: "tls_certificate").each do |ta|
           = render partial: "member/trust_assets/item", locals: { ta: ta }
