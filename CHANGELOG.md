@@ -1,3 +1,13 @@
+## v2.2.7 (2026-11-20)
+
+### Bug Fixes
+* Empty Env issue (70bbd69)
+
+### Maintenance
+* Update ruby version (367a5eb)
+
+---
+
 ## v2.2.6 (2026-11-20)
 
 ### Bug Fixes
