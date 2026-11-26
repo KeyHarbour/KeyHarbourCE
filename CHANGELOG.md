@@ -1,3 +1,19 @@
+## v2.3.0 (2026-11-26)
+
+### Features
+* Allow account edition (c71b976)
+
+### Bug Fixes
+* Brakeman exclude (0a7576f)
+* Adding smoke test for routes (6c3f904)
+* Rspec test (e3d5404)
+* Subscription with plan (c9dee2b)
+
+### Maintenance
+* Adding coverage [skip ci] (f900a8a)
+
+---
+
 ## v2.2.8 (2026-11-26)
 
 ### Bug Fixes
