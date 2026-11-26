@@ -920,6 +920,7 @@ en:
   menu:
     account_applications: Applications
     add_ons: Add ons
+    account: My Account
     all_organizations: All organizations
     all_spaces: All spaces
     api_queries: Api queries

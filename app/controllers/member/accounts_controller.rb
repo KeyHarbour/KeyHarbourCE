@@ -34,8 +34,14 @@ class Member::AccountsController < Member::MemberController
     end
   end
 
+  def edit
+    @account = Current.account
+    @item = @account
+  end
+
   def show
-    redirect_to member_root_path, notice: "#{datum_name.capitalize} #{t('globals.created')}."
+    redirect_to edit_member_account_path(Current.account)
+    # redirect_to member_root_path, notice: "#{datum_name.capitalize} #{t('globals.created')}."
   end
 
   def datum

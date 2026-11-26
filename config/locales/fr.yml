@@ -926,6 +926,7 @@ fr:
   menu:
     account_applications: Applications
     add_ons: Modules
+    account: Mon compte
     all_organizations: Toutes les organisations
     all_spaces: Tous les espaces
     api_queries: Requêtes API

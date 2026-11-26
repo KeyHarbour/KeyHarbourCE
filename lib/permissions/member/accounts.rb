@@ -5,7 +5,7 @@ class Permissions::Member::Accounts < Permissions::Member::Base
     end
   end    
 
-  %w[new create].each do |method_name|
+  %w[new create edit update].each do |method_name|
     define_method("#{method_name}?".to_sym) do
       true
     end
