@@ -43,7 +43,7 @@ module ApplicationHelper
       "admin/accounts": { title: I18n.t('member.member_controller.accounts_management'), icon: 'users-group' },
       "admin/users": { title: I18n.t('member.member_controller.all_users'), icon: 'users' },
       "admin/coupons": { title: I18n.t('activerecord.models.coupon').pluralize, icon: 'briefcase' },
-      "member/accounts": { title: (Current.account&.name || I18n.t('activerecord.models.account')), icon: 'home' },
+      "member/accounts": { title: (Current.account&.name || I18n.t('activerecord.models.account')), icon: 'home-edit' },
       "member/dashboard": { title: (Current.account&.name || I18n.t('activerecord.models.account')), icon: 'home' },
       # "member/applications": { title: I18n.t('menu.account_applications'), icon: 'apps' },
       "member/organizations": { title: I18n.t('menu.all_organizations'), icon: 'binary-tree-2', exclude_controllers: %w[member/license/team_members member/license/applications member/inventory/instances member/inventory/model_families member/inventory/model_categories member/inventory/model_category_attrs member/workspaces member/tokens member/trust_assets member/statefiles member/key_value_stores] },
@@ -205,6 +205,7 @@ module ApplicationHelper
   def nav_items_for_member
     items = []
     items << item_for(member_root_path, start_with: false).merge(title: I18n.t('menu.dashboard'))
+    items << item_for(member_account_path(Current.account, locale: I18n.locale)).merge(title: I18n.t('menu.account')) if Current.account
     items << item_for(member_organizations_path, start_with: false, restfull: { except: %w[show] }, debug: false)
     items << item_for(member_teams_path)
     items << item_for(member_users_path)

@@ -5,11 +5,14 @@ RSpec.describe Member::AccountsController, type: :controller do
 
   before do
     allow(controller).to receive(:datum).and_return(Account)
+    session = user.sessions.create!
+    allow(Current).to receive(:session).and_return(session)
+    allow(Current).to receive(:user).and_return(user)    
   end
 
   describe "GET #new" do
     it "returns http success" do
-      get :new
+      get :new, params: { locale: :fr }
       expect(response).to have_http_status(:success)
     end
   end

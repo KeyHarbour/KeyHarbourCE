@@ -19,7 +19,8 @@ class RegistrationsController < AuthController
       start_new_session_for @user
       redirect_to root_path, notice: t('controllers.registrations.signed_up')
     else
-      render :new, status: :unprocessable_entity, notice: t('controllers.registrations.sign_up_failed')
+      flash.now[:alert] = t('controllers.registrations.sign_up_failed')
+      render :new, status: :unprocessable_entity
     end
   end
 

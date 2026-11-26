@@ -7,6 +7,10 @@ module Admin::CouponsHelper
     new_admin_coupon_path()
   end
 
+  def add_button(position)
+    controller_items[:'admin/coupons'].merge(path: new_item_url, title: new_name(@item)) if position == :top and action_name == 'index'
+  end
+
   def index_page_name
     "CouponCode"
   end

@@ -26,13 +26,13 @@
     {
       "warning_type": "Redirect",
       "warning_code": 18,
-      "fingerprint": "9bd85285f544788ba3fb424b6ef6000b23dbf79c74843aa9f4f90f22ff8e1485",
+      "fingerprint": "839455f5234d8bbae53a977565eed1d566e83202b63bd087e0b8ece92e42132c",
       "check_name": "Redirect",
       "message": "Possible unprotected redirect",
       "file": "app/controllers/member/subscriptions_controller.rb",
-      "line": 81,
+      "line": 86,
       "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(Plan.client.v1.checkout.sessions.create(:mode => \"subscription\", :line_items => ([{ :quantity => 1, :price => Plan.find(params[:plan]).price_id!(params[:period]) }]), :success_url => (root_url + \"/member/subscriptions/#{Current.subscription.id}/success?session_id={CHECKOUT_SESSION_ID}&plan=#{Plan.find(params[:plan]).id}&period=#{params[:period]}\"), :cancel_url => (root_url + \"/member/subscriptions/#{Current.subscription.id}/fail?session_id={CHECKOUT_SESSION_ID}&plan=#{Plan.find(params[:plan]).id}&period=#{params[:period]}\"), :discounts => ([{ :coupon => Current.subscription.subscription_coupons.where(:used => nil).first.coupon.stripe_id }])).url, :allow_other_host => true)",
+      "code": "redirect_to(Plan.client.v1.checkout.sessions.create(:mode => \"subscription\", :line_items => ([{ :quantity => 1, :price => Plan.find(params[:plan]).price_id!(params[:period]) }]), :success_url => (root_url + \"/member/subscriptions/#{Current.subscription.id}/success?session_id={CHECKOUT_SESSION_ID}&plan=#{Plan.find(params[:plan]).id}&period=#{params[:period]}\"), :cancel_url => (root_url + \"/member/subscriptions/#{Current.subscription.id}/fail?session_id={CHECKOUT_SESSION_ID}&plan=#{Plan.find(params[:plan]).id}&period=#{params[:period]}\"), :discounts => ([{ :coupon => Current.subscription.subscription_coupons.where(:used => nil).first.coupon.stripe_id }])).url, :allow_other_host => true, :status => :see_other)",
       "render_path": null,
       "location": {
         "type": "method",
@@ -70,5 +70,5 @@
       "note": ""
     }
   ],
-  "brakeman_version": "8.0.6"
+  "brakeman_version": "8.1.1"
 }

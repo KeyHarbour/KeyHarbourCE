@@ -19,5 +19,6 @@ module KeyHarbourEe
     config.solid_queue.connects_to = { database: { writing: :queue } }
     config.fixtures_paths = [ Rails.root.join('spec', 'fixtures') ]
     config.active_record.encryption.encrypt_fixtures = true
+    config.autoload_paths << Rails.root.join("app/ee/controllers")
   end
 end

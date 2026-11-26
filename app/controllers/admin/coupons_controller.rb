@@ -1,4 +1,9 @@
 class Admin::CouponsController < Admin::AdminController
+  def index
+    @item = datum.new
+    super()
+  end
+  
   def datum
     Coupon.order(id: :desc)
   end
