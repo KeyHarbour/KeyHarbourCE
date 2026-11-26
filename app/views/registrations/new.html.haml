@@ -5,11 +5,20 @@
       = t('.already_have_account')
       = link_to t('.log_in'), new_session_path, class: "text-sm link"
     = form_with model: @user, url: registration_url do |form|
-      = tag.div(flash[:alert], style: "color:red") if flash[:alert]
-      = tag.div(flash[:notice], style: "color:green") if flash[:notice]
+      - if @user.errors.any?
+        .alert.alert-important.alert-danger.alert-dismissible{:role => "alert"}
+          .alert-icon
+            = icon "alert-circle"
+          %div
+            %h3.alert-heading= flash[:alert]
+            .alert-description
+              %ul.alert-list
+                - @user.errors.full_messages.each do |message|
+                  %li= message
+          %button.btn-close{"aria-label" => "close", "data-bs-dismiss" => "alert", :type => "button"}
       .mb-3
         %label.form-label= t("activerecord.attributes.user.email_address")
-        = form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t('activerecord.placeholders.user.email_address'), value: params[:email_address], class: "form-control"
+        = form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t('activerecord.placeholders.user.email_address'), class: "form-control"
       .mb-2
         %label.form-label
           = t("activerecord.attributes.user.password")

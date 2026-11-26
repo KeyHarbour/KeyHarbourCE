@@ -83,7 +83,7 @@ class Member::SubscriptionsController < Member::MemberController
     session = Plan.client.v1.checkout.sessions.create(data)
     logger.debug session.url
     if session.url.start_with?("https://checkout.stripe.com")
-      redirect_to session.url, allow_other_host: true
+      redirect_to session.url, allow_other_host: true, status: :see_other
     else
       redirect_to member_root_url, alert: "Une erreur de sécurité est survenue lors de la redirection vers le paiement."
     end

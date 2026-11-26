@@ -1,4 +1,12 @@
 class Member::AccountsController < Member::MemberController
+  def new
+    if Current.account&.id
+      redirect_to (session[:redirect_to] || member_root_path), notice: "#{datum_name.capitalize} #{t('globals.created')}."
+    else
+      super()
+    end
+  end
+    
   def create
     if controller_name == 'accounts'
       @item = datum.new(item_params)
@@ -6,6 +14,16 @@ class Member::AccountsController < Member::MemberController
         create_result = @item.account_users.create(user: Current.user, role: Role.find_by(name: 'Owner'))
         if KeyHarbour.multi_org? == false
           Current.account.build_default_org_and_sub
+        end
+        if session[:coupon_id] && Coupon.where(id: session[:coupon_id]).count > 0
+          item = Coupon.find(session[:coupon_id])
+          if item.duration_limited
+            subscription = @item.build_subscription(plan_id: session[:plan_id], current_period_start: DateTime.now, current_period_end: DateTime.now.advance(months: item.duration_in_month))
+          else
+            subscription = @item.build_subscription(plan_id: session[:plan_id], current_period_start: DateTime.now)
+          end
+          subscription.save
+          subscription.subscription_coupons.create(coupon: item) if item
         end
         redirect_to (session[:redirect_to] || member_root_path), notice: "#{datum_name.capitalize} #{t('globals.created')}."
       else
