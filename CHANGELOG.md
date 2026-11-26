@@ -1,3 +1,14 @@
+## v2.2.8 (2026-11-26)
+
+### Bug Fixes
+* Bad link in trust_assets (324210f)
+
+### Maintenance
+* updage gems (e3737e9)
+* updage gems (bb2d61c)
+
+---
+
 ## v2.2.7 (2026-11-20)
 
 ### Bug Fixes
