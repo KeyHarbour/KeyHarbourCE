@@ -205,7 +205,7 @@ module ApplicationHelper
   def nav_items_for_member
     items = []
     items << item_for(member_root_path, start_with: false).merge(title: I18n.t('menu.dashboard'))
-    items << item_for(member_account_path(Current.account)).merge(title: I18n.t('menu.account'))
+    items << item_for(member_account_path(Current.account, locale: I18n.locale)).merge(title: I18n.t('menu.account')) if Current.account
     items << item_for(member_organizations_path, start_with: false, restfull: { except: %w[show] }, debug: false)
     items << item_for(member_teams_path)
     items << item_for(member_users_path)

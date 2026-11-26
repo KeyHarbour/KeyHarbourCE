@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationHelper, type: :helper do
+  before do
+    allow(helper).to receive(:default_url_options).and_return({ locale: :fr })
+  end
   # --- new_name ---
   describe "#new_name" do
     it "returns the translated new model name" do
@@ -300,9 +303,11 @@ RSpec.describe ApplicationHelper, type: :helper do
   # --- Navigation builders ---
   describe "Navigation menu builders" do
     let(:user) { double("user", global_role: "admin") }
-    let(:account) { double("account", name: "Acme Corporation Ltd") }
+    # let(:account) { double("account", name: "Acme Corporation Ltd") }
+    let(:account) { instance_double(Account, id: 1, to_param: "1", name: "Mon super compte très long") }
 
     before do
+      allow(I18n).to receive(:locale).and_return(:fr)
       allow(Current).to receive(:user).and_return(user)
       allow(Current).to receive(:account).and_return(account)
       allow(Current).to receive(:organizations).and_return([])
@@ -343,7 +348,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     describe "#nav_items_for_member" do
       it "returns member menu with truncated account name" do
         result = helper.nav_items_for_member
-        expect(result[:items].size).to eq(6)
+        expect(result[:items].size).to eq(7)
         expect(result[:active]).to be true
         expect(result[:title].length).to be <= 20
       end
